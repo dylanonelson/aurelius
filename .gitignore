@@ -1,0 +1,6 @@
+.*.s[w-z]?
+.s[w-z]?
+node_modules/
+dist/*bundle*
+dist/service-worker.js
+builds/
