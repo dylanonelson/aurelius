@@ -2,11 +2,6 @@ var path = require('path');
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = {
-  devServer: {
-    contentBase: 'dist',
-    inline: true,
-    port: 1104
-  },
   devtool: 'source-map',
   entry: './src/index.js',
   module: {

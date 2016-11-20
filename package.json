@@ -3,6 +3,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --colors --progress",
+    "start": "ws -d dist -p 1104",
     "watch": "webpack --colors --progress --watch"
   },
   "author": "Dylan Nelson",
@@ -21,5 +22,8 @@
     "react-dom": "^15.4.0",
     "sw-precache-webpack-plugin": "^0.6.1",
     "webpack": "^1.13.3"
+  },
+  "devDependencies": {
+    "local-web-server": "^1.2.6"
   }
 }
