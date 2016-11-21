@@ -5,5 +5,5 @@ import render from './render';
 auth().then(user => {
   render(user);
 }).catch(error => {
-  document.write(error);
+  console.error(error);
 });

@@ -1,19 +1,14 @@
 import React from 'react';
 import firebase from 'firebase';
 
+import Header from './Header';
+import Main from './Main';
+
 const App = ({ user }) => (
-  <header>
-    <h1>
-      {`Hello ${user.displayName}`}
-    </h1>
-    <button
-      onClick={() => {
-        firebase.auth().signOut();
-      }}
-    >
-      Log out
-    </button>
-  </header>
+  <div>
+    <Header user={user} />
+    <Main />
+  </div>
 );
 
 App.propTypes = {
