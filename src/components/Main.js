@@ -7,6 +7,13 @@ class Main extends React.Component {
 
     return (
       <main>
+        <h1
+          style={{
+            textAlign: 'center'
+          }}
+        >
+          {database.getDateString()}
+        </h1>
         <div
           style={{
             display: 'flex',

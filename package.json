@@ -19,8 +19,10 @@
     "eslint-loader": "^1.6.1",
     "eslint-plugin-react": "^6.7.1",
     "firebase": "^3.6.1",
+    "moment": "^2.16.0",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
+    "style-loader": "^0.13.1",
     "sw-precache-webpack-plugin": "^0.6.1",
     "webpack": "^1.13.3",
     "wolfy87-eventemitter": "^5.1.0"

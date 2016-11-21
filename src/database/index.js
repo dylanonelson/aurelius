@@ -1,10 +1,11 @@
 import Firebase from 'firebase';
+import moment from 'moment';
 
-const getDateString = () => (new Date().toISOString().slice(0, 10));
+const getDateString = () => (moment().subtract(4, 'hours').format('YYYY-MM-DD'));
 
 const getUserUID = () => (Firebase.auth().currentUser.uid);
 
-const getThoughtRef = () => (Firebase.database().ref(`/thoughts/${getUserUID()}`));
+const getThoughtRef = () => (Firebase.database().ref(`/thoughts/${getUserUID()}/${getDateString()}`));
 
 const writeThought = (type) => {
   const date = getDateString();
@@ -23,14 +24,17 @@ const writeThought = (type) => {
 };
 
 const readThoughts = () => (new Promise((resolve) => {
-  getThoughtRef().once('value').then(snapshot => {
-    resolve(snapshot.val());
-  }).catch(() => {
-    resolve(null);
-  });
+  getThoughtRef()
+    .once('value')
+    .then(snapshot => {
+      resolve(snapshot.val());
+    }).catch(() => {
+      resolve(null);
+    });
 }));
 
 export default {
-  writeThought,
+  getDateString,
   readThoughts,
+  writeThought,
 };

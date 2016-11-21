@@ -3,6 +3,8 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 
+import './app.css';
+
 const App = ({ user, dysfunctionalThoughts, productiveThoughts }) => (
   <div>
     <Header user={user} />

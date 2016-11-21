@@ -1,0 +1,13 @@
+header:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 15px;
+  list-style-type: none;
+  text-align: center;
+}
