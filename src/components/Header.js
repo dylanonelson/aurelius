@@ -26,9 +26,6 @@ const Header = ({ user }) => (
       }}
       onClick={() => {
         Firebase.auth().currentUser.delete()
-          .then(response => {
-            console.log(response);
-          })
           .catch(error => {
             document.write(error);
           });
@@ -38,5 +35,9 @@ const Header = ({ user }) => (
     </button>
   </header>
 );
+
+Header.propTypes = {
+  user: React.PropTypes.object,
+};
 
 export default Header;

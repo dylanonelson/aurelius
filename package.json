@@ -22,7 +22,8 @@
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "sw-precache-webpack-plugin": "^0.6.1",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "wolfy87-eventemitter": "^5.1.0"
   },
   "devDependencies": {
     "local-web-server": "^1.2.6"
