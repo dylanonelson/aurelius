@@ -1,8 +1,9 @@
 import './sw';
 import auth from './auth';
+import render from './render';
 
-auth().then((user) => {
-  console.log(`Hello ${user.displayName}!`);
-}).catch((error) => {
-  console.error(error);
+auth().then(user => {
+  render(user);
+}).catch(error => {
+  document.write(error);
 });
