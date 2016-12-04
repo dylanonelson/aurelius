@@ -3,6 +3,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --colors --progress",
+    "dev": "npm run watch & npm run start",
     "start": "ws -d dist -p 1104",
     "watch": "webpack --colors --progress --watch"
   },

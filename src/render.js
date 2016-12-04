@@ -1,36 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import database from './database';
+import { LogTypes, Logs } from './database';
 
 import App from './components/App';
 
-const render = (user) => (new Promise((resolve) => {
-  database.readThoughts().then((thoughts) => {
-    let dysfunctionalThoughts = [],
-      productiveThoughts = [];
+const render = (user) => {
+  const readLogTypes = new Promise(resolve => {
+    LogTypes.read().then(types => resolve(types));
+  });
 
-    if (thoughts) {
-      dysfunctionalThoughts = Object.keys(thoughts).reduce((memo, key) => {
-        if (thoughts[key].type === 'dysfunctional') {
-          memo.push(thoughts[key]);
-        }
-        return memo;
-      }, []);
+  const readLogs = new Promise(resolve => {
+    Logs.read().then(logs => resolve(logs));
+  });
 
-      productiveThoughts = Object.keys(thoughts).reduce((memo, key) => {
-        if (thoughts[key].type === 'productive') {
-          memo.push(thoughts[key]);
-        }
-        return memo;
-      }, []);
-    }
-
+  return Promise.all([readLogTypes, readLogs]).then(([types, logs]) => {
     const app = (
       <App
         user={user}
-        dysfunctionalThoughts={dysfunctionalThoughts}
-        productiveThoughts={productiveThoughts}
+        logTypes={types}
+        logs={logs}
       />
     );
 
@@ -38,9 +27,7 @@ const render = (user) => (new Promise((resolve) => {
       app,
       document.getElementById('root')
     );
-
-    resolve(app);
   })
-}));
+};
 
 export default render;

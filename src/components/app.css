@@ -1,3 +1,8 @@
+h1 {
+  text-align: center;
+  padding: 25px 0;
+}
+
 header:after {
   content: '';
   display: block;
@@ -9,5 +14,4 @@ ul {
   padding: 0;
   padding-bottom: 15px;
   list-style-type: none;
-  text-align: center;
 }

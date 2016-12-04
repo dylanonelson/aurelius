@@ -1,82 +1,66 @@
 import React from 'react';
-import database from '../database';
+import LogControls from './LogControls';
+import LogTypeControls from './LogTypeControls';
+import LogList from './LogList';
+import Moment from 'moment';
+import { Logs, LogTypes } from '../database';
 
 class Main extends React.Component {
-  render() {
-    const { dysfunctionalThoughts, productiveThoughts } = this.props;
 
+  constructor(props) {
+    super();
+
+    this.state = {
+      logs: props.logs,
+      logTypes: props.logTypes,
+    };
+
+    this.handleLogCreate = this.handleLogCreate.bind(this);
+    this.handleLogTypeCreate = this.handleLogTypeCreate.bind(this);
+  }
+
+  handleLogCreate(typeID) {
+    Logs.write(typeID)
+      .then(val => {
+        this.setState({
+          logs: Object.assign(this.state.logs, val)
+        });
+      });
+  }
+
+  handleLogTypeCreate(logType) {
+    LogTypes.write(logType)
+      .then(val => {
+        this.setState({
+          logTypes: Object.assign(this.state.logTypes, val)
+        });
+      });
+  }
+
+  render() {
     return (
       <main>
-        <h1
-          style={{
-            textAlign: 'center'
-          }}
-        >
-          {database.getDateString()}
-        </h1>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            paddingTop: 50,
-            width: '100%',
-          }}
-        >
-          <div className="productive">
-            <ul>
-              {productiveThoughts.map(thought => (
-                <li
-                 key={thought.ts}
-                >
-                 +
-                </li>
-              ))}
-            </ul>
-            <button
-              style={{
-                border: '1px solid #ccc'
-              }}
-              onClick={() => {
-                this.props.productiveThoughts.push({ ts: Date.now() });
-                database.writeThought('productive');
-                this.forceUpdate();
-              }}
-            >
-              Productive
-            </button>
-          </div>
-          <div className="dysfunctional">
-            <ul>
-              {dysfunctionalThoughts.map(thought => (
-                <li
-                  key={thought.ts}
-                >
-                 ×
-                </li>
-              ))}
-            </ul>
-            <button
-              style={{
-                border: '1px solid #ccc'
-              }}
-              onClick={() => {
-                this.props.dysfunctionalThoughts.push({ ts: Date.now() });
-                database.writeThought('dysfunctional');
-                this.forceUpdate();
-              }}
-            >
-            Dysfunctional
-            </button>
-          </div>
-        </div>
+        <h1>{Moment().subtract(4, 'hours').format('YYYY-MM-DD')}</h1>
+        <LogList
+          logs={this.state.logs}
+          logTypes={this.state.logTypes}
+        />
+        <LogControls
+          logTypes={this.state.logTypes}
+          onLogCreate={this.handleLogCreate}
+        />
+        <LogTypeControls
+          logTypes={this.state.logTypes}
+          onLogTypeCreate={this.handleLogTypeCreate}
+        />
       </main>
     );
   }
+
 }
 
 Main.propTypes = {
-  dysfunctionalThoughts: React.PropTypes.array,
-  productiveThoughts: React.PropTypes.array,
+  logTypes: React.PropTypes.object.isRequired,
 };
 
 export default Main;

@@ -5,20 +5,20 @@ import Main from './Main';
 
 import './app.css';
 
-const App = ({ user, dysfunctionalThoughts, productiveThoughts }) => (
+const App = ({ user, logTypes, logs }) => (
   <div>
     <Header user={user} />
     <Main
-      dysfunctionalThoughts={dysfunctionalThoughts}
-      productiveThoughts={productiveThoughts}
+      logs={logs}
+      logTypes={logTypes}
     />
   </div>
 );
 
 App.propTypes = {
   user: React.PropTypes.object,
-  dysfunctionalThoughts: React.PropTypes.array,
-  productiveThoughts: React.PropTypes.array,
+  logTypes: React.PropTypes.object.isRequired,
+  logs: React.PropTypes.object.isRequired,
 };
 
 export default App;
