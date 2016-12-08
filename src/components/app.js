@@ -5,20 +5,18 @@ import Main from './Main';
 
 import './app.css';
 
-const App = ({ user, logTypes, logs }) => (
+const App = ({ user, store }) => (
   <div>
     <Header user={user} />
     <Main
-      logs={logs}
-      logTypes={logTypes}
+      store={store}
     />
   </div>
 );
 
 App.propTypes = {
   user: React.PropTypes.object,
-  logTypes: React.PropTypes.object.isRequired,
-  logs: React.PropTypes.object.isRequired,
+  store: React.PropTypes.object,
 };
 
 export default App;

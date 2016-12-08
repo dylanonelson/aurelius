@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { LogTypes, Logs } from './database';
 
 import App from './components/App';
+import store from './store';
 
 const render = (user) => {
   const readLogTypes = new Promise(resolve => {
@@ -15,11 +16,13 @@ const render = (user) => {
   });
 
   return Promise.all([readLogTypes, readLogs]).then(([types, logs]) => {
+    store.logs = logs;
+    store.logTypes = types;
+
     const app = (
       <App
         user={user}
-        logTypes={types}
-        logs={logs}
+        store={store}
       />
     );
 

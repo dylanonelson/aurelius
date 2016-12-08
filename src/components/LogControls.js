@@ -1,6 +1,7 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 
-const LogControls = ({ onLogCreate, logTypes }) => (
+const LogControls = observer(({ onLogCreate, logTypes }) => (
   <div>
     {Object.keys(logTypes).map((type) => (
       <button
@@ -11,10 +12,11 @@ const LogControls = ({ onLogCreate, logTypes }) => (
       </button>
     ))}
   </div>
-);
+));
 
 LogControls.propTypes = {
-  onLogCreate: React.PropTypes.func
+  logTypes: React.PropTypes.object,
+  onLogCreate: React.PropTypes.func,
 };
 
 export default LogControls;

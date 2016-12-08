@@ -1,5 +1,6 @@
 import React from 'react';
 import LogMarks from './LogMarks';
+import { observer } from 'mobx-react';
 
 const getLogsByType = (logs, type) =>
   Object.keys(logs).reduce((memo, log) => {
@@ -7,7 +8,7 @@ const getLogsByType = (logs, type) =>
     return memo;
   }, []);
 
-const Logs = ({ logs, logTypes }) => (
+const Logs = observer(({ logs, logTypes }) => (
   <ul>
     {Object.keys(logTypes).map(type =>
       <LogMarks
@@ -17,6 +18,11 @@ const Logs = ({ logs, logTypes }) => (
       />
     )}
   </ul>
-);
+));
+
+Logs.propTypes = {
+  logs: React.PropTypes.object,
+  logTypes: React.PropTypes.object,
+}
 
 export default Logs;

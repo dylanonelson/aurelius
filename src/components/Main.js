@@ -1,39 +1,42 @@
-import React from 'react';
-import LogControls from './LogControls';
-import LogTypeControls from './LogTypeControls';
-import LogList from './LogList';
 import Moment from 'moment';
+import React from 'react';
+import autobind from 'autobind-decorator';
+import { observer } from 'mobx-react';
+
+import LogControls from './LogControls';
+import LogList from './LogList';
+import LogTypeControls from './LogTypeControls';
 import { Logs, LogTypes } from '../database';
 
+@observer
 class Main extends React.Component {
 
   constructor(props) {
     super();
-
-    this.state = {
-      logs: props.logs,
-      logTypes: props.logTypes,
-    };
-
-    this.handleLogCreate = this.handleLogCreate.bind(this);
-    this.handleLogTypeCreate = this.handleLogTypeCreate.bind(this);
+    this.store = props.store;
   }
 
+  @autobind
   handleLogCreate(typeID) {
     Logs.write(typeID)
       .then(val => {
-        this.setState({
-          logs: Object.assign(this.state.logs, val)
-        });
+        this.store.logs = JSON.parse(
+          JSON.stringify(
+            Object.assign(this.store.logs, val)
+          )
+        );
       });
   }
 
+  @autobind
   handleLogTypeCreate(logType) {
     LogTypes.write(logType)
       .then(val => {
-        this.setState({
-          logTypes: Object.assign(this.state.logTypes, val)
-        });
+        this.store.logTypes = JSON.parse(
+          JSON.stringify(
+            Object.assign(this.store.logTypes, val)
+          )
+        );
       });
   }
 
@@ -42,15 +45,15 @@ class Main extends React.Component {
       <main>
         <h1>{Moment().subtract(4, 'hours').format('YYYY-MM-DD')}</h1>
         <LogList
-          logs={this.state.logs}
-          logTypes={this.state.logTypes}
+          logs={this.store.logs}
+          logTypes={this.store.logTypes}
         />
         <LogControls
-          logTypes={this.state.logTypes}
+          logTypes={this.store.logTypes}
           onLogCreate={this.handleLogCreate}
         />
         <LogTypeControls
-          logTypes={this.state.logTypes}
+          logTypes={this.store.logTypes}
           onLogTypeCreate={this.handleLogTypeCreate}
         />
       </main>
@@ -60,7 +63,7 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  logTypes: React.PropTypes.object.isRequired,
-};
+  store: React.PropTypes.object.isRequired,
+}
 
 export default Main;

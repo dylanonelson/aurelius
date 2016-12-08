@@ -1,30 +1,31 @@
 import React from 'react';
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
 
+@observer
 class LogTypeControls extends React.Component {
+
+  @observable logType = {
+    mark: '',
+    name: '',
+  };
+
   render() {
-    const { onLogTypeCreate, logTypes } = this.props;
+    const { onLogTypeCreate } = this.props;
     return (
       <div>
         <label htmlFor="log-type-name">Name</label>
         <input
           name="log-type-name"
-          onChange={(e) => {
-            this.setState({
-              name: e.target.value
-            });
-          }}
+          onChange={e => this.logType.name = e.target.value }
         />
         <label htmlFor="log-type-mark">Mark</label>
         <input
           name="log-type-mark"
-          onChange={(e) => {
-            this.setState({
-              mark: e.target.value
-            });
-          }}
+          onChange={e => this.logType.mark = e.target.value }
         />
         <button
-          onClick={(e) => onLogTypeCreate(this.state)}
+          onClick={() => onLogTypeCreate(this.logType)}
         >
           Create new type
         </button>
@@ -35,7 +36,6 @@ class LogTypeControls extends React.Component {
 
 LogTypeControls.propTypes = {
   onLogTypeCreate: React.PropTypes.func,
-  logTypes: React.PropTypes.object,
 };
 
 export default LogTypeControls;
