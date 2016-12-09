@@ -7,7 +7,7 @@ const dateString = () => moment().subtract(4, 'hours').format('YYYY-MM-DD');
 
 const ref = date => Firebase.database().ref(`logs/${userUID()}/${date || dateString()}`);
 
-const write = log_type =>
+const write = data =>
   new Promise(resolve => {
     const date = dateString();
     const key = ref().push().key;
@@ -17,7 +17,7 @@ const write = log_type =>
       [key]: {
         date,
         ts,
-        log_type,
+        log_type: data.log_type,
       }
     };
 

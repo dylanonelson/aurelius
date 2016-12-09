@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import LogControls from './LogControls';
 import LogList from './LogList';
 import LogTypeControls from './LogTypeControls';
-import { Logs, LogTypes } from '../database';
+import DataTypes from '../data/DataTypes';
 
 @observer
 class Main extends React.Component {
@@ -18,26 +18,12 @@ class Main extends React.Component {
 
   @autobind
   handleLogCreate(typeID) {
-    Logs.write(typeID)
-      .then(val => {
-        this.store.logs = JSON.parse(
-          JSON.stringify(
-            Object.assign(this.store.logs, val)
-          )
-        );
-      });
+    this.store.add(DataTypes.LOG, { log_type: typeID });
   }
 
   @autobind
   handleLogTypeCreate(logType) {
-    LogTypes.write(logType)
-      .then(val => {
-        this.store.logTypes = JSON.parse(
-          JSON.stringify(
-            Object.assign(this.store.logTypes, val)
-          )
-        );
-      });
+    this.store.add(DataTypes.LOG_TYPE, logType);
   }
 
   render() {

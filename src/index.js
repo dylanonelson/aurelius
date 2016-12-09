@@ -1,4 +1,3 @@
-import './sw';
 import auth from './auth';
 import render from './render';
 
