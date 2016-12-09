@@ -10,10 +10,12 @@ class Store {
   @observable logTypes = {};
 
   initialize() {
-    Promise.all([Logs.read(), LogTypes.read()]).then(([logs, logTypes]) => {
-      this.logs = logs;
-      this.logTypes = logTypes;
-    });
+    Logs.listen(logs =>
+      this.logs = Object.assign({}, this.logs, logs)
+    );
+    LogTypes.listen(logTypes =>
+      this.logTypes = Object.assign({}, this.logTypes, logTypes)
+    );
   }
 
   add(type, data) {

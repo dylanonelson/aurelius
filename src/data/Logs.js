@@ -5,7 +5,8 @@ const userUID = () => Firebase.auth().currentUser.uid
 
 const dateString = () => moment().subtract(4, 'hours').format('YYYY-MM-DD');
 
-const ref = date => Firebase.database().ref(`logs/${userUID()}/${date || dateString()}`);
+const ref = date =>
+  Firebase.database().ref(`logs/${userUID()}/${date || dateString()}`);
 
 const write = data =>
   new Promise(resolve => {
@@ -25,15 +26,10 @@ const write = data =>
     resolve(newLog);
   })
 
-const read = date =>
-  new Promise(resolve => {
-    ref(date)
-      .once('value')
-      .then(snapshot => resolve(snapshot.val() || {}))
-      .catch(() => resolve(null));
-  })
+const listen = (callback) =>
+  ref().on('value', (snapshot) => callback(snapshot.val()))
 
 export default {
   write,
-  read
+  listen,
 }

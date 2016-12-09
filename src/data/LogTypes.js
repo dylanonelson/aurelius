@@ -23,16 +23,10 @@ const write = (data) => (
   })
 );
 
-const read = () => (
-  new Promise(resolve => {
-    ref()
-      .once('value')
-      .then(snapshot => resolve(snapshot.val() || {}))
-      .catch(() => resolve(null));
-  })
-);
+const listen = callback =>
+  ref().on('value', snapshot => callback(snapshot.val()));
 
 export default {
   write,
-  read
+  listen
 }
