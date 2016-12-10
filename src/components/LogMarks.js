@@ -31,10 +31,9 @@ const getMarks = (mark, times) => {
 
 const LogMarks = ({ logs, logType }) => {
   return (
-    <li>
-      <h3>{logType.name}</h3>
+    <div>
       {getMarks(logType.mark, logs.length)}
-    </li>
+    </div>
   );
 };
 

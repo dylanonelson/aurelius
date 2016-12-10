@@ -3,7 +3,6 @@ import React from 'react';
 import autobind from 'autobind-decorator';
 import { observer } from 'mobx-react';
 
-import LogControls from './LogControls';
 import LogList from './LogList';
 import LogTypeControls from './LogTypeControls';
 import DataTypes from '../data/DataTypes';
@@ -31,11 +30,8 @@ class Main extends React.Component {
       <main>
         <h1>{Moment().subtract(4, 'hours').format('YYYY-MM-DD')}</h1>
         <LogList
+          logTypes={this.store.logTypes}
           logs={this.store.logs}
-          logTypes={this.store.logTypes}
-        />
-        <LogControls
-          logTypes={this.store.logTypes}
           onLogCreate={this.handleLogCreate}
         />
         <LogTypeControls

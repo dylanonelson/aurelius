@@ -1,4 +1,5 @@
 import React from 'react';
+import LogHeader from './LogHeader';
 import LogMarks from './LogMarks';
 import { observer } from 'mobx-react';
 
@@ -8,14 +9,21 @@ const getLogsByType = (logs, type) =>
     return memo;
   }, []);
 
-const Logs = observer(({ logs, logTypes }) => (
+const Logs = observer(({ logs, logTypes, onLogCreate }) => (
   <ul>
     {Object.keys(logTypes).map(type =>
-      <LogMarks
+      <li
         key={type}
-        logs={getLogsByType(logs, type)}
-        logType={logTypes[type]}
-      />
+      >
+        <LogHeader
+          logType={logTypes[type]}
+          onLogCreate={() => onLogCreate(type)}
+        />
+        <LogMarks
+          logs={getLogsByType(logs, type)}
+          logType={logTypes[type]}
+        />
+      </li>
     )}
   </ul>
 ));
@@ -23,6 +31,7 @@ const Logs = observer(({ logs, logTypes }) => (
 Logs.propTypes = {
   logs: React.PropTypes.object,
   logTypes: React.PropTypes.object,
+  onLogCreate: React.PropTypes.func,
 }
 
 export default Logs;
