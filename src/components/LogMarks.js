@@ -9,6 +9,7 @@ const getMarks = (mark, times) => {
   for (let i = 0; i < rows; i++) {
     lis.push(
       <li
+        className="row-marks"
         key={i}
       >
         {new Array(5).fill(mark).join('')}
@@ -17,6 +18,7 @@ const getMarks = (mark, times) => {
   }
   lis.push(
     <li
+      className="row-marks"
       key={rows}
     >
       {new Array(remainder).fill(mark).join('')}

@@ -15,3 +15,7 @@ ul {
   padding-bottom: 15px;
   list-style-type: none;
 }
+
+.row-marks:nth-child(5n) {
+  padding-bottom: 15px;
+}
