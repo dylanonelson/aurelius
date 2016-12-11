@@ -11,6 +11,7 @@ const handler = {
 class DataTypes {
   static get LOG() { return 'log'; }
   static get LOG_TYPE() { return 'logType'; }
+  static get BENCHMARK() { return 'benchmark'; }
 }
 
 export default new Proxy(DataTypes, handler);

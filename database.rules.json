@@ -2,6 +2,7 @@
   "rules": {
     "logs": {
       "$uid": {
+        ".indexOn": "date",
         ".write": "$uid === auth.uid",
         ".read": "$uid === auth.uid"
       }

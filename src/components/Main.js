@@ -1,4 +1,3 @@
-import Moment from 'moment';
 import React from 'react';
 import autobind from 'autobind-decorator';
 import { observer } from 'mobx-react';
@@ -17,7 +16,10 @@ class Main extends React.Component {
 
   @autobind
   handleLogCreate(typeID) {
-    this.store.add(DataTypes.LOG, { log_type: typeID });
+    this.store.add(DataTypes.LOG, {
+      log_type: typeID,
+      date: this.store.date,
+    });
   }
 
   @autobind
@@ -28,7 +30,7 @@ class Main extends React.Component {
   render() {
     return (
       <main>
-        <h1>{Moment().subtract(4, 'hours').format('YYYY-MM-DD')}</h1>
+        <h1>{this.store.date}</h1>
         <LogList
           logTypes={this.store.logTypes}
           logs={this.store.logs}

@@ -1,16 +1,22 @@
 import { asMap, observable } from 'mobx';
+import Moment from 'moment';
 import DataTypes from './DataTypes';
-import LogTypes from './LogTypes';
-import Logs from './Logs';
+import db from './database';
 
 class Store {
 
   @observable logs = asMap({});
   @observable logTypes = asMap({});
+  @observable date = '';
 
   initialize() {
-    Logs.listen(logs => this.updateProp('logs', logs));
-    LogTypes.listen(logTypes => this.updateProp('logTypes', logTypes));
+    this.date = this.currentDate;
+    db.listen(DataTypes.LOG, logs => this.updateProp('logs', logs || {}));
+    db.listen(DataTypes.LOG_TYPE, logTypes => this.updateProp('logTypes', logTypes || {}));
+  }
+
+  get currentDate() {
+    return Moment().subtract(4, 'hours').format('YYYY-MM-DD');
   }
 
   updateProp(propName, values) {
@@ -18,16 +24,19 @@ class Store {
   }
 
   add(type, data) {
+    const record = db.write(type, data);
+
     switch (type) {
       case DataTypes.LOG: {
-        Logs.write(data)
-          .then(log => this.updateProp('logs', log));
+        this.updateProp('logs', record);
         break;
       }
       case DataTypes.LOG_TYPE: {
-        LogTypes.write(data)
-          .then(logType => this.updateProp('logTypes', logType));
+        this.updateProp('logTypes', record);
         break;
+      }
+      default: {
+        throw new Error(`Cannot add record for data type ${type}`);
       }
     }
   }
