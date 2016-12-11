@@ -3,25 +3,27 @@ import LogHeader from './LogHeader';
 import LogMarks from './LogMarks';
 import { observer } from 'mobx-react';
 
-const getLogsByType = (logs, type) =>
-  Object.keys(logs).reduce((memo, log) => {
-    if (logs[log].log_type === type) memo.push(logs[log]);
-    return memo;
-  }, []);
+const getLogsByType = (logs, typeId) => {
+  const logsByType = [];
+  for (let [id, log] of logs) { // eslint-disable-line no-unused-vars
+    if (log.log_type === typeId) logsByType.push(log);
+  }
+  return logsByType;
+}
 
 const Logs = observer(({ logs, logTypes, onLogCreate }) => (
   <ul>
-    {Object.keys(logTypes).map(type =>
+    {[...logTypes].map(([typeId, type]) =>
       <li
-        key={type}
+        key={typeId}
       >
         <LogHeader
-          logType={logTypes[type]}
-          onLogCreate={() => onLogCreate(type)}
+          logType={type}
+          onLogCreate={() => onLogCreate(typeId)}
         />
         <LogMarks
-          logs={getLogsByType(logs, type)}
-          logType={logTypes[type]}
+          logs={getLogsByType(logs, typeId)}
+          logType={type}
         />
       </li>
     )}
