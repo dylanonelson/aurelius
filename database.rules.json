@@ -4,7 +4,12 @@
       "$uid": {
         ".indexOn": "date",
         ".write": "$uid === auth.uid",
-        ".read": "$uid === auth.uid"
+        ".read": "$uid === auth.uid",
+        "$logId": {
+          "date": {
+            ".validate": "newData.isString() && newData.val().matches(/^2\\d{3}-\\d{2}-\\d{2}$/)"
+          }
+        }
       }
     },
     "logTypes": {
