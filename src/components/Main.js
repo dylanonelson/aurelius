@@ -4,40 +4,32 @@ import { observer } from 'mobx-react';
 
 import LogList from './LogList';
 import LogTypeControls from './LogTypeControls';
-import DataTypes from '../data/DataTypes';
+import { data } from '../data';
 
 @observer
 class Main extends React.Component {
 
-  constructor(props) {
-    super();
-    this.store = props.store;
+  @autobind
+  handleLogCreate(logType) {
+    const { date } = this.props.state;
+    data.CURRENT_LOGS.write({ logType, date });
   }
 
-  @autobind
-  handleLogCreate(typeID) {
-    this.store.add(DataTypes.LOG, {
-      log_type: typeID,
-      date: this.store.date,
-    });
-  }
-
-  @autobind
   handleLogTypeCreate(logType) {
-    this.store.add(DataTypes.LOG_TYPE, logType);
+    data.LOG_TYPES.write(logType);
   }
 
   render() {
     return (
       <main>
-        <h1>{this.store.date}</h1>
+        <h1>{this.props.state.date}</h1>
         <LogList
-          logTypes={this.store.logTypes}
-          logs={this.store.logs}
+          logTypes={this.props.state.logTypes}
+          logs={this.props.state.logs}
           onLogCreate={this.handleLogCreate}
         />
         <LogTypeControls
-          logTypes={this.store.logTypes}
+          logTypes={this.props.state.logTypes}
           onLogTypeCreate={this.handleLogTypeCreate}
         />
       </main>
@@ -47,7 +39,7 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  store: React.PropTypes.object.isRequired,
+  state: React.PropTypes.object.isRequired,
 }
 
 export default Main;

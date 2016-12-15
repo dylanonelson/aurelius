@@ -1,3 +1,5 @@
+import { logDAO, logTypeDAO, benchmarkDAO } from './daos';
+
 const handler = {
   get: (target, property) => {
     if (property in target) {
@@ -8,10 +10,11 @@ const handler = {
   },
 };
 
+
 class DataTypes {
-  static get LOG() { return 'log'; }
-  static get LOG_TYPE() { return 'logType'; }
-  static get BENCHMARK() { return 'benchmark'; }
+  static get CURRENT_LOGS() { return logDAO; }
+  static get LOG_TYPES() { return logTypeDAO; }
+  static get BENCHMARK() { return benchmarkDAO; }
 }
 
 export default new Proxy(DataTypes, handler);

@@ -7,7 +7,7 @@
         ".read": "$uid === auth.uid"
       }
     },
-    "log_types": {
+    "logTypes": {
       "$uid": {
         ".write": "$uid === auth.uid",
         ".read": "$uid === auth.uid"

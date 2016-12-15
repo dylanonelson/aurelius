@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import db from './data';
+import { bindData, data, state } from './data';
 
 import App from './components/App';
 
 const render = (user) => {
-  db.initialize();
+  bindData(data, state);
 
   const app = (
     <App
       user={user}
-      store={db}
+      state={state}
     />
   );
 

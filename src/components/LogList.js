@@ -6,12 +6,12 @@ import { observer } from 'mobx-react';
 const getLogsByType = (logs, typeId) => {
   const logsByType = [];
   for (let [id, log] of logs) { // eslint-disable-line no-unused-vars
-    if (log.log_type === typeId) logsByType.push(log);
+    if (log.logType === typeId) logsByType.push(log);
   }
   return logsByType;
 }
 
-const Logs = observer(({ logs, logTypes, onLogCreate }) => (
+const LogList = observer(({ logs, logTypes, onLogCreate }) => (
   <ul>
     {[...logTypes].map(([typeId, type]) =>
       <li
@@ -30,10 +30,10 @@ const Logs = observer(({ logs, logTypes, onLogCreate }) => (
   </ul>
 ));
 
-Logs.propTypes = {
+LogList.propTypes = {
   logs: React.PropTypes.object,
   logTypes: React.PropTypes.object,
   onLogCreate: React.PropTypes.func,
 }
 
-export default Logs;
+export default LogList;
