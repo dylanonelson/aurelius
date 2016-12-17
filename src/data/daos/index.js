@@ -40,16 +40,22 @@ class DataType {
   }
 }
 
-class LogType extends DataType {
-  get refs() {
+const getByCurrentDateObj = {
+  get: function () {
     const write = Firebase.database().ref(this.path);
     const read = write.orderByChild('date').equalTo(state.date);
     return { read, write };
   }
 }
 
-const benchmarkDAO = new DataType({ key: 'benchmark' });
-const logDAO = new LogType({ key: 'logs' });
+const benchmarkDAO = new DataType({ key: 'benchmarks' });
+Object.defineProperty(benchmarkDAO, 'refs', getByCurrentDateObj);
+
+const benchmarkTypeDAO = new DataType({ key: 'benchmarkTypes' });
+
+const logDAO = new DataType({ key: 'logs' });
+Object.defineProperty(logDAO, 'refs', getByCurrentDateObj);
+
 const logTypeDAO = new DataType({ key: 'logTypes' });
 
-export { logDAO, logTypeDAO, benchmarkDAO };
+export { logDAO, logTypeDAO, benchmarkDAO, benchmarkTypeDAO };

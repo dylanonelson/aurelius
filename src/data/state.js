@@ -3,6 +3,8 @@ import Moment from 'moment';
 
 class Store {
 
+  @observable benchmarks = asMap({});
+  @observable benchmarkTypes = asMap({});
   @observable logs = asMap({});
   @observable logTypes = asMap({});
   @observable date = '';

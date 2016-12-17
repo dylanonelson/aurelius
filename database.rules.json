@@ -17,6 +17,19 @@
         ".write": "$uid === auth.uid",
         ".read": "$uid === auth.uid"
       }
+    },
+    "benchmarks": {
+      "$uid": {
+        ".indexOn": "date",
+        ".write": "$uid === auth.uid",
+        ".read": "$uid === auth.uid"
+      }
+    }
+    "benchmarkTypes": {
+      "$uid": {
+        ".write": "$uid === auth.uid",
+        ".read": "$uid === auth.uid"
+      }
     }
   }
 }

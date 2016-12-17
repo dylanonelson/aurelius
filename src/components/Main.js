@@ -2,6 +2,7 @@ import React from 'react';
 import autobind from 'autobind-decorator';
 import { observer } from 'mobx-react';
 
+import BenchmarkTypeControls from './BenchmarkTypeControls';
 import LogList from './LogList';
 import LogTypeControls from './LogTypeControls';
 import { data } from '../data';
@@ -19,6 +20,10 @@ class Main extends React.Component {
     data.LOG_TYPES.write(logType);
   }
 
+  handleBenchmarkTypeCreate(benchmarkType) {
+    data.BENCHMARK_TYPES.write(benchmarkType);
+  }
+
   render() {
     return (
       <main>
@@ -31,6 +36,9 @@ class Main extends React.Component {
         <LogTypeControls
           logTypes={this.props.state.logTypes}
           onLogTypeCreate={this.handleLogTypeCreate}
+        />
+        <BenchmarkTypeControls
+          onBenchmarkTypeCreate={this.handleBenchmarkTypeCreate}
         />
       </main>
     );

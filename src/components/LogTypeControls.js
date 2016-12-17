@@ -12,8 +12,10 @@ class LogTypeControls extends React.Component {
 
   render() {
     const { onLogTypeCreate } = this.props;
+
     return (
-      <div>
+      <fieldset>
+        <h4>New log type</h4>
         <label htmlFor="log-type-name">Name</label>
         <input
           name="log-type-name"
@@ -29,7 +31,7 @@ class LogTypeControls extends React.Component {
         >
           Create new type
         </button>
-      </div>
+      </fieldset>
     );
   }
 }
