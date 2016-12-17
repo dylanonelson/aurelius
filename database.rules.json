@@ -3,12 +3,10 @@
     "logs": {
       "$uid": {
         ".indexOn": "date",
-        ".write": "$uid === auth.uid",
         ".read": "$uid === auth.uid",
         "$logId": {
-          "date": {
-            ".validate": "newData.isString() && newData.val().matches(/^2\\d{3}-\\d{2}-\\d{2}$/)"
-          }
+          ".write": "$uid === auth.uid",
+          ".validate": "newData.child('date').isString() && newData.child('date').val().matches(/^2\\d{3}-\\d{2}-\\d{2}$/)"
         }
       }
     },
@@ -21,10 +19,13 @@
     "benchmarks": {
       "$uid": {
         ".indexOn": "date",
-        ".write": "$uid === auth.uid",
-        ".read": "$uid === auth.uid"
+        ".read": "$uid === auth.uid",
+        "$benchmarkId": {
+          ".write": "$uid === auth.uid",
+          ".validate": "newData.child('date').isString() && newData.child('date').val().matches(/^2\\d{3}-\\d{2}-\\d{2}$/) && newData.child('value').isNumber() && newData.child('benchmarkType').isString()"
+        }
       }
-    }
+    },
     "benchmarkTypes": {
       "$uid": {
         ".write": "$uid === auth.uid",

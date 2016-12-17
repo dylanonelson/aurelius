@@ -2,6 +2,8 @@ import React from 'react';
 import autobind from 'autobind-decorator';
 import { observer } from 'mobx-react';
 
+import BenchmarkControls from './BenchmarkControls';
+import BenchmarkList from './BenchmarkList';
 import BenchmarkTypeControls from './BenchmarkTypeControls';
 import LogList from './LogList';
 import LogTypeControls from './LogTypeControls';
@@ -33,6 +35,11 @@ class Main extends React.Component {
           logs={this.props.state.logs}
           onLogCreate={this.handleLogCreate}
         />
+        <BenchmarkList
+          types={this.props.state.benchmarkTypes}
+          benchmarks={this.props.state.benchmarks}
+        />
+        <BenchmarkControls state={this.props.state} />
         <LogTypeControls
           logTypes={this.props.state.logTypes}
           onLogTypeCreate={this.handleLogTypeCreate}
