@@ -18,6 +18,10 @@ class Main extends React.Component {
     data.CURRENT_LOGS.write({ logType, date });
   }
 
+  handleLogRemove(logId) {
+    data.CURRENT_LOGS.delete(logId);
+  }
+
   handleLogTypeCreate(logType) {
     data.LOG_TYPES.write(logType);
   }
@@ -34,6 +38,7 @@ class Main extends React.Component {
           logTypes={this.props.state.logTypes}
           logs={this.props.state.logs}
           onLogCreate={this.handleLogCreate}
+          onLogRemove={this.handleLogRemove}
         />
         <BenchmarkList
           types={this.props.state.benchmarkTypes}

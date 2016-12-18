@@ -11,7 +11,11 @@ const getLogsByType = (logs, typeId) => {
   return logsByType;
 }
 
-const LogList = observer(({ logs, logTypes, onLogCreate }) => (
+const getMostRecentLogOfType = (logs, type) => {
+  return [...logs].reverse().find(([id, log]) => (log.logType === type));
+}
+
+const LogList = observer(({ logs, logTypes, onLogCreate, onLogRemove }) => (
   <ul>
     {[...logTypes].map(([typeId, type]) =>
       <li
@@ -20,6 +24,7 @@ const LogList = observer(({ logs, logTypes, onLogCreate }) => (
         <LogHeader
           logType={type}
           onLogCreate={() => onLogCreate(typeId)}
+          onLogRemove={() => onLogRemove(getMostRecentLogOfType(logs, typeId)[0])}
         />
         <LogMarks
           logs={getLogsByType(logs, typeId)}

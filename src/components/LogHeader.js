@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LogHeader = ({ logType, onLogCreate }) => (
+const LogHeader = ({ logType, onLogCreate, onLogRemove }) => (
   <h3>
     <p
       style={{
@@ -13,7 +13,12 @@ const LogHeader = ({ logType, onLogCreate }) => (
     <button
       onClick={onLogCreate}
     >
-      {logType.mark}
+      ADD
+    </button>
+    <button
+      onClick={onLogRemove}
+    >
+      REMOVE
     </button>
   </h3>
 )

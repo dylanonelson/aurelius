@@ -8,4 +8,7 @@ const bindData = (data, state) => {
   data.LOG_TYPES.sync(logTypes => state.updateProp('logTypes', logTypes));
 }
 
+window.state = state;
+window.data = data;
+
 export { state, data, bindData };

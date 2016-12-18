@@ -36,7 +36,8 @@ class DataType {
     return d;
   }
 
-  delete() {
+  delete(id) {
+    this.refs.write.child(id).set(null);
   }
 }
 
