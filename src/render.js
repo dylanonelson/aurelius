@@ -3,19 +3,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import './app.css';
 import { bindData, data, state } from './data';
-import { Header, Home  } from './views';
+import { Home  } from './views';
 
 const render = () => {
   injectTapEventPlugin();
-
   bindData(data, state);
-
-  const header = Header();
-
-  ReactDOM.render(
-    header,
-    document.getElementById('header')
-  );
 
   const home = Home();
 

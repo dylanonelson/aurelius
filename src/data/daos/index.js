@@ -49,7 +49,7 @@ const getByCurrentDateObj = {
     const read = write.orderByChild('date').equalTo(dateString);
     return { read, write };
   },
-}
+};
 
 const benchmarkDAO = new DataType({ key: 'benchmarks' });
 Object.defineProperty(benchmarkDAO, 'refs', getByCurrentDateObj);

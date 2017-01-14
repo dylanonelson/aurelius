@@ -6,7 +6,7 @@ const bindData = (data, state) => {
   data.CURRENT_BENCHMARKS.sync(benchmarks => state.updateProp('benchmarks', benchmarks));
   data.CURRENT_LOGS.sync(logs => state.updateProp('logs', logs));
   data.LOG_TYPES.sync(logTypes => state.updateProp('logTypes', logTypes));
-}
+};
 
 window.state = state;
 window.data = data;

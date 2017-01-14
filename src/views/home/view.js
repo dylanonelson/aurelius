@@ -1,9 +1,12 @@
+import Moment from 'moment';
 import { asMap, autorun, observable } from 'mobx';
+
 import { state } from '../../data';
 
 class HomeView {
 
   @observable logMap = asMap({});
+  @observable date = '';
 
   sync() {
     autorun(() => {
@@ -23,6 +26,8 @@ class HomeView {
       });
 
       this.logMap = logMap;
+
+      this.date = Moment(state.date).format('MMMM D, YYYY');
     });
   }
 }

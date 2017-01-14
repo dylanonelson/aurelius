@@ -10,14 +10,14 @@ const muiTheme = getMuiTheme({
   },
 });
 
-const Header = ({ state }) => (
+const Header = ({ date }) => (
   <MuiThemeProvider muiTheme={muiTheme}>
-    <AppBar title={state.date} />
+    <AppBar title={date} />
   </MuiThemeProvider>
 );
 
 Header.propTypes = {
-  state: React.PropTypes.object.isRequired,
-}
+  date: React.PropTypes.string.isRequired,
+};
 
 export default Header;

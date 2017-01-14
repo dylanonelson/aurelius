@@ -1,22 +1,19 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 
+import Header from './Header';
+import Logs from './Logs';
+
 @observer
 class Home extends React.Component {
   render() {
     const { state } = this.props;
 
     return (
-      <ul>
-        {[...state.logMap].map(([logType, logs]) => {
-          return (
-            <li key={logType.id}>
-              {logType.name}
-              {logType.mark}
-            </li>
-          );
-        })}
-      </ul>
+      <div id="home">
+        <Header date={state.date} />
+        <Logs logs={state.logMap} />
+      </div>
     );
   }
 }

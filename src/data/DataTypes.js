@@ -3,7 +3,7 @@ import { logDAO, logTypeDAO, benchmarkDAO, benchmarkTypeDAO } from './daos';
 const handler = {
   get: (target, property) => {
     if (property in target) {
-      return target[property]
+      return target[property];
     }
 
     throw new Error(`${property} is not a data type`);
