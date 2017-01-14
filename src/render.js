@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import './app.css';
 import { bindData, data, state } from './data';
 import { Header, Home  } from './views';
 
