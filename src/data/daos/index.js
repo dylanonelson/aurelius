@@ -46,7 +46,7 @@ const getByCurrentDateObj = {
     const write = Firebase.database().ref(this.path);
     const read = write.orderByChild('date').equalTo(state.date);
     return { read, write };
-  }
+  },
 }
 
 const benchmarkDAO = new DataType({ key: 'benchmarks' });

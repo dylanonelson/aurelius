@@ -1,22 +1,15 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { bindData, data, state } from './data';
 
-import App from './components/App';
+import { Home } from './views';
 
-const render = (user) => {
+const render = () => {
   bindData(data, state);
-
-  const app = (
-    <App
-      user={user}
-      state={state}
-    />
-  );
+  const home = Home();
 
   ReactDOM.render(
-    app,
+    home,
     document.getElementById('root')
   );
 };
