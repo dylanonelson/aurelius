@@ -1,13 +1,16 @@
 import React from 'react';
 
+import Log from './Log';
+
 const Logs = ({ logs }) => (
   <ul>
     {[...logs].map(([logType, logs]) => {
       return (
-        <li key={logType.id}>
-          {logType.name}
-          {logType.mark}
-        </li>
+        <Log
+          key={logType.id}
+          logType={logType}
+          logs={logs}
+        />
       );
     })}
   </ul>
