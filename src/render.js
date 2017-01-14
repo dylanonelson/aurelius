@@ -1,16 +1,26 @@
 import ReactDOM from 'react-dom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { bindData, data, state } from './data';
-
-import { Home } from './views';
+import { Header, Home  } from './views';
 
 const render = () => {
+  injectTapEventPlugin();
+
   bindData(data, state);
+
+  const header = Header();
+
+  ReactDOM.render(
+    header,
+    document.getElementById('header')
+  );
+
   const home = Home();
 
   ReactDOM.render(
     home,
-    document.getElementById('root')
+    document.getElementById('body')
   );
 };
 

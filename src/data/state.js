@@ -14,7 +14,7 @@ class Store {
   }
 
   get currentDate() {
-    return Moment().subtract(4, 'hours').format('YYYY-MM-DD');
+    return Moment().subtract(4, 'hours').format();
   }
 
   updateProp(propName, values) {

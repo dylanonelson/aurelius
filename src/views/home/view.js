@@ -8,6 +8,7 @@ class HomeView {
   sync() {
     autorun(() => {
       const logMap = new Map();
+
       [...state.logTypes].forEach(([id, logType]) => {
         const typeObj = logType;
         logType.id = id;
@@ -20,6 +21,7 @@ class HomeView {
 
         logMap.set(typeObj, logs);
       });
+
       this.logMap = logMap;
     });
   }

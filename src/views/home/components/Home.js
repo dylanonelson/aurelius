@@ -22,7 +22,7 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  state: React.PropTypes.object,
-}
+  state: React.PropTypes.object.isRequired,
+};
 
 export default Home;

@@ -1,4 +1,5 @@
 import Firebase from 'firebase';
+import Moment from 'moment';
 import state from '../state';
 
 const getUserUID = () => (Firebase.auth().currentUser.uid);
@@ -44,7 +45,8 @@ class DataType {
 const getByCurrentDateObj = {
   get: function () {
     const write = Firebase.database().ref(this.path);
-    const read = write.orderByChild('date').equalTo(state.date);
+    const dateString = Moment(state.date).format('YYYY-MM-DD');
+    const read = write.orderByChild('date').equalTo(dateString);
     return { read, write };
   },
 }
