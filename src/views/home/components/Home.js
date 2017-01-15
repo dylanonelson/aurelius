@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 
 import Header from './Header';
 import Logs from './Logs';
+import EditButton from './EditButton';
 
 
 const muiTheme = getMuiTheme({
@@ -24,6 +25,7 @@ class Home extends React.Component {
         <div id="home">
           <Header date={state.date} />
           <Logs logs={state.logMap} />
+          <EditButton />
         </div>
       </MuiThemeProvider>
     );

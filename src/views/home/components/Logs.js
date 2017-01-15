@@ -4,6 +4,8 @@ import Log from './Log';
 
 const styles = {
   list: {
+    // Add bottom margin for FAB
+    marginBottom: 100,
     // Compensate for the height of the fixed App Bar
     position: 'relative',
     top: 64,
