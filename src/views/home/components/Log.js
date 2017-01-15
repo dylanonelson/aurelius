@@ -1,36 +1,19 @@
 import React from 'react';
-import Marks from './Marks';
+
+import LogDetails from './LogDetails';
+import LogSummary from './LogSummary';
 
 const styles = {
   line: {
     padding: 20,
-  },
-  title: {
-    fontFamily: 'Roboto',
-    fontSize: 24,
-    fontWeight: 300,
-  },
-  count: {
-    float: 'right',
-    fontFamily: 'Roboto',
-    fontSize: 24,
-    fontWeight: 700,
+    borderBottom: '1px solid rgba(0,0,0,0.3)',
   },
 };
 
-
-const Log = ({ logType, logs }) => (
+const Log = (props) => (
   <li style={styles.line}>
-    <span style={styles.count}>
-      {logs.length}
-    </span>
-    <h2 style={styles.title}>
-      {logType.name}
-    </h2>
-    <Marks
-      mark={logType.mark}
-      num={logs.length}
-    />
+    <LogSummary {...props} />
+    <LogDetails {...props} />
   </li>
 );
 
