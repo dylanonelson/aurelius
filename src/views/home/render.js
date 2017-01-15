@@ -6,7 +6,6 @@ import { Home } from './components';
 const render = () => {
   const dataView = new View();
   dataView.sync();
-  console.log('yo');
 
   return (
     <Home state={dataView} />

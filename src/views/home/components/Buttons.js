@@ -29,7 +29,7 @@ const Buttons = ({ logType, logs }) => {
     addLog: () => {
       return data.CURRENT_LOGS.write({
         logType: logType.id,
-        date: Moment().format('YYYY-MM-DD'),
+        date: Moment().subtract(4, 'hours').format('YYYY-MM-DD'),
       });
     },
   };
