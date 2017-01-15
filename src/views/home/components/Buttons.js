@@ -34,6 +34,10 @@ const Buttons = ({ logType, logs }) => {
     },
   };
 
+  const removeButtonStyle = Object.assign({}, styles.button, {
+    display: logs.length > 0 ? 'block' : 'none',
+  });
+
   return (
     <div
       id="log-buttons"
@@ -41,7 +45,7 @@ const Buttons = ({ logType, logs }) => {
     >
       <IconButton
         onClick={callbacks.removeLog}
-        style={styles.button}
+        style={removeButtonStyle}
       >
         <RemoveCircleOutline />
       </IconButton>
