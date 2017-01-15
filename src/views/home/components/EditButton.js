@@ -1,6 +1,7 @@
 import React from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Create from 'material-ui/svg-icons/content/create';
+import { Link } from 'react-router';
 
 // Use full stylesheet to center FAB with translateX
 import './fab.css';
@@ -12,13 +13,20 @@ const styles = {
   },
 };
 
-const EditButton = () => (
-  <FloatingActionButton
-    className="fab"
-    style={styles.fab}
-  >
-    <Create />
-  </FloatingActionButton>
+const EditButton = ({ onClick }) => (
+  <Link to="/edit">
+    <FloatingActionButton
+      className="fab"
+      style={styles.fab}
+      onClick={onClick}
+    >
+      <Create />
+    </FloatingActionButton>
+  </Link>
 );
+
+EditButton.propTypes = {
+  onClick: React.PropTypes.func,
+};
 
 export default EditButton;
