@@ -6,7 +6,6 @@ const styles = {
     fontFamily: 'Roboto',
     fontSize: 14,
     fontWeight: 100,
-    marginTop: 10,
   },
   row: {
     letterSpacing: 5,

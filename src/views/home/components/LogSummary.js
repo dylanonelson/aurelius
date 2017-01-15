@@ -1,27 +1,28 @@
 import React from 'react';
 
+import Buttons from './Buttons';
+
 const styles = {
-  count: {
-    float: 'right',
-    fontFamily: 'Roboto',
-    fontSize: 24,
-    fontWeight: 700,
+  container: {
+    display: 'flex',
   },
   title: {
     fontFamily: 'Roboto',
     fontSize: 24,
     fontWeight: 300,
+    width: '50%',
   },
 };
 
 const LogSummary = ({ logs, logType }) => (
-  <div id="log-summary">
-    <span style={styles.count}>
-      {logs.length}
-    </span>
+  <div
+    id="log-summary"
+    style={styles.container}
+  >
     <h2 style={styles.title}>
       {logType.name}
     </h2>
+    <Buttons logType={logType} logs={logs} />
   </div>
 );
 

@@ -14,7 +14,8 @@ const styles = {
   },
   button: {
     float: 'right',
-    right: -12,
+    right: -15,
+    top: -8,
   },
 };
 
