@@ -7,6 +7,7 @@ const styles = {
     display: 'flex',
   },
   title: {
+    lineHeight: '48px',
     fontFamily: 'Roboto',
     fontSize: 24,
     fontWeight: 300,

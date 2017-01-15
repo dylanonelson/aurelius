@@ -2,8 +2,18 @@ import React from 'react';
 
 import Log from './Log';
 
+const styles = {
+  list: {
+    // Compensate for the height of the fixed App Bar
+    position: 'relative',
+    top: 64,
+  },
+};
+
 const Logs = ({ logs }) => (
-  <ul>
+  <ul
+    style={styles.list}
+  >
     {[...logs].map(([logType, logs]) => {
       return (
         <Log

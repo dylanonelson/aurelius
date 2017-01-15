@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-const LogDetails = ({ logType, logs }) => (
+const LogDetails = ({ logType, logs }) => (logs.length === 0 ? null : (
   <div
     id="log-details"
     style={styles.container}
@@ -29,7 +29,7 @@ const LogDetails = ({ logType, logs }) => (
       {logs.length}
     </span>
   </div>
-);
+));
 
 LogDetails.propTypes = {
   logType: React.PropTypes.object.isRequired,

@@ -31,7 +31,7 @@ const Marks = ({ mark, num }) => {
 
   return (
     <ul style={styles.list}>
-      {num === 0 ? 'None' : rows}
+      {num === 0 ? null : rows}
     </ul>
   );
 };
