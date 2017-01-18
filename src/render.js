@@ -22,6 +22,10 @@ const App = (props) => (
   </MuiThemeProvider>
 );
 
+App.propTypes = {
+  children: React.PropTypes.element.isRequired,
+};
+
 const routes = {
   path: '/',
   component: App,
@@ -37,7 +41,7 @@ const render = () => {
 
   ReactDOM.render(
     <Router history={hashHistory} routes={routes} />,
-    document.getElementById('body')
+    document.getElementById('root')
   );
 };
 

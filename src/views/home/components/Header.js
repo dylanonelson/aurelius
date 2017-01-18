@@ -8,10 +8,12 @@ const styles = {
 };
 
 const Header = ({ date }) => (
-  <AppBar
-    style={styles.appbar}
-    title={date}
-  />
+  <div id="home-header">
+    <AppBar
+      style={styles.appbar}
+      title={date}
+    />
+  </div>
 );
 
 Header.propTypes = {
