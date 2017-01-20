@@ -10,8 +10,8 @@ const styles = {
   count: {
     width: '50%',
     fontFamily: 'Roboto',
-    fontSize: 24,
-    fontWeight: 100,
+    fontSize: 20,
+    fontWeight: 700,
     textAlign: 'right',
   },
 };
