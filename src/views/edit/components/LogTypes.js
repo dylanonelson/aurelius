@@ -1,4 +1,5 @@
 import React from 'react';
+import { List } from 'material-ui/List';
 import LogType from './LogType';
 
 const styles = {
@@ -11,9 +12,9 @@ const styles = {
 const LogTypes = ({ logTypes }) => {
   return (
     <div id="edit-log-types">
-      <ul style={styles.list}>
+      <List style={styles.list}>
         {logTypes.map((logType) => <LogType key={logType.id} logType={logType} />)}
-      </ul>
+      </List>
     </div>
   );
 };

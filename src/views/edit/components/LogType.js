@@ -1,9 +1,14 @@
-import React from 'react';
+import Avatar from 'material-ui/avatar';
 import Create from 'material-ui/svg-icons/content/create';
 import Delete from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
+import React from 'react';
+import { ListItem } from 'material-ui/List';
 
 const styles = {
+  avatar: {
+    background: 'transparent',
+  },
   line: {
     borderBottom: '1px solid rgba(0,0,0,0.3)',
     fontFamily: 'Roboto',
@@ -33,24 +38,12 @@ const styles = {
 };
 
 const LogType = ({ logType }) => (
-  <li id="edit-log-type" style={styles.line}>
-    <span style={styles.mark}>
-      {logType.mark}
-    </span>
-    <span style={styles.name}>
-      {logType.name}
-    </span>
-    <IconButton
-      style={styles.delete}
-    >
-      <Delete />
-    </IconButton>
-    <IconButton
-      style={styles.create}
-    >
-      <Create />
-    </IconButton>
-  </li>
+  <ListItem
+    id="edit-log-type"
+    primaryText={logType.name}
+    leftAvatar={<Avatar style={styles.avatar}>{logType.mark}</Avatar>}
+    rightIcon={<Create />}
+  />
 );
 
 LogType.propTypes = {
