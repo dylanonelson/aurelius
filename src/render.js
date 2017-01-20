@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { indigo500 } from 'material-ui/styles/colors';
+import { deepPurple700 } from 'material-ui/styles/colors';
 import { Router, hashHistory } from 'react-router';
 
 import './app.css';
@@ -12,7 +12,7 @@ import { Home, Edit } from './views';
 
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: indigo500,
+    primary1Color: deepPurple700,
   },
 });
 
