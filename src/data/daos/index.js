@@ -37,6 +37,12 @@ class DataType {
     return d;
   }
 
+  update(id, data) {
+    const ts = Date.now();
+    const d = Object.assign({}, data, { ts });
+    this.refs.write.child(id).update(d);
+  }
+
   delete(id) {
     this.refs.write.child(id).set(null);
   }

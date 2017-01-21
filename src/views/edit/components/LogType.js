@@ -1,7 +1,5 @@
 import Avatar from 'material-ui/avatar';
 import Create from 'material-ui/svg-icons/content/create';
-import Delete from 'material-ui/svg-icons/action/delete';
-import IconButton from 'material-ui/IconButton';
 import React from 'react';
 import { ListItem } from 'material-ui/List';
 
@@ -37,9 +35,10 @@ const styles = {
   },
 };
 
-const LogType = ({ logType }) => (
+const LogType = ({ logType, onLogTypeSelection }) => (
   <ListItem
     id="edit-log-type"
+    onClick={() => onLogTypeSelection({ logType })}
     primaryText={logType.name}
     leftAvatar={<Avatar style={styles.avatar}>{logType.mark}</Avatar>}
     rightIcon={<Create />}
@@ -48,6 +47,7 @@ const LogType = ({ logType }) => (
 
 LogType.propTypes = {
   logType: React.PropTypes.object.isRequired,
+  onLogTypeSelection: React.PropTypes.func.isRequired,
 };
 
 export default LogType;

@@ -9,11 +9,17 @@ const styles = {
   },
 };
 
-const LogTypes = ({ logTypes }) => {
+const LogTypes = ({ logTypes, onLogTypeSelection }) => {
   return (
     <div id="edit-log-types">
       <List style={styles.list}>
-        {logTypes.map((logType) => <LogType key={logType.id} logType={logType} />)}
+        {logTypes.map((logType) => (
+          <LogType
+            key={logType.id}
+            logType={logType}
+            onLogTypeSelection={onLogTypeSelection}
+          />
+         ))}
       </List>
     </div>
   );
@@ -22,6 +28,7 @@ const LogTypes = ({ logTypes }) => {
 LogTypes.propTypes = {
   // MobX observable array
   logTypes: React.PropTypes.object.isRequired,
+  onLogTypeSelection: React.PropTypes.func.isRequired,
 };
 
 export default LogTypes;

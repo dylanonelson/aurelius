@@ -9,15 +9,20 @@ const styles = {
   },
 };
 
-const AddButton = () => (
+const AddButton = ({ onClick }) => (
   <div id="edit-fab">
     <FloatingActionButton
       className="fab"
+      onClick={onClick}
       style={styles.fab}
     >
       <Add />
     </FloatingActionButton>
   </div>
 );
+
+AddButton.propTypes = {
+  onClick: React.PropTypes.func,
+};
 
 export default AddButton;
