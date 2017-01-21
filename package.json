@@ -4,8 +4,9 @@
   "scripts": {
     "build": "webpack --colors --progress",
     "serve": "ws -d dist -p 1104",
-    "start": "npm run watch & npm run serve",
-    "watch": "webpack --colors --progress --watch"
+    "watch": "webpack --colors --progress --watch",
+    "dev": "npm run watch & npm run serve",
+    "prd": "NODE_ENV=production npm run build && firebase deploy"
   },
   "author": "Dylan Nelson",
   "license": "ISC",

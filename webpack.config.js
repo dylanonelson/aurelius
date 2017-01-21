@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = {
@@ -27,7 +28,12 @@ module.exports = {
       fileName: './dist/service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css,png,jpg,gif}'],
       stripPrefix: 'dist',
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      }
+    }),
   ],
   output: {
     path: path.join(__dirname, 'dist'),
