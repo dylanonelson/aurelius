@@ -62,7 +62,7 @@ class EditDialog extends React.Component {
 }
 
 EditDialog.propTypes = {
-  logType: React.PropTypes.object.isRequired,
+  logType: React.PropTypes.object,
   onClose: React.PropTypes.func,
   onSave: React.PropTypes.func,
 };

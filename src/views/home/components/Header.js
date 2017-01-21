@@ -4,6 +4,7 @@ import AppBar from 'material-ui/AppBar';
 const styles = {
   appbar: {
     position: 'fixed',
+    top: 0,
   },
 };
 
