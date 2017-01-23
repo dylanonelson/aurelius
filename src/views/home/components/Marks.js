@@ -1,4 +1,5 @@
 import React from 'react';
+import './Marks.css';
 
 const styles = {
   list: {
@@ -7,9 +8,7 @@ const styles = {
     fontSize: 14,
     fontWeight: 100,
   },
-  row: {
-    letterSpacing: 5,
-  },
+  row: {},
 };
 
 const Marks = ({ mark, num }) => {
@@ -23,6 +22,7 @@ const Marks = ({ mark, num }) => {
       <li
         key={rowNum}
         style={styles.row}
+        className="mark-row"
       >
         {mark.repeat(rowNum === numRows ? lastRowLength : 5)}
       </li>
