@@ -82,7 +82,7 @@ class Log extends React.Component {
 
     return (
       <li
-        onTouchStart={this.handleTap}
+        onTouchTap={this.handleTap}
       >
         <Paper
           children={children}
