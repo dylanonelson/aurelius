@@ -64,6 +64,7 @@ class Log extends React.Component {
 
     e.stopPropagation();
     e.preventDefault();
+    return false;
   }
 
   render() {
@@ -81,7 +82,7 @@ class Log extends React.Component {
 
     return (
       <li
-        onTouchTap={this.handleTap}
+        onTouchStart={this.handleTap}
       >
         <Paper
           children={children}

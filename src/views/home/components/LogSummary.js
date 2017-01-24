@@ -41,12 +41,14 @@ const LogSummary = (props) => {
       <h2 style={styles.title}>
         {logType.name}
       </h2>
-      <div style={styles.modeToggleContainer}>
+      <div
+        style={styles.modeToggleContainer}
+        onTouchStart={toggleChecked}
+      >
         <Checkbox
           checked={mode === 'add' ? true : false}
           checkedIcon={<Add />}
           iconStyle={styles.icon}
-          onTouchTap={toggleChecked}
           uncheckedIcon={<Remove />}
         />
       </div>
