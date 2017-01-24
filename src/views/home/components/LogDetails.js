@@ -8,11 +8,13 @@ const styles = {
     marginTop: 15,
   },
   count: {
-    width: '50%',
     fontFamily: 'Roboto',
     fontSize: 20,
     fontWeight: 700,
     textAlign: 'right',
+    position: 'relative',
+    right: 8,
+    width: '50%',
   },
 };
 
