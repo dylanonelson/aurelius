@@ -46,12 +46,22 @@ class Log extends React.Component {
       return;
     }
 
+    // If the user is removing the last log, set mode to add
+    if (this.props.logs.length === 1)
+      this.mode = 'add';
+
     this.removeLog();
   }
 
   @autobind
   handleToggleMode(e) {
-    this.mode = this.mode === 'add' ? 'remove' : 'add';
+    // Don't toggle mode to subtract if there are no logs
+    this.mode = this.props.logs.length === 0 ?
+      'add' :
+      this.mode === 'add' ?
+      'remove' :
+      'add';
+
     e.stopPropagation();
     e.preventDefault();
   }
