@@ -12,7 +12,7 @@ import LogSummary from './LogSummary';
 const styles = {
   line: {
     padding: 20,
-    margin: '5px 0',
+    margin: '5px 2px',
   },
 };
 
@@ -34,12 +34,12 @@ class Log extends React.Component {
   @autobind
   handleTap() {
     this.active = true;
-    this.zDepth = this.zDepth > 2 ? this.zDepth : this.zDepth + 1;
+    this.zDepth = this.zDepth > 1 ? this.zDepth : this.zDepth + 1;
 
     this.deactivateTimer = setTimeout(() => {
       this.active = false;
       this.zDepth = 1;
-    }, 500);
+    }, 250);
 
     if (this.mode === 'add') {
       this.addLog();
