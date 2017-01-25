@@ -6,14 +6,16 @@ const styles = {
   container: {
     display: 'flex',
     marginTop: 15,
+    position: 'relative',
   },
   count: {
     fontFamily: 'Roboto',
     fontSize: 20,
-    fontWeight: 700,
+    fontWeight: 300,
     textAlign: 'right',
-    position: 'relative',
-    right: 8,
+    position: 'absolute',
+    right: 9,
+    bottom: 0,
     width: '50%',
   },
 };

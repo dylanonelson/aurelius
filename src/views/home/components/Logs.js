@@ -8,7 +8,7 @@ const styles = {
     marginBottom: 100,
     // Compensate for the height of the fixed App Bar
     position: 'relative',
-    top: 64,
+    top: 68,
   },
 };
 

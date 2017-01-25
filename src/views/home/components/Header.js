@@ -13,6 +13,7 @@ const Header = ({ date }) => (
     <AppBar
       style={styles.appbar}
       title={date}
+      zDepth={3}
     />
   </div>
 );
