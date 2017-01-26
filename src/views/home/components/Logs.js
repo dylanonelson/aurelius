@@ -6,9 +6,9 @@ const styles = {
   list: {
     // Add bottom margin for FAB
     marginBottom: 100,
-    // Compensate for the height of the fixed App Bar
+    // Spacing beneath tabs
     position: 'relative',
-    top: 68,
+    top: 4,
   },
 };
 

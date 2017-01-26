@@ -1,21 +1,60 @@
-import React from 'react';
 import { observer } from 'mobx-react';
+import { Tab, Tabs } from 'material-ui/Tabs';
+import AppBar from 'material-ui/AppBar';
+import React from 'react';
 
-import Header from './Header';
 import Logs from './Logs';
 import EditButton from './EditButton';
+
+
+const styles = {
+  appbar: {
+    position: 'fixed',
+    top: 0,
+  },
+  tabs: {
+    position: 'relative',
+    top: 64,
+  },
+};
 
 @observer
 class Home extends React.Component {
   render() {
     const { state } = this.props;
+    const { dailyLogMap, date, weeklyLogMap } = state;
 
     return (
       <div id="home">
-        <Header date={state.date} />
-        <Logs logs={state.logMap} />
+        {this.getHeader({ date })}
+        {this.getTabs({ dailyLogMap, weeklyLogMap })}
         <EditButton />
       </div>
+    );
+  }
+
+  getHeader({ date }) {
+    return (
+      <div id="home-header">
+        <AppBar
+          style={styles.appbar}
+          title={date}
+          zDepth={0}
+        />
+      </div>
+    );
+  }
+
+  getTabs({ dailyLogMap, weeklyLogMap }) {
+    return (
+      <Tabs style={styles.tabs}>
+        <Tab label="TODAY">
+          <Logs logs={dailyLogMap} />
+        </Tab>
+        <Tab label="THIS WEEK">
+          <Logs logs={weeklyLogMap} />
+        </Tab>
+      </Tabs>
     );
   }
 }
