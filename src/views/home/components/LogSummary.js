@@ -43,7 +43,7 @@ const LogSummary = (props) => {
       </h2>
       <div
         style={styles.modeToggleContainer}
-        onTouchStart={toggleChecked}
+        onTouchTap={toggleChecked}
       >
         <Checkbox
           checked={mode === 'add' ? true : false}
