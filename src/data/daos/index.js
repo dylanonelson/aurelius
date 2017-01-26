@@ -51,8 +51,15 @@ class DataType {
 const getByCurrentDateObj = {
   get: function () {
     const write = Firebase.database().ref(this.path);
-    const dateString = Moment(state.date).format('YYYY-MM-DD');
-    const read = write.orderByChild('date').equalTo(dateString);
+
+    const currentDateString = Moment(state.date).format('YYYY-MM-DD');
+    const beginningOfWeekString =
+      Moment(state.date).startOf('week').format('YYYY-MM-DD');
+
+    const read = write.orderByChild('date')
+      .startAt(beginningOfWeekString)
+      .endAt(currentDateString);
+
     return { read, write };
   },
 };

@@ -5,27 +5,43 @@ import { state } from '../../data';
 
 class HomeView {
 
-  @observable logMap = asMap({});
+  @observable dailyLogMap = asMap({});
+  @observable weeklyLogMap = asMap({});
   @observable date = '';
 
   sync() {
     autorun(() => {
-      const logMap = new Map();
+      const dailyLogMap = new Map();
+      const weeklyLogMap = new Map();
 
       [...state.logTypes].forEach(([id, logType]) => {
         const typeObj = logType;
         logType.id = id;
 
-        const logs = [...state.logs].reduce((arr, [id, log]) => {
-          if (log.logType === logType.id)
+        const dailyLogs = [...state.logs].reduce((arr, [id, log]) => {
+          if (
+            (log.logType === logType.id) &&
+            (log.date === Moment(state.date).format('YYYY-MM-DD'))
+          )
             arr.push(Object.assign({}, log, { id }));
+
           return arr;
         }, []);
 
-        logMap.set(typeObj, logs);
+        dailyLogMap.set(typeObj, dailyLogs);
+
+        const weeklyLogs = [...state.logs].reduce((arr, [id, log]) => {
+          if (log.logType === logType.id)
+            arr.push(Object.assign({}, log, { id }));
+
+          return arr;
+        }, []);
+
+        weeklyLogMap.set(typeObj, weeklyLogs);
       });
 
-      this.logMap = logMap;
+      this.dailyLogMap = dailyLogMap;
+      this.weeklyLogMap = weeklyLogMap;
 
       this.date = Moment(state.date).format('MMMM D, YYYY');
     });
