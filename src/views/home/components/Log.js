@@ -31,6 +31,10 @@ class Log extends React.Component {
     return this._dt;
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (nextProps.logs.length !== this.props.logs.length);
+  }
+
   @autobind
   handleTap() {
     this.active = true;
