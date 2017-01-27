@@ -13,10 +13,10 @@ const LogTypes = ({ logTypes, onLogTypeSelection }) => {
   return (
     <div id="edit-log-types">
       <List style={styles.list}>
-        {logTypes.map((logType) => (
+        {[...logTypes].map(([id, logType]) => (
           <LogType
-            key={logType.id}
-            logType={logType}
+            key={id}
+            logType={Object.assign({}, logType, { id })}
             onLogTypeSelection={onLogTypeSelection}
           />
          ))}

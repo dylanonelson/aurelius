@@ -1,14 +1,11 @@
 import React from 'react';
 
-import View from './view';
+import { state } from '../../data';
 import { Edit } from './components';
 
 const render = () => {
-  const dataView = new View();
-  dataView.sync();
-
   return (
-    <Edit state={dataView} />
+    <Edit state={state} />
   );
 };
 

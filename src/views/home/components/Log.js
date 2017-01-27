@@ -1,4 +1,3 @@
-import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import autobind from 'autobind-decorator';
 import Moment from 'moment';
@@ -18,10 +17,6 @@ const styles = {
 
 @observer
 class Log extends React.Component {
-
-  @observable zDepth = 1;
-  @observable mode = 'add';
-
   set deactivateTimer(dt) {
     if (this._dt)
       clearTimeout(this._dt);
@@ -30,14 +25,17 @@ class Log extends React.Component {
     return this._dt;
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return (nextProps.logs.length !== this.props.logs.length);
+  shouldComponentUpdate(newProps, newState) {
+    return (
+      (newProps.logs.length !== this.props.logs.length) ||
+      (newProps.mode !== this.props.mode)
+    );
   }
 
   @autobind
   initiateTap() {
     this.tapInProgress = true;
-    setTimeout(this.handleTap(), 75);
+    setTimeout(this.handleTap, 10);
   }
 
   @autobind
@@ -50,20 +48,14 @@ class Log extends React.Component {
     if (!this.tapInProgress) return;
     this.tapInProgress = false;
 
-    this.zDepth = this.zDepth > 1 ? this.zDepth : this.zDepth + 1;
-
-    this.deactivateTimer = setTimeout(() => {
-      this.zDepth = 1;
-    }, 250);
-
-    if (this.mode === 'add') {
+    if (this.props.mode === 'add') {
       this.addLog();
       return;
     }
 
     // If the user is removing the last log, set mode to add
     if (this.props.logs.length === 1)
-      this.mode = 'add';
+      this.props.toggleMode('add');
 
     this.removeLog();
   }
@@ -71,11 +63,12 @@ class Log extends React.Component {
   @autobind
   handleToggleMode(e) {
     // Don't toggle mode to subtract if there are no logs
-    this.mode = this.props.logs.length === 0 ?
+    this.props.toggleMode(this.props.logs.length === 0 ?
       'add' :
-      this.mode === 'add' ?
+      this.props.mode === 'add' ?
       'remove' :
-      'add';
+      'add'
+    );
 
     e.stopPropagation();
     e.preventDefault();
@@ -86,7 +79,6 @@ class Log extends React.Component {
     const children = (
       <div>
         <LogSummary
-          mode={this.mode}
           toggleChecked={this.handleToggleMode}
           {...this.props}
         />
@@ -130,6 +122,8 @@ class Log extends React.Component {
 Log.propTypes = {
   logType: React.PropTypes.object.isRequired,
   logs: React.PropTypes.array.isRequired,
+  mode: React.PropTypes.string,
+  toggleMode: React.PropTypes.func,
 };
 
 export default Log;

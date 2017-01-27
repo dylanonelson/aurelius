@@ -25,8 +25,23 @@ class DataType {
     this.refs.read.once(snapshot => callback(snapshot.val()));
   }
 
+  load(callback) {
+    this.refs.read.once('value', (snapshot) => callback(snapshot.val()));
+  }
+
   sync(callback) {
     this.refs.read.on('value', (snapshot) => callback(snapshot.val()));
+  }
+
+  onChildAdded(callback) {
+    this.refs.read
+      .limitToLast(1)
+      .on('child_added', data => callback(data.key, data.val()));
+  }
+
+  onChildRemoved(callback) {
+    this.refs.read
+      .on('child_removed', data => callback(data.key, data.val()));
   }
 
   write(data) {
