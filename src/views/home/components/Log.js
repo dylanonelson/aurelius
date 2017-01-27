@@ -20,7 +20,6 @@ const styles = {
 class Log extends React.Component {
 
   @observable zDepth = 1;
-  @observable active = false;
   @observable mode = 'add';
 
   set deactivateTimer(dt) {
@@ -36,12 +35,24 @@ class Log extends React.Component {
   }
 
   @autobind
+  initiateTap() {
+    this.tapInProgress = true;
+    setTimeout(this.handleTap(), 75);
+  }
+
+  @autobind
+  cancelTap() {
+    this.tapInProgress = false;
+  }
+
+  @autobind
   handleTap() {
-    this.active = true;
+    if (!this.tapInProgress) return;
+    this.tapInProgress = false;
+
     this.zDepth = this.zDepth > 1 ? this.zDepth : this.zDepth + 1;
 
     this.deactivateTimer = setTimeout(() => {
-      this.active = false;
       this.zDepth = 1;
     }, 250);
 
@@ -75,18 +86,18 @@ class Log extends React.Component {
     const children = (
       <div>
         <LogSummary
-          active={this.active}
           mode={this.mode}
           toggleChecked={this.handleToggleMode}
           {...this.props}
         />
-        <LogDetails {...this.props} active={this.active} />
+        <LogDetails {...this.props} />
       </div>
     );
 
     return (
       <li
-        onTouchTap={this.handleTap}
+        onTouchStart={this.initiateTap}
+        onTouchMove={this.cancelTap}
       >
         <Paper
           children={children}

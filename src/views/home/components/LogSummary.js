@@ -29,9 +29,15 @@ const getStyles = ({ active }) => {
   };
 };
 
+const stopPropagation = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+};
+
 const LogSummary = (props) => {
   const { logType, mode, toggleChecked } = props;
-  const styles = getStyles(props);
+  const styles = getStyles({ active: true });
 
   return (
     <div
@@ -44,6 +50,7 @@ const LogSummary = (props) => {
       <div
         style={styles.modeToggleContainer}
         onTouchTap={toggleChecked}
+        onTouchStart={stopPropagation}
       >
         <Checkbox
           checked={mode === 'add' ? true : false}
