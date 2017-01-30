@@ -67,9 +67,13 @@ const getByCurrentDateObj = {
   get: function () {
     const write = Firebase.database().ref(this.path);
 
-    const currentDateString = Moment(state.date).format('YYYY-MM-DD');
-    const beginningOfWeekString =
-      Moment(state.date).startOf('week').format('YYYY-MM-DD');
+    const currentDateString = Moment(state.date)
+      .format('YYYY-MM-DD');
+
+    const beginningOfWeekString = Moment(state.date)
+      // ISO week starts on Monday
+      .startOf('isoWeek')
+      .format('YYYY-MM-DD');
 
     const read = write.orderByChild('date')
       .startAt(beginningOfWeekString)
