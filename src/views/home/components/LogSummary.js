@@ -12,9 +12,8 @@ const getStyles = ({ active }) => {
     title: {
       lineHeight: '56px',
       fontFamily: 'Roboto',
-      fontSize: 24,
+      fontSize: 20,
       fontWeight: 300,
-      width: '50%',
     },
     modeToggleContainer: {
       marginTop: 13,
