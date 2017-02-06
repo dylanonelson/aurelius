@@ -1,5 +1,6 @@
 html {
   background: #EEEEEE;
+  touch-action: manipulation;
 }
 
 body {
