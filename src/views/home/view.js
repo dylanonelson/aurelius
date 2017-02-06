@@ -11,19 +11,17 @@ class HomeView {
 
   sync() {
     autorun(() => {
-      if (state.logTypes.size === 0 || state.logs.size === 0 ) return;
-
       const dailyLogMap = new Map();
       const weeklyLogMap = new Map();
 
-      [...state.logTypes].forEach(([id, logType]) => {
+      state.logTypes.size > 0 && [...state.logTypes].forEach(([id, logType]) => {
         const typeObj = logType;
         typeObj.id = id;
         dailyLogMap.set(typeObj, []);
         weeklyLogMap.set(typeObj, []);
       });
 
-      [...state.logs].forEach(([id, log]) => {
+      state.logs.size > 0 && [...state.logs].forEach(([id, log]) => {
         const logObj = log;
         logObj.id = id;
 
