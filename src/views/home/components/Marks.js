@@ -1,20 +1,49 @@
 import React from 'react';
 import './Marks.css';
 
-const styles = {
+const getStyles = (largeStyle = false) => ({
+  emptyList: {
+    fontSize: 45,
+    opacity: 0.70,
+  },
   list: {
     width: '50%',
     fontFamily: 'Roboto',
-    fontSize: 14,
+    fontSize: largeStyle ? 35 : 14,
     fontWeight: 100,
   },
-  row: {},
-};
+  row: {
+    textAlign: 'center',
+    lineHeight: 1.5,
+  },
+});
 
 const Marks = ({ mark, num }) => {
+  let styles;
+
+  if (num === 0) {
+    styles = getStyles();
+    console.log('yo');
+    return (
+      <span style={styles.emptyList}>{mark}</span>
+    );
+  }
+
+  if (num > 25) {
+    const numMarks = Math.floor(num / 25);
+    styles = getStyles(true);
+
+    return (
+      <ul style={styles.list}>
+        <li style={styles.row}>{mark.repeat(numMarks)}</li>
+      </ul>
+    );
+  }
+
   const numRows = Math.floor(num / 5) + 1;
   const lastRowLength = num % 5;
   const rows = [];
+  styles = getStyles();
 
   for (let j = 0; j < numRows; j++) {
     let rowNum = j + 1;

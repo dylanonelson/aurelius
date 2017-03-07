@@ -7,24 +7,18 @@ import React from 'react';
 import { data } from '../../../data';
 import LogDetails from './LogDetails';
 import LogSummary from './LogSummary';
+import LogControls from './LogControls';
 
 const styles = {
   line: {
-    padding: 20,
-    margin: '5px 2px',
+    height: 250,
+    margin: '0 15px 15px 15px',
+    position: 'relative',
   },
 };
 
 @observer
 class Log extends React.Component {
-  set deactivateTimer(dt) {
-    if (this._dt)
-      clearTimeout(this._dt);
-
-    this._dt = dt;
-    return this._dt;
-  }
-
   shouldComponentUpdate(newProps, newState) {
     return (
       (newProps.logs.length !== this.props.logs.length) ||
@@ -32,65 +26,20 @@ class Log extends React.Component {
     );
   }
 
-  @autobind
-  initiateTap() {
-    this.tapInProgress = true;
-    setTimeout(this.handleTap, 10);
-  }
-
-  @autobind
-  cancelTap() {
-    this.tapInProgress = false;
-  }
-
-  @autobind
-  handleTap() {
-    if (!this.tapInProgress) return;
-    this.tapInProgress = false;
-
-    if (this.props.mode === 'add') {
-      this.addLog();
-      return;
-    }
-
-    // If the user is removing the last log, set mode to add
-    if (this.props.logs.length === 1)
-      this.props.toggleMode('add');
-
-    this.removeLog();
-  }
-
-  @autobind
-  handleToggleMode(e) {
-    // Don't toggle mode to subtract if there are no logs
-    this.props.toggleMode(this.props.logs.length === 0 ?
-      'add' :
-      this.props.mode === 'add' ?
-      'remove' :
-      'add'
-    );
-
-    e.stopPropagation();
-    e.preventDefault();
-    return false;
-  }
-
   render() {
     const children = (
       <div>
-        <LogSummary
-          toggleChecked={this.handleToggleMode}
-          {...this.props}
-        />
+        <LogSummary {...this.props} />
         <LogDetails {...this.props} />
+        <LogControls
+          removeLog={this.removeLog}
+          addLog={this.addLog}
+        />
       </div>
     );
 
     return (
-      <li
-        onTouchStart={this.initiateTap}
-        onTouchMove={this.cancelTap}
-      >
+      <li>
         <Paper
           children={children}
           style={styles.line}
@@ -100,6 +49,7 @@ class Log extends React.Component {
     );
   }
 
+  @autobind
   removeLog() {
     const { logs } = this.props;
 
@@ -108,6 +58,7 @@ class Log extends React.Component {
       null;
   }
 
+  @autobind
   addLog() {
     const { logType } = this.props;
 

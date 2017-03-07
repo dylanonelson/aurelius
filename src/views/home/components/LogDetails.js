@@ -4,23 +4,15 @@ import Marks from './Marks';
 
 const styles = {
   container: {
+    alignItems: 'center',
     display: 'flex',
-    marginTop: 15,
+    height: 104,
+    justifyContent: 'center',
     position: 'relative',
-  },
-  count: {
-    fontFamily: 'Roboto',
-    fontSize: 20,
-    fontWeight: 300,
-    textAlign: 'right',
-    position: 'absolute',
-    right: 9,
-    bottom: 0,
-    width: '50%',
   },
 };
 
-const LogDetails = ({ logType, logs }) => (logs.length === 0 ? null : (
+const LogDetails = ({ logType, logs }) => (
   <div
     id="log-details"
     style={styles.container}
@@ -29,11 +21,8 @@ const LogDetails = ({ logType, logs }) => (logs.length === 0 ? null : (
       mark={logType.mark}
       num={logs.length}
     />
-    <span style={styles.count}>
-      {logs.length}
-    </span>
   </div>
-));
+);
 
 LogDetails.propTypes = {
   logType: React.PropTypes.object.isRequired,
