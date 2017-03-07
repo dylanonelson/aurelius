@@ -23,7 +23,7 @@ const Marks = ({ mark, num }) => {
 
   if (num === 0) {
     styles = getStyles();
-    console.log('yo');
+
     return (
       <span style={styles.emptyList}>{mark}</span>
     );
