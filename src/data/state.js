@@ -3,11 +3,12 @@ import Moment from 'moment';
 
 class Store {
 
-  @observable benchmarks = asMap({});
   @observable benchmarkTypes = asMap({});
-  @observable logs = asMap({});
-  @observable logTypes = asMap({});
+  @observable benchmarks = asMap({});
   @observable date = '';
+  @observable loading = true;
+  @observable logTypes = asMap({});
+  @observable logs = asMap({});
 
   constructor() {
     this.date = this.currentDate;

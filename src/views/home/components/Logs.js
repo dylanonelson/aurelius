@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import Log from './Log';
 
@@ -11,25 +12,43 @@ const styles = {
     position: 'relative',
     top: 4,
   },
+  spinner: {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translateX(-50%) translateY(-50%)',
+  },
 };
 
 @observer
 class Logs extends React.Component {
 
   render() {
-    const { logs } = this.props;
+    const { logs, loading } = this.props;
 
-    return (
-      <ul
-        style={styles.list}
-      >
-        {[...logs].map(([logType, logs]) => (
+    let children;
+
+    if (loading !== true) {
+      children = (
+        [...logs].map(([logType, logs]) => (
           <Log
             key={logType.id}
             logType={logType}
             logs={logs}
           />
-        ))}
+        ))
+      );
+    } else {
+      children = (
+        <CircularProgress style={styles.spinner} />
+      );
+    }
+
+    return (
+      <ul
+        style={styles.list}
+      >
+        {children}
       </ul>
     );
   }
@@ -37,6 +56,7 @@ class Logs extends React.Component {
 }
 
 Logs.propTypes = {
+  loading: React.PropTypes.bool,
   // Map of log type objects to a list of log objects
   logs: React.PropTypes.object.isRequired,
 };

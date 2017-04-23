@@ -22,12 +22,12 @@ const styles = {
 class Home extends React.Component {
   render() {
     const { state } = this.props;
-    const { dailyLogMap, date, weeklyLogMap } = state;
+    const { dailyLogMap, date, loading, weeklyLogMap } = state;
 
     return (
       <div id="home">
         {this.getHeader({ date })}
-        {this.getTabs({ dailyLogMap, weeklyLogMap })}
+        {this.getTabs({ dailyLogMap, loading, weeklyLogMap })}
         <EditButton />
       </div>
     );
@@ -45,11 +45,14 @@ class Home extends React.Component {
     );
   }
 
-  getTabs({ dailyLogMap, weeklyLogMap }) {
+  getTabs({ dailyLogMap, weeklyLogMap, loading }) {
     return (
       <Tabs style={styles.tabs}>
         <Tab label="TODAY">
-          <Logs logs={dailyLogMap} />
+          <Logs
+            loading={loading}
+            logs={dailyLogMap}
+          />
         </Tab>
         <Tab label="THIS WEEK">
           <Logs logs={weeklyLogMap} />

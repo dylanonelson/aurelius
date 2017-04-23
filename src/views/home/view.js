@@ -8,6 +8,7 @@ class HomeView {
   @observable dailyLogMap = asMap({});
   @observable weeklyLogMap = asMap({});
   @observable date = '';
+  @observable loading = true;
 
   sync() {
     autorun(() => {
@@ -34,6 +35,10 @@ class HomeView {
       this.dailyLogMap = dailyLogMap;
       this.weeklyLogMap = weeklyLogMap;
       this.date = Moment(state.date).format('MMMM D, YYYY');
+    });
+
+    autorun(() => {
+      this.loading = state.loading;
     });
   }
 }
