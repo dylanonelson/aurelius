@@ -20,10 +20,7 @@ const styles = {
 @observer
 class Log extends React.Component {
   shouldComponentUpdate(newProps, newState) {
-    return (
-      (newProps.logs.length !== this.props.logs.length) ||
-      (newProps.mode !== this.props.mode)
-    );
+    return newProps.logs.length !== this.props.logs.length;
   }
 
   render() {
@@ -73,8 +70,6 @@ class Log extends React.Component {
 Log.propTypes = {
   logType: React.PropTypes.object.isRequired,
   logs: React.PropTypes.array.isRequired,
-  mode: React.PropTypes.string,
-  toggleMode: React.PropTypes.func,
 };
 
 export default Log;

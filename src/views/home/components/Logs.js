@@ -17,14 +17,6 @@ const styles = {
 @observer
 class Logs extends React.Component {
 
-  @observable modes = asMap({});
-
-  componentWillMount() {
-    for (let logType in this.props.logs.keys()) {
-      this.modes.set(logType.id, 'add');
-    }
-  }
-
   render() {
     const { logs } = this.props;
 
@@ -37,8 +29,6 @@ class Logs extends React.Component {
             key={logType.id}
             logType={logType}
             logs={logs}
-            mode={this.modes.get(logType.id) || 'add'}
-            toggleMode={(mode) => this.modes.set(logType.id, mode)}
           />
         ))}
       </ul>
