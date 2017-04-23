@@ -19,15 +19,28 @@ const styles = {
 
 @observer
 class Log extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: props.logs.length,
+    };
+  }
+
   shouldComponentUpdate(newProps, newState) {
-    return newProps.logs.length !== this.props.logs.length;
+    return newState.count !== this.state.count;
   }
 
   render() {
     const children = (
       <div>
-        <LogSummary {...this.props} />
-        <LogDetails {...this.props} />
+        <LogSummary
+          logType={this.props.logType}
+          numLogs={this.state.count}
+        />
+        <LogDetails
+          logType={this.props.logType}
+          numLogs={this.state.count}
+        />
         <LogControls
           removeLog={this.removeLog}
           addLog={this.addLog}
@@ -48,6 +61,9 @@ class Log extends React.Component {
 
   @autobind
   removeLog() {
+    if (this.state.count > 0)
+      this.setState({ count: this.state.count - 1 });
+
     const { logs } = this.props;
 
     return logs.length > 0 ?
@@ -57,6 +73,8 @@ class Log extends React.Component {
 
   @autobind
   addLog() {
+    this.setState({ count: this.state.count + 1 });
+
     const { logType } = this.props;
 
     return data.CURRENT_LOGS.write({

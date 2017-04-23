@@ -35,15 +35,15 @@ const LogSummary = (props) => {
         {logType.name}
       </h2>
       <span style={styles.count}>
-        {props.logs.length}
+        {props.numLogs}
       </span>
     </div>
   );
 };
 
 LogSummary.propTypes = {
-  logs: React.PropTypes.array.isRequired,
   logType: React.PropTypes.object.isRequired,
+  numLogs: React.PropTypes.number.isRequired,
 };
 
 export default LogSummary;
