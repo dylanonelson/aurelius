@@ -11,14 +11,15 @@ const getStyles = () => ({
     width: 46,
   },
   addButton: {
+    bottom: 0,
     height: 70,
+    left: '50%',
+    position: 'absolute',
+    transform: 'translateX(-50%)',
     width: 70,
   },
   row: {
-    alignItems: 'center',
     bottom: 0,
-    display: 'flex',
-    justifyContent: 'space-around',
     left: 0,
     margin: '0 15px',
     position: 'absolute',
@@ -26,6 +27,8 @@ const getStyles = () => ({
   },
   secondaryButton: {
     height: 64,
+    position: 'absolute',
+    transform: 'translateX(-50%)',
     width: 64,
   },
   secondaryIcon: {
@@ -44,7 +47,10 @@ const LogControls = (props) => {
       <IconButton
         iconStyle={styles.secondaryIcon}
         onClick={removeLog}
-        style={styles.secondaryButton}
+        style={Object.assign({}, styles.secondaryButton, {
+          bottom: 3,
+          left: '20%',
+        })}
       >
         <Remove />
       </IconButton>
@@ -62,6 +68,8 @@ const LogControls = (props) => {
         })}
         onClick={editLogs}
         style={Object.assign({}, styles.secondaryButton, {
+          bottom: 8,
+          left: 'calc(80% - 4px)',
           height: 54,
           width: 54,
         })}

@@ -11,6 +11,8 @@ const getStyles = (largeStyle = false) => ({
     fontFamily: 'Roboto',
     fontSize: largeStyle ? 35 : 14,
     fontWeight: 100,
+    position: 'relative',
+    left: -3,
   },
   row: {
     textAlign: 'center',
