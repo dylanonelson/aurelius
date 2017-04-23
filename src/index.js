@@ -1,3 +1,5 @@
+import './index.html';
+import './manifest.json';
 import auth from './auth';
 import render from './render';
 

@@ -38,6 +38,7 @@
     "webpack": "^1.13.3"
   },
   "devDependencies": {
+    "file-loader": "^0.11.1",
     "local-web-server": "^1.2.6"
   }
 }

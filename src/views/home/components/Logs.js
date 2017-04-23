@@ -1,5 +1,4 @@
 import React from 'react';
-import { asMap, observable } from 'mobx';
 import { observer } from 'mobx-react';
 
 import Log from './Log';
@@ -34,6 +33,7 @@ class Logs extends React.Component {
       </ul>
     );
   }
+
 }
 
 Logs.propTypes = {

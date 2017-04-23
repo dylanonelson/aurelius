@@ -10,9 +10,12 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader'
-    },{
+    }, {
       test: /\.css$/,
       loader: 'style!css'
+    }, {
+      test: /\.html$|\.json$/,
+      loader: 'file-loader?name=[name].[ext]',
     }],
     preLoaders: [
       {
