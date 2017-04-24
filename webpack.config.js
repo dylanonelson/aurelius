@@ -4,7 +4,9 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+  },
   module: {
     loaders: [{
       test: /\.js$/,
@@ -40,7 +42,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].bundle.js'
   },
   resolve: {
     root: path.resolve('./src')
