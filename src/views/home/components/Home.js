@@ -55,7 +55,10 @@ class Home extends React.Component {
           />
         </Tab>
         <Tab label="THIS WEEK">
-          <Logs logs={weeklyLogMap} />
+          <Logs
+            loading={loading}
+            logs={weeklyLogMap}
+          />
         </Tab>
       </Tabs>
     );

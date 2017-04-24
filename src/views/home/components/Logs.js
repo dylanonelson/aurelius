@@ -22,7 +22,6 @@ const styles = {
 
 @observer
 class Logs extends React.Component {
-
   render() {
     const { logs, loading } = this.props;
 
@@ -52,7 +51,6 @@ class Logs extends React.Component {
       </ul>
     );
   }
-
 }
 
 Logs.propTypes = {

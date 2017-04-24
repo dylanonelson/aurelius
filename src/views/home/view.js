@@ -34,11 +34,14 @@ class HomeView {
 
       this.dailyLogMap = dailyLogMap;
       this.weeklyLogMap = weeklyLogMap;
+    });
+
+    autorun(() => {
       this.date = Moment(state.date).format('MMMM D, YYYY');
     });
 
     autorun(() => {
-      this.loading = state.loading;
+      if (this.loading !== state.loading) this.loading = state.loading;
     });
   }
 }
