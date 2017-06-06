@@ -1,10 +1,8 @@
-import { observer } from 'mobx-react';
+import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
-import Moment from 'moment';
 import Paper from 'material-ui/Paper';
 import React from 'react';
 
-import { data } from '../../../data';
 import LogDetails from './LogDetails';
 import LogSummary from './LogSummary';
 import LogControls from './LogControls';
@@ -17,29 +15,17 @@ const styles = {
   },
 };
 
-@observer
 class Log extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: props.logs.length,
-    };
-  }
-
-  shouldComponentUpdate(newProps, newState) {
-    return newState.count !== this.state.count;
-  }
-
   render() {
     const children = (
       <div>
         <LogSummary
           logType={this.props.logType}
-          numLogs={this.state.count}
+          numLogs={this.props.count}
         />
         <LogDetails
           logType={this.props.logType}
-          numLogs={this.state.count}
+          numLogs={this.props.count}
         />
         <LogControls
           removeLog={this.removeLog}
@@ -60,34 +46,39 @@ class Log extends React.Component {
   }
 
   @autobind
-  removeLog() {
-    if (this.state.count > 0)
-      this.setState({ count: this.state.count - 1 });
-
-    const { logs } = this.props;
-
-    return logs.length > 0 ?
-      data.CURRENT_LOGS.delete(logs[logs.length - 1].id) :
-      null;
+  addLog() {
+    this.props.incrementLogType(
+      this.props.logType.id
+    );
   }
 
   @autobind
-  addLog() {
-    this.setState({ count: this.state.count + 1 });
-
-    const { logType } = this.props;
-
-    return data.CURRENT_LOGS.write({
-      logType: logType.id,
-      date: Moment().subtract(4, 'hours').format('YYYY-MM-DD'),
-    });
+  removeLog() {
+    this.props.decrementLogType(
+      this.props.logType.id
+    );
   }
-
 }
 
 Log.propTypes = {
+  count: React.PropTypes.number.isRequired,
+  decrementLogType: React.PropTypes.func.isRequired,
+  incrementLogType: React.PropTypes.func.isRequired,
+  logTypeId: React.PropTypes.string.isRequired,
   logType: React.PropTypes.object.isRequired,
-  logs: React.PropTypes.array.isRequired,
 };
 
-export default Log;
+function mapStateToProps(state, props) {
+  const { currentDate } = state;
+  const { yearmoday } = currentDate;
+
+  return {
+    count: state.logs[yearmoday][props.logTypeId] || 0,
+    dateString: yearmoday,
+    logType: state.logTypes[props.logTypeId],
+  };
+}
+
+export default connect(
+  mapStateToProps,
+)(Log);

@@ -10,6 +10,6 @@ const config = {
 
 firebase.initializeApp(config);
 
-onmessage = (e) => {
+self.onmessage = (e) => {
   console.log(`Hello from firebase-worker! ${e.data}`);
 };

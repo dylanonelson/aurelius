@@ -3,7 +3,7 @@ import autobind from 'autobind-decorator';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 
-import { data } from '../../../data';
+import { data } from '../../../persistence';
 import AddButton from './AddButton';
 import EditDialog from './EditDialog';
 import Header from './Header';

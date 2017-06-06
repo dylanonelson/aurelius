@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
+import reduceReducers from 'reduce-reducers';
 
-import currentDate from './currentDate';
-import db from './db';
-import local from './local';
-import user from './user';
+import currentDateReducer from '../redux-modules/currentDate';
+import initReducer from '../redux-modules/init';
+import logsReducer from '../redux-modules/logs';
+import logTypesReducer from '../redux-modules/logTypes';
+import rootReducer from './root';
 
 const reducer = combineReducers({
-  currentDate,
-  db,
-  local,
-  user,
+  currentDate: currentDateReducer,
+  init: initReducer,
+  logs: logsReducer,
+  logTypes: logTypesReducer,
 });
 
-export default reducer;
+export default reduceReducers(rootReducer, reducer);

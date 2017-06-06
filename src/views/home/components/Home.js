@@ -1,6 +1,5 @@
-import { observer } from 'mobx-react';
-import { Tab, Tabs } from 'material-ui/Tabs';
 import AppBar from 'material-ui/AppBar';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Logs from './Logs';
@@ -18,55 +17,39 @@ const styles = {
   },
 };
 
-@observer
 class Home extends React.Component {
   render() {
-    const { state } = this.props;
-    const { dailyLogMap, date, loading, weeklyLogMap } = state;
+    const { displayDate, loading, logs, logTypes } = this.props;
 
     return (
       <div id="home">
-        {this.getHeader({ date })}
-        {this.getTabs({ dailyLogMap, loading, weeklyLogMap })}
+        {this.getHeader(displayDate)}
+        <Logs
+          loading={loading}
+          logs={logs}
+        />
         <EditButton />
       </div>
     );
   }
 
-  getHeader({ date }) {
+  getHeader(displayDate) {
     return (
       <div id="home-header">
         <AppBar
           style={styles.appbar}
-          title={date}
+          title={displayDate}
           zDepth={0}
         />
       </div>
     );
   }
-
-  getTabs({ dailyLogMap, weeklyLogMap, loading }) {
-    return (
-      <Tabs style={styles.tabs}>
-        <Tab label="TODAY">
-          <Logs
-            loading={loading}
-            logs={dailyLogMap}
-          />
-        </Tab>
-        <Tab label="THIS WEEK">
-          <Logs
-            loading={loading}
-            logs={weeklyLogMap}
-          />
-        </Tab>
-      </Tabs>
-    );
-  }
 }
 
 Home.propTypes = {
-  state: React.PropTypes.object.isRequired,
+  displayDate: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  logs: PropTypes.object.isRequired,
 };
 
 export default Home;

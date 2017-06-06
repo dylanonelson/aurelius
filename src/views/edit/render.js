@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { state } from '../../data';
+import { state } from '../../persistence';
 import { Edit } from './components';
 
 const render = () => {
