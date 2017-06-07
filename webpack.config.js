@@ -8,24 +8,35 @@ module.exports = {
     index: './src/index.js',
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
+    rules: [{
       exclude: /node_modules/,
-      loader: 'babel-loader'
+      test: /\.js$/,
+      use: ['babel-loader'],
     }, {
       test: /\.css$/,
-      loader: 'style!css'
+      use: [
+        'style-loader',
+        'css-loader',
+      ],
     }, {
       test: /\.html$|\.json$/,
-      loader: 'file-loader?name=[name].[ext]',
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
+      }],
+    }, {
+      enforce: 'pre',
+      include: /src/,
+      test: /\.js?$/,
+      use: [{
+        loader: 'eslint-loader',
+        options: {
+          fix: true,
+        },
+      }],
     }],
-    preLoaders: [
-      {
-        test: /\.js?$/,
-        loader: 'eslint?{fix:true}',
-        include: /src/,
-      }
-    ]
   },
   plugins: [
     new SWPrecacheWebpackPlugin({
@@ -45,6 +56,9 @@ module.exports = {
     filename: '[name].bundle.js'
   },
   resolve: {
-    root: path.resolve('./src')
+    modules: [
+      path.join(__dirname, 'src'),
+      'node_modules',
+    ],
   }
 }

@@ -42,6 +42,6 @@
     "redux-actions": "^2.0.3",
     "style-loader": "^0.13.1",
     "sw-precache-webpack-plugin": "^0.6.1",
-    "webpack": "^1.13.3"
+    "webpack": "^2.6.1"
   }
 }
