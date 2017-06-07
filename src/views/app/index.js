@@ -6,8 +6,8 @@ import { Router, hashHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import  React from 'react';
 
-import Home from '../Home';
-import Edit from '../Edit';
+import Home from '../home';
+import Edit from '../edit';
 import store from '../../state';
 
 const muiTheme = getMuiTheme({
