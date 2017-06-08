@@ -45,26 +45,21 @@ class DataType {
   }
 
   write(data) {
-    setTimeout(() => {
-      const key = this.refs.write.push().key;
-      const ts = Date.now();
-      const d = { [key]: Object.assign({}, data, { ts }) };
-      this.refs.write.update(d);
-    }, 5);
+    const key = this.refs.write.push().key;
+    const ts = Date.now();
+    const d = { [key]: Object.assign({}, data, { ts }) };
+    this.refs.write.update(d);
+    return d;
   }
 
   update(id, data) {
-    setTimeout(() => {
-      const ts = Date.now();
-      const d = Object.assign({}, data, { ts });
-      this.refs.write.child(id).update(d);
-    }, 5);
+    const ts = Date.now();
+    const d = Object.assign({}, data, { ts });
+    this.refs.write.child(id).update(d);
   }
 
   delete(id) {
-    setTimeout(() => {
-      this.refs.write.child(id).set(null);
-    }, 5);
+    this.refs.write.child(id).set(null);
   }
 }
 

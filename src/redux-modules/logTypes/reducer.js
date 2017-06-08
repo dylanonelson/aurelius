@@ -3,10 +3,14 @@ import { ingestLogTypes } from './actions';
 
 const reducerMap = {
   [ingestLogTypes]: (previous = {}, action) => {
-    return Object.assign({}, previous, action.payload);
+    return Object.assign(
+      {},
+      previous === 'loading' ? {} : previous,
+      action.payload
+    );
   },
 };
 
-const initialState = {};
+const initialState = 'loading';
 
 export default handleActions(reducerMap, initialState);

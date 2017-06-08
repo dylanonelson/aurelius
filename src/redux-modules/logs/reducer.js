@@ -3,7 +3,21 @@ import { ingestLogs, incrementLogType } from './actions';
 
 const reducerMap = {
   [ingestLogs]: (previous = {}, action) => {
-    return Object.assign({}, previous, action.payload);
+     const logs = Object.keys(action.payload).reduce((memo, logId) => {
+      const l = action.payload[logId];
+      const { date, logType } = l;
+      memo[date] = memo[date] || {};
+      const o = memo[date];
+      o[logType] = o[logType] ? o[logType] + 1 : 1;
+
+      return memo;
+    }, {});
+
+    return Object.assign(
+      {},
+      previous === 'loading' ? {} : previous,
+      logs,
+    );
   },
   [incrementLogType]: (previous = {}, action) => {
     const { date, logType, amount } = action.payload;
@@ -22,6 +36,6 @@ const reducerMap = {
   },
 };
 
-const initialState = {};
+const initialState = 'loading';
 
 export default handleActions(reducerMap, initialState);

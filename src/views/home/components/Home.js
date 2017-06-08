@@ -19,14 +19,14 @@ const styles = {
 
 class Home extends React.Component {
   render() {
-    const { displayDate, loading, logs } = this.props;
+    const { displayDate, loading, logTypes } = this.props;
 
     return (
       <div id="home">
         {this.getHeader(displayDate)}
         <Logs
           loading={loading}
-          logs={logs}
+          logTypes={logTypes}
         />
         <EditButton />
       </div>
@@ -49,7 +49,7 @@ class Home extends React.Component {
 Home.propTypes = {
   displayDate: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
-  logs: PropTypes.object.isRequired,
+  logTypes: PropTypes.object.isRequired,
 };
 
 export default Home;

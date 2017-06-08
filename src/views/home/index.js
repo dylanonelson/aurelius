@@ -4,12 +4,14 @@ import { Home } from './components';
 
 function mapStateToProps(state) {
   const { selectedDate } = state.home;
-  const { display, yearmoday } = selectedDate;
+  const { display } = selectedDate;
+
+  const loading = (state.logs === 'loading' || state.logTypes === 'loading');
 
   return {
     displayDate: display,
-    loading: !state.logs[yearmoday] || Object.keys(state.logTypes).length === 0,
-    logs: state.logs[yearmoday] || {},
+    loading,
+    logTypes: state.logTypes === 'loading' ? {} : state.logTypes,
   };
 }
 
