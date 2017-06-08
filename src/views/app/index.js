@@ -4,7 +4,7 @@ import { deepPurple700 } from 'material-ui/styles/colors';
 import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import PropTypes from 'prop-types';
-import  React from 'react';
+import React from 'react';
 
 import Home from '../home';
 import Edit from '../edit';
