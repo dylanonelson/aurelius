@@ -60,7 +60,7 @@ function mapStateToProps(state, props) {
   const { yearmoday } = selectedDate;
 
   return {
-    count: state.logs[yearmoday][props.logTypeId] || 0,
+    count: state.logs[yearmoday] ? (state.logs[yearmoday][props.logTypeId] || 0) : 0,
     dateString: yearmoday,
     logType: state.logTypes[props.logTypeId],
   };

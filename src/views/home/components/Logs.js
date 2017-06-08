@@ -71,7 +71,12 @@ function mapStateToProps(state, props) {
   const { yearmoday } = selectedDate;
 
   const logs = Object.keys(state.logTypes).reduce((memo, logTypeId) => {
-    memo[logTypeId] = state.logs[yearmoday][logTypeId] || {};
+    if (state.logs[yearmoday] === undefined) {
+      memo[logTypeId] = {};
+    } else {
+      memo[logTypeId] = state.logs[yearmoday][logTypeId] || {};
+    }
+
     return memo;
   }, {});
 

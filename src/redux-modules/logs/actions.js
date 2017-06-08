@@ -2,7 +2,9 @@ import { createAction } from 'redux-actions';
 
 const INGEST_LOGS = 'logs/INGEST_LOGS';
 
-export const ingestLogs = createAction(INGEST_LOGS);
+export const ingestLogs = createAction(INGEST_LOGS, logs => {
+  return logs ? logs : {};
+});
 
 export const INCREMENT_LOG_TYPE = 'logs/INCREMENT_LOG_TYPE';
 
