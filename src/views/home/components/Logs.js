@@ -10,7 +10,7 @@ const styles = {
     marginBottom: 100,
     // Spacing beneath tabs
     position: 'relative',
-    top: 15,
+    top: 64,
   },
   spinner: {
     position: 'fixed',

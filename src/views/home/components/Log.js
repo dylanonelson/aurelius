@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import './log.css';
 import LogControls from './LogControls';
 import LogDetails from './LogDetails';
 import LogSummary from './LogSummary';
@@ -37,7 +38,7 @@ const Log = (props) => {
   );
 
   return (
-    <li>
+    <li className="log">
       <Paper
         children={children}
         style={styles.line}
