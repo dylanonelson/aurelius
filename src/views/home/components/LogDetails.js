@@ -10,6 +10,7 @@ const styles = {
     height: 25,
     justifyContent: 'center',
     position: 'relative',
+    top: -10,
   },
 };
 
