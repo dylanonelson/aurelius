@@ -1,17 +1,7 @@
-import Moment from 'moment';
-
 import { handleActions } from 'redux-actions';
+
+import { formatDate } from 'utilities/time';
 import { resetDate } from './actions';
-
-const formatDate = (milliseconds) => {
-  const m = Moment(milliseconds).subtract(4, 'hours');
-
-  return {
-    milliseconds: m.format('x'),
-    yearmoday: m.format('YYYY-MM-DD'),
-    display: m.format('MMMM D, YYYY'),
-  };
-};
 
 const reducerMap = {
   [resetDate]: (previous = {}, action) => {

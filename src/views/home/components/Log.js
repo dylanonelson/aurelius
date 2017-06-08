@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
-import autobind from 'autobind-decorator';
 import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
+import LogControls from './LogControls';
 import LogDetails from './LogDetails';
 import LogSummary from './LogSummary';
-import LogControls from './LogControls';
+import { incrementLogType } from 'redux-modules/logs/actions';
 
 const styles = {
   line: {
@@ -16,62 +16,47 @@ const styles = {
   },
 };
 
-class Log extends React.Component {
-  render() {
-    const children = (
-      <div>
-        <LogSummary
-          logType={this.props.logType}
-          numLogs={this.props.count}
-        />
-        <LogDetails
-          logType={this.props.logType}
-          numLogs={this.props.count}
-        />
-        <LogControls
-          removeLog={this.removeLog}
-          addLog={this.addLog}
-        />
-      </div>
-    );
+const Log = (props) => {
+  const { addLog, count, logType, removeLog } = props;
 
-    return (
-      <li>
-        <Paper
-          children={children}
-          style={styles.line}
-          zDepth={this.zDepth}
-        />
-      </li>
-    );
-  }
+  const children = (
+    <div>
+      <LogSummary
+        logType={logType}
+        numLogs={count}
+      />
+      <LogDetails
+        logType={logType}
+        numLogs={count}
+      />
+      <LogControls
+        removeLog={removeLog}
+        addLog={addLog}
+      />
+    </div>
+  );
 
-  @autobind
-  addLog() {
-    this.props.incrementLogType(
-      this.props.logType.id
-    );
-  }
-
-  @autobind
-  removeLog() {
-    this.props.decrementLogType(
-      this.props.logType.id
-    );
-  }
-}
+  return (
+    <li>
+      <Paper
+        children={children}
+        style={styles.line}
+        zDepth={1}
+      />
+    </li>
+  );
+};
 
 Log.propTypes = {
   count: PropTypes.number.isRequired,
-  decrementLogType: PropTypes.func.isRequired,
-  incrementLogType: PropTypes.func.isRequired,
-  logTypeId: PropTypes.string.isRequired,
+  addLog: PropTypes.func.isRequired,
+  removeLog: PropTypes.func.isRequired,
   logType: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, props) {
-  const { currentDate } = state;
-  const { yearmoday } = currentDate;
+  const { selectedDate } = state.home;
+  const { yearmoday } = selectedDate;
 
   return {
     count: state.logs[yearmoday][props.logTypeId] || 0,
@@ -80,6 +65,29 @@ function mapStateToProps(state, props) {
   };
 }
 
+function mapDispatchToProps(dispatch, props) {
+  return {
+    incrementLogType: (date, logType, amount) => dispatch(incrementLogType(date, logType, amount)),
+  };
+}
+
+function mergeProps(stateProps, dispatchProps) {
+  return Object.assign({}, stateProps, {
+    addLog: () => dispatchProps.incrementLogType(
+      stateProps.dateString,
+      stateProps.logType.id,
+      1,
+    ),
+    removeLog: () => dispatchProps.incrementLogType(
+      stateProps.dateString,
+      stateProps.logType.id,
+      -1,
+    ),
+  });
+}
+
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
+  mergeProps,
 )(Log);
