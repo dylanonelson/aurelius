@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Create from 'material-ui/svg-icons/content/create';
@@ -26,7 +27,7 @@ const EditButton = ({ onClick }) => (
 );
 
 EditButton.propTypes = {
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default EditButton;

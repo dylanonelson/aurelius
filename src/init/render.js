@@ -1,4 +1,5 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -24,7 +25,7 @@ const App = (props) => (
 );
 
 App.propTypes = {
-  children: React.PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 const routes = {

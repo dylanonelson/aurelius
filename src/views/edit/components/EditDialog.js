@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { observable, autorun } from 'mobx';
 import mobx from 'mobx';
@@ -62,9 +63,9 @@ class EditDialog extends React.Component {
 }
 
 EditDialog.propTypes = {
-  logType: React.PropTypes.object,
-  onClose: React.PropTypes.func,
-  onSave: React.PropTypes.func,
+  logType: PropTypes.object,
+  onClose: PropTypes.func,
+  onSave: PropTypes.func,
 };
 
 export default EditDialog;

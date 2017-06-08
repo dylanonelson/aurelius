@@ -14,7 +14,7 @@ const initiateLogin = (dispatch) => {
   });
 
   firebase.auth().getRedirectResult().catch((error) => {
-    console.error(error);
+    document.write(error);
   });
 };
 

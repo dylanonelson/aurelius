@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const getStyles = ({ active }) => {
@@ -42,8 +43,8 @@ const LogSummary = (props) => {
 };
 
 LogSummary.propTypes = {
-  logType: React.PropTypes.object.isRequired,
-  numLogs: React.PropTypes.number.isRequired,
+  logType: PropTypes.object.isRequired,
+  numLogs: PropTypes.number.isRequired,
 };
 
 export default LogSummary;

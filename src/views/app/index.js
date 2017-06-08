@@ -29,7 +29,7 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
 };
 
-App.displayName = 'app';
+App.displayName = 'App';
 
 const routes = {
   path: '/',
@@ -40,6 +40,10 @@ const routes = {
   ],
 };
 
-export default (props) => (
+const router = (props) => (
   <Router history={hashHistory} routes={routes} />
 );
+
+router.displayName = 'AppRouter';
+
+export default router;

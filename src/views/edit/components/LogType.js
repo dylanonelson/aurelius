@@ -1,5 +1,6 @@
 import Avatar from 'material-ui/avatar';
 import Create from 'material-ui/svg-icons/content/create';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { ListItem } from 'material-ui/List';
 
@@ -46,8 +47,8 @@ const LogType = ({ logType, onLogTypeSelection }) => (
 );
 
 LogType.propTypes = {
-  logType: React.PropTypes.object.isRequired,
-  onLogTypeSelection: React.PropTypes.func.isRequired,
+  logType: PropTypes.object.isRequired,
+  onLogTypeSelection: PropTypes.func.isRequired,
 };
 
 export default LogType;

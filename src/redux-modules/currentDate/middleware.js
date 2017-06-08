@@ -1,5 +1,3 @@
-import Moment from 'moment';
-
 import { resetDate } from './actions';
 
 export default store => {

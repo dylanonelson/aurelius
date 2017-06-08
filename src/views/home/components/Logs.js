@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 
@@ -56,8 +57,8 @@ class Logs extends React.Component {
 }
 
 Logs.propTypes = {
-  loading: React.PropTypes.bool,
-  logs: React.PropTypes.object.isRequired,
+  loading: PropTypes.bool,
+  logs: PropTypes.object.isRequired,
 };
 
 export default Logs;

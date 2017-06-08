@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import autobind from 'autobind-decorator';
 import { observer } from 'mobx-react';
@@ -70,7 +71,7 @@ class Edit extends React.Component {
 }
 
 Edit.propTypes = {
-  state: React.PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
 };
 
 export default Edit;

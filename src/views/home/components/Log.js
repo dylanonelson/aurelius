@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
 import Paper from 'material-ui/Paper';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import LogDetails from './LogDetails';
@@ -61,11 +62,11 @@ class Log extends React.Component {
 }
 
 Log.propTypes = {
-  count: React.PropTypes.number.isRequired,
-  decrementLogType: React.PropTypes.func.isRequired,
-  incrementLogType: React.PropTypes.func.isRequired,
-  logTypeId: React.PropTypes.string.isRequired,
-  logType: React.PropTypes.object.isRequired,
+  count: PropTypes.number.isRequired,
+  decrementLogType: PropTypes.func.isRequired,
+  incrementLogType: PropTypes.func.isRequired,
+  logTypeId: PropTypes.string.isRequired,
+  logType: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, props) {

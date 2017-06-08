@@ -19,7 +19,7 @@ const styles = {
 
 class Home extends React.Component {
   render() {
-    const { displayDate, loading, logs, logTypes } = this.props;
+    const { displayDate, loading, logs } = this.props;
 
     return (
       <div id="home">

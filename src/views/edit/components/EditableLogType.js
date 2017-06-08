@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
@@ -21,9 +22,9 @@ const EditableLogType = ({ name, mark, onChange }) => (
 );
 
 EditableLogType.propTypes = {
-  name: React.PropTypes.string,
-  mark: React.PropTypes.string,
-  onChange: React.PropTypes.func,
+  name: PropTypes.string,
+  mark: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default EditableLogType;

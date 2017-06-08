@@ -1,5 +1,6 @@
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Add from 'material-ui/svg-icons/content/add';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const styles = {
@@ -22,7 +23,7 @@ const AddButton = ({ onClick }) => (
 );
 
 AddButton.propTypes = {
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default AddButton;

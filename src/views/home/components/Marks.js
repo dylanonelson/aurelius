@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import './Marks.css';
 
@@ -68,8 +69,8 @@ const Marks = ({ mark, num }) => {
 };
 
 Marks.propTypes = {
-  mark: React.PropTypes.string.isRequired,
-  num: React.PropTypes.number.isRequired,
+  mark: PropTypes.string.isRequired,
+  num: PropTypes.number.isRequired,
 };
 
 export default Marks;

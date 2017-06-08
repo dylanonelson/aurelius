@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
-import Moment from 'moment';
 
 import { Home } from './components';
-import { incrementLogType } from '../../redux-modules/logs/actions';
 
 function mapStateToProps(state) {
   const { currentDate } = state;

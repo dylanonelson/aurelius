@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { List } from 'material-ui/List';
 import LogType from './LogType';
@@ -27,8 +28,8 @@ const LogTypes = ({ logTypes, onLogTypeSelection }) => {
 
 LogTypes.propTypes = {
   // MobX observable array
-  logTypes: React.PropTypes.object.isRequired,
-  onLogTypeSelection: React.PropTypes.func.isRequired,
+  logTypes: PropTypes.object.isRequired,
+  onLogTypeSelection: PropTypes.func.isRequired,
 };
 
 export default LogTypes;
