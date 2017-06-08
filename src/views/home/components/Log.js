@@ -11,7 +11,7 @@ import { incrementLogType } from 'redux-modules/logs/actions';
 
 const styles = {
   line: {
-    height: 250,
+    height: 175,
     margin: '0 15px 15px 15px',
     position: 'relative',
   },

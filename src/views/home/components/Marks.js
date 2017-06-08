@@ -22,7 +22,7 @@ const getStyles = (largeStyle = false) => ({
 });
 
 const Marks = ({ mark, num }) => {
-  let styles;
+  let numMarks, styles;
 
   if (num === 0) {
     styles = getStyles();
@@ -32,12 +32,25 @@ const Marks = ({ mark, num }) => {
     );
   }
 
-  if (num > 25) {
-    const numMarks = Math.floor(num / 25);
+  if (num > 10 && num < 50) {
+    numMarks = Math.floor(num / 10);
     styles = getStyles(true);
 
     return (
       <ul style={styles.list}>
+        <li style={styles.row}>{mark.repeat(numMarks)}</li>
+      </ul>
+    );
+  }
+
+  if (num >= 50) {
+    numMarks = 4;
+    styles = getStyles(true);
+
+    return (
+      <ul style={Object.assign({}, styles.list, {
+        fontSize: 40,
+      })}>
         <li style={styles.row}>{mark.repeat(numMarks)}</li>
       </ul>
     );
