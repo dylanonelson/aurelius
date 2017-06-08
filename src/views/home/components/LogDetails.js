@@ -7,7 +7,7 @@ const styles = {
   container: {
     alignItems: 'center',
     display: 'flex',
-    height: 30,
+    height: 25,
     justifyContent: 'center',
     position: 'relative',
   },
