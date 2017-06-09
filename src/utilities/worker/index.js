@@ -16,7 +16,6 @@ class Worker {
     this.interval = null;
 
     const performTask = () => {
-      console.log('performing task');
       const f = this.queue.shift();
       if (typeof f === 'function') f();
 
