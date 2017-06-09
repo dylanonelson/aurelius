@@ -14,11 +14,17 @@ class Worker {
   @autobind
   restart() {
     this.interval = null;
-    let f;
-    while (this.queue.length > 0) {
-      f = this.queue.shift();
-      if (typeof f === 'function') requestAnimationFrame(f);
-    }
+
+    const performTask = () => {
+      console.log('performing task');
+      const f = this.queue.shift();
+      if (typeof f === 'function') f();
+
+      if (this.queue.length > 0 && this.interval === null)
+        requestAnimationFrame(performTask);
+    };
+
+    performTask();
   }
 
   @autobind
