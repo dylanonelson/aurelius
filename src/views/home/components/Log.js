@@ -17,36 +17,42 @@ const styles = {
   },
 };
 
-const Log = (props) => {
-  const { addLog, count, logType, removeLog } = props;
+class Log extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return (nextProps.count !== this.props.count);
+  }
 
-  const children = (
-    <div>
-      <LogSummary
-        logType={logType}
-        numLogs={count}
-      />
-      <LogDetails
-        logType={logType}
-        numLogs={count}
-      />
-      <LogControls
-        removeLog={removeLog}
-        addLog={addLog}
-      />
-    </div>
-  );
+  render() {
+    const { addLog, count, logType, removeLog } = this.props;
 
-  return (
-    <li className="log">
-      <Paper
-        children={children}
-        style={styles.line}
-        zDepth={1}
-      />
-    </li>
-  );
-};
+    const children = (
+      <div>
+        <LogSummary
+          logType={logType}
+          numLogs={count}
+        />
+        <LogDetails
+          logType={logType}
+          numLogs={count}
+        />
+        <LogControls
+          removeLog={removeLog}
+          addLog={addLog}
+        />
+      </div>
+    );
+
+    return (
+      <li className="log">
+        <Paper
+          children={children}
+          style={styles.line}
+          zDepth={1}
+        />
+      </li>
+    );
+  }
+}
 
 Log.propTypes = {
   count: PropTypes.number.isRequired,
