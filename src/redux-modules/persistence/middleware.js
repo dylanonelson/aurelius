@@ -3,25 +3,33 @@ import { data } from '../../persistence';
 import { INCREMENT_LOG_TYPE } from '../logs/actions';
 import { LOGIN_USER } from '../init/actions';
 import { addLogAtKey, deleteLogAtKey } from './actions';
+import Worker from 'utilities/worker';
+
+const persistenceWorker = new Worker(2500);
 
 export default store => next => action => {
   if (action.type === INCREMENT_LOG_TYPE) {
     const { date, logType } = action.payload;
     let { amount } = action.payload;
+    let f;
+
+    persistenceWorker.pause();
 
     while (amount > 0) {
-      requestAnimationFrame(() => {
+      f = () => {
         data.CURRENT_LOGS.write({
           date,
           logType,
         });
-      });
+      };
+
+      persistenceWorker.schedule(f);
 
       amount--;
     }
 
     while (amount < 0) {
-      requestAnimationFrame(() => {
+      f = () => {
         const { logs } = store.getState().persistence;
         const key = Object.keys(logs).reduce((memo, k) => {
           if (
@@ -36,7 +44,9 @@ export default store => next => action => {
         if (key) {
           data.CURRENT_LOGS.delete(key);
         }
-      });
+      };
+
+      persistenceWorker.schedule(f);
 
       amount ++;
     }
