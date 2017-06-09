@@ -4,8 +4,8 @@ import './Marks.css';
 
 const getStyles = (largeStyle = false) => ({
   emptyList: {
-    fontSize: 45,
-    opacity: 0.70,
+    fontSize: 40,
+    opacity: 0.50,
   },
   list: {
     width: '50%',
