@@ -19,8 +19,13 @@ class Worker {
       const f = this.queue.shift();
       if (typeof f === 'function') f();
 
-      if (this.queue.length > 0 && this.interval === null)
-        requestAnimationFrame(performTask);
+      if (this.queue.length > 0 && this.interval === null) {
+        const caller = document.hidden
+          ? (callee) => callee()
+          : requestAnimationFrame;
+
+        caller(performTask);
+      }
     };
 
     performTask();
