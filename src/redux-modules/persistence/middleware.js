@@ -5,7 +5,7 @@ import { LOGIN_USER } from '../init/actions';
 import { addLogAtKey, deleteLogAtKey } from './actions';
 import Worker from 'utilities/worker';
 
-const persistenceWorker = new Worker(2500);
+const persistenceWorker = new Worker(1500);
 
 export default store => next => action => {
   if (action.type === INCREMENT_LOG_TYPE) {
