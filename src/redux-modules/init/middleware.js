@@ -1,6 +1,11 @@
 import firebase from 'firebase';
 
-import { AUTHENTICATE_USER, loginUser } from './actions';
+import {
+  AUTHENTICATE_USER,
+  LOG_IN_WITH_GOOGLE,
+  loginUser,
+  requestLogin,
+} from './actions';
 
 const initiateLogin = (dispatch) => {
   firebase.auth().onAuthStateChanged(user => {
@@ -8,8 +13,7 @@ const initiateLogin = (dispatch) => {
       // User is signed in.
       dispatch(loginUser(user));
     } else {
-      var provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      dispatch(requestLogin());
     }
   });
 
@@ -18,9 +22,19 @@ const initiateLogin = (dispatch) => {
   });
 };
 
+const initiateRedirect = () => {
+  console.log('yo');
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithRedirect(provider);
+};
+
 export default store => next => action => {
   if (action.type === AUTHENTICATE_USER) {
     initiateLogin(store.dispatch);
+  }
+
+  if (action.type === LOG_IN_WITH_GOOGLE) {
+    initiateRedirect();
   }
 
   return next(action);

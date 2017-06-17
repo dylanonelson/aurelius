@@ -6,8 +6,9 @@ import { Router, hashHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Home from '../home';
 import Edit from '../edit';
+import Home from '../home';
+import LoadingScreen from '../loadingScreen';
 import store from '../../state';
 
 const muiTheme = getMuiTheme({
@@ -20,7 +21,9 @@ const muiTheme = getMuiTheme({
 const App = (props) => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
-      {props.children}
+      <LoadingScreen>
+        {props.children}
+      </LoadingScreen>
     </MuiThemeProvider>
   </Provider>
 );

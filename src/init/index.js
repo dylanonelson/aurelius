@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 import './firebaseInit';
-import { actions as initActions } from '../redux-modules/init';
+import { authenticateUser  } from 'redux-modules/init/actions';
 import App from '../views';
 import store from '../state';
 
@@ -17,7 +17,5 @@ const renderApp = () => {
 };
 
 document.addEventListener('DOMContentLoaded', renderApp);
-
-const { authenticateUser } = initActions;
 
 store.dispatch(authenticateUser());

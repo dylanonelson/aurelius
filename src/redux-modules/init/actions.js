@@ -11,3 +11,11 @@ export const loginUser = createAction(LOGIN_USER, (user) => {
     currentUser: user,
   };
 });
+
+export const LOG_IN_WITH_GOOGLE = 'init/LOG_IN_WITH_GOOGLE';
+
+export const logInWithGoogle = createAction(LOG_IN_WITH_GOOGLE);
+
+export const REQUEST_LOGIN = 'init/REQUEST_LOGIN';
+
+export const requestLogin = createAction(REQUEST_LOGIN);
