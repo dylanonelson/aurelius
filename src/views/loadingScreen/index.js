@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { deepPurple700 } from 'material-ui/styles/colors';
-import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import './styles.css';
 import LandingPage from '../landingPage';
