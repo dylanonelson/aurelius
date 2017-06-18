@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 
 class Worker {
-  constructor(restartInterval = 2000) {
+  constructor(restartInterval = 1000) {
     this.restartInterval = restartInterval;
   }
 
@@ -33,6 +33,13 @@ class Worker {
 
   @autobind
   schedule(f) {
+    this.queue.push(f);
+    this.resetInterval();
+  }
+
+  @autobind
+  reschedule(f) {
+    this.queue = this.queue.filter(func => func !== f);
     this.queue.push(f);
     this.resetInterval();
   }

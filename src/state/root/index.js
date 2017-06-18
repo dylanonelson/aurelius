@@ -4,7 +4,9 @@ import { loadLocalStorageData } from 'redux-modules/init/actions';
 
 const actionsMap = {
   [loadLocalStorageData]: (previous = {}, action) => {
-    const nextState = JSON.parse(localStorage.getItem('state'));
+    if (!localStorage.getItem('state')) return previous;
+
+    const nextState = JSON.parse(localStorage.getItem('previousState'));
     nextState.init.currentUser = previous.init.currentUser;
     // Maintain the part of the state monitoring the Firebase connection
     nextState.persistence.connectedToFirebase =

@@ -9,8 +9,8 @@ import {
   loginUser,
   requestLogin,
 } from './actions';
-
 import { flushQueuedActions } from 'redux-modules/persistence/actions';
+import { persistenceWorker } from 'redux-modules/persistence/middleware';
 
 const initiateLogin = (dispatch) => {
   firebase.auth().onAuthStateChanged(user => {
@@ -43,12 +43,19 @@ export default store => next => action => {
 
   if (action.type === LOGIN_USER) {
     if (navigator.onLine) {
-      store.dispatch(loadFirebaseData());
+      store.dispatch(loadLocalStorageData());
+      store.dispatch(flushQueuedActions());
+      persistenceWorker.schedule(() => {
+        store.dispatch(loadFirebaseData());
+      });
     } else {
       store.dispatch(loadLocalStorageData());
 
       window.addEventListener('online', () => {
         store.dispatch(flushQueuedActions());
+        persistenceWorker.schedule(() => {
+          store.dispatch(loadFirebaseData());
+        });
       });
     }
   }

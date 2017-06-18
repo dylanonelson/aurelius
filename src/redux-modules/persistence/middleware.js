@@ -1,18 +1,17 @@
 import { data } from '../../persistence';
 
 import { INCREMENT_LOG_TYPE } from '../logs/actions';
-import { LOAD_FIREBASE_DATA } from '../init/actions';
 import { FLUSH_QUEUED_ACTIONS, addLogAtKey, deleteLogAtKey } from './actions';
 import Worker from 'utilities/worker';
 
-const persistenceWorker = new Worker(500);
+export const persistenceWorker = new Worker(500);
+
+const deletedKeys = {};
 
 const persistToFirebase = (store, action) => {
   const { date, logType } = action.payload;
   let { amount } = action.payload;
   let f;
-
-  persistenceWorker.pause();
 
   while (amount > 0) {
     f = () => {
@@ -34,20 +33,22 @@ const persistToFirebase = (store, action) => {
         if (
           logs[k] &&
           logs[k].logType === logType &&
-          logs[k].date === date
+          logs[k].date === date &&
+          deletedKeys[k] !== true
         ) return k;
 
         return memo;
       }, null);
 
       if (key) {
+        deletedKeys[key] = true;
         data.CURRENT_LOGS.delete(key);
       }
     };
 
     persistenceWorker.schedule(f);
 
-    amount ++;
+    amount++;
   }
 };
 
@@ -62,17 +63,6 @@ export default store => next => action => {
     } else {
       persistToLocalStorage(action);
     }
-  }
-
-
-  if (action.type === LOAD_FIREBASE_DATA) {
-    data.CURRENT_LOGS.onChildAdded((id, log) => {
-      store.dispatch(addLogAtKey(id, log));
-    });
-
-    data.CURRENT_LOGS.onChildRemoved((id, log) => {
-      store.dispatch(deleteLogAtKey(id));
-    });
   }
 
   if (action.type === FLUSH_QUEUED_ACTIONS) {
