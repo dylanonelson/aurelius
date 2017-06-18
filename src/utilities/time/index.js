@@ -1,7 +1,7 @@
 import Moment from 'moment';
 
 export const formatDate = (milliseconds) => {
-  const m = Moment(milliseconds).subtract(4, 'hours');
+  const m = Moment(milliseconds);
 
   return {
     milliseconds: m.format('x'),

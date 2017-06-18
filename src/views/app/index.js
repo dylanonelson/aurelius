@@ -14,7 +14,9 @@ import store from '../../state';
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: deepPurple700,
+    primary2Color: '#673AB7',
     accent1Color: '#7c4dfe',
+    accent2Color: '#C3B7D9',
   },
 });
 

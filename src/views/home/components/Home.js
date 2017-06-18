@@ -2,9 +2,9 @@ import AppBar from 'material-ui/AppBar';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Logs from './Logs';
 import EditButton from './EditButton';
-
+import HomeDatePicker from './HomeDatePicker';
+import Logs from './Logs';
 
 const styles = {
   appbar: {
@@ -33,10 +33,13 @@ class Home extends React.Component {
     );
   }
 
-  getHeader(displayDate) {
+  getHeader() {
+    const { displayDate } = this.props;
+
     return (
       <div id="home-header">
         <AppBar
+          iconElementRight={<HomeDatePicker />}
           style={styles.appbar}
           title={displayDate}
           zDepth={0}
@@ -45,7 +48,6 @@ class Home extends React.Component {
     );
   }
 }
-
 Home.propTypes = {
   displayDate: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
