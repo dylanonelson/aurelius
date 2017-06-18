@@ -4,6 +4,7 @@ import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import IconButton from 'material-ui/IconButton';
 import EventIcon from 'material-ui/svg-icons/action/event';
+import RestoreIcon from 'material-ui/svg-icons/action/restore';
 import { connect } from 'react-redux';
 
 import { setSelectedDate } from 'redux-modules/home/actions';
@@ -12,18 +13,21 @@ const styles = {
   datePicker: {
     display: 'none',
   },
-  iconButton: {
-  },
   icon: {
     color: 'white',
   },
 };
 
-const HomeDatePicker = ({ selectedDate, selectNewDate }) => {
+const HomeDatePicker = ({ selectedDate, todaysDate, selectNewDate }) => {
   const onDateSelection = (e, date) => {
     selectNewDate(Number(Moment(date).format('x')));
   };
 
+  const resetDateToToday = () =>
+    selectNewDate(todaysDate);
+
+  const selectedIsToday =
+    Moment(todaysDate).format('YYYYMMDD') === Moment(selectedDate).format('YYYYMMDD');
   const d = new Date(selectedDate);
   let datePickerEl = null;
 
@@ -35,28 +39,36 @@ const HomeDatePicker = ({ selectedDate, selectNewDate }) => {
     value: d,
   });
 
-  return (
+  return (selectedIsToday ? (
     <div>
       {datePicker}
       <IconButton
         iconStyle={styles.icon}
         onClick={() => datePickerEl.focus()}
-        style={styles.iconButton}
       >
         <EventIcon />
       </IconButton>
     </div>
-  );
+  ) : (
+    <IconButton
+      iconStyle={styles.icon}
+      onClick={resetDateToToday}
+    >
+      <RestoreIcon />
+    </IconButton>
+  ));
 };
 
 HomeDatePicker.propTypes = {
   selectedDate: PropTypes.number.isRequired,
   selectNewDate: PropTypes.func.isRequired,
+  todaysDate: PropTypes.number.isRequired,
 };
 
 function mapStateToProps(state, props) {
   return {
     selectedDate: Number(state.home.selectedDate.milliseconds),
+    todaysDate: Number(state.currentDate.milliseconds),
   };
 }
 
