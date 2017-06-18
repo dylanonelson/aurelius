@@ -4,7 +4,12 @@ import { ingestLogs } from './actions';
 
 const initializeLogs = (dispatch) => {
   data.CURRENT_LOGS.load(logs => {
-    dispatch(ingestLogs(logs));
+    dispatch(
+      ingestLogs({
+        logs,
+        meta: { merge: false },
+      })
+    );
   });
 };
 

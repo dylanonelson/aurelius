@@ -35,11 +35,21 @@ const reducerMap = {
     return previous;
   },
   [ingestLogs]: (previous = {}, action) => {
+    if (action.meta.merge === false)
+      return Object.assign({}, previous, {
+        logs: action.payload,
+      });
+
     return Object.assign({}, previous, {
       logs: Object.assign({}, previous.logs, action.payload),
     });
   },
   [ingestLogTypes]: (previous = {}, action) => {
+    if (action.meta.merge === false)
+      return Object.assign({}, previous, {
+        logTypes: action.payload,
+      });
+
     return Object.assign({}, previous, {
       logTypes: Object.assign({}, previous.logTypes, action.payload),
     });

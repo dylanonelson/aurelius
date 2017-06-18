@@ -65,7 +65,9 @@ class DataType {
 
 const getByCurrentDateObj = {
   get: function () {
-    const date = store.getState().currentDate.milliseconds;
+    const date = Number(
+      store.getState().currentDate.milliseconds
+    );
 
     const write = Firebase.database().ref(this.path);
 

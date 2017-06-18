@@ -13,6 +13,9 @@ const reducerMap = {
       return memo;
     }, {});
 
+    if (action.meta.merge === false)
+      return logs;
+
     return Object.assign(
       {},
       previous === 'loading' ? {} : previous,

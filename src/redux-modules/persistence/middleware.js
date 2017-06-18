@@ -87,7 +87,11 @@ export default store => next => action => {
       .startAt(yearmoday)
       .endAt(yearmoday)
       .once('value', snapshot => {
-        store.dispatch(ingestLogs(snapshot.val()));
+        store.dispatch(
+          ingestLogs({
+            logs: snapshot.val(),
+          })
+        );
       });
   }
 

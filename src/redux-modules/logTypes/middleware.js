@@ -4,7 +4,12 @@ import { ingestLogTypes } from './actions';
 
 const initializeLogTypes = (dispatch) => {
   data.LOG_TYPES.load(logTypes => {
-    dispatch(ingestLogTypes(logTypes));
+    dispatch(
+      ingestLogTypes({
+        logTypes,
+        meta: { merge: false },
+      })
+    );
   });
 };
 
