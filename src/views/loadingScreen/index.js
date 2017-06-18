@@ -20,6 +20,7 @@ const getStyles = (loading, isVisible) => ({
     zIndex: 10000,
   },
   progress: {
+    display: loading ? 'block' : 'none',
     left: '50%',
     position: 'absolute',
     top: '50%',
