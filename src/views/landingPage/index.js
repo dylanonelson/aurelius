@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import { deepPurple700 } from 'material-ui/styles/colors';
 import { logInWithGoogle } from 'redux-modules/init/actions';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 

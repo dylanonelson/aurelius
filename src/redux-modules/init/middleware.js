@@ -23,7 +23,6 @@ const initiateLogin = (dispatch) => {
 };
 
 const initiateRedirect = () => {
-  console.log('yo');
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithRedirect(provider);
 };
