@@ -21,7 +21,6 @@ const styles = {
 
 const HomeDatePicker = ({ selectedDate, selectNewDate }) => {
   const onDateSelection = (e, date) => {
-    console.log(Moment(date).format('YYYY-MM-DD'));
     selectNewDate(Number(Moment(date).format('x')));
   };
 

@@ -1,4 +1,4 @@
-import { logDAO, logTypeDAO, benchmarkDAO, benchmarkTypeDAO } from './daos';
+import { allLogDAO, logDAO, logTypeDAO, benchmarkDAO, benchmarkTypeDAO } from './daos';
 
 const handler = {
   get: (target, property) => {
@@ -12,6 +12,7 @@ const handler = {
 
 
 class DataTypes {
+  static get ALL_LOGS() { return allLogDAO; }
   static get BENCHMARK_TYPES() { return benchmarkTypeDAO; }
   static get CURRENT_BENCHMARKS() { return benchmarkDAO; }
   static get CURRENT_LOGS() { return logDAO; }

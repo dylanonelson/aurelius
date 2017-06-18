@@ -1,8 +1,10 @@
-import { data } from '../../persistence';
+import Moment from 'moment';
 
-import { INCREMENT_LOG_TYPE } from '../logs/actions';
-import { FLUSH_QUEUED_ACTIONS, addLogAtKey, deleteLogAtKey } from './actions';
 import Worker from 'utilities/worker';
+import { FLUSH_QUEUED_ACTIONS, addLogAtKey, deleteLogAtKey } from './actions';
+import { INCREMENT_LOG_TYPE, ingestLogs } from '../logs/actions';
+import { SET_SELECTED_DATE } from 'redux-modules/home/actions';
+import { data } from '../../persistence';
 
 export const persistenceWorker = new Worker(500);
 
@@ -77,6 +79,16 @@ export default store => next => action => {
     (store.getState().persistence.queuedActions || []).forEach(action => {
       persistToFirebase(store, action);
     });
+  }
+
+  if (action.type === SET_SELECTED_DATE) {
+    const yearmoday = Moment(action.payload).format('YYYY-MM-DD');
+    data.ALL_LOGS.refs.read.orderByChild('date')
+      .startAt(yearmoday)
+      .endAt(yearmoday)
+      .once('value', snapshot => {
+        store.dispatch(ingestLogs(snapshot.val()));
+      });
   }
 
   return next(action);

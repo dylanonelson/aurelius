@@ -85,6 +85,8 @@ const getByCurrentDateObj = {
   },
 };
 
+const allLogDAO = new DataType({ key: 'logs' });
+
 const benchmarkDAO = new DataType({ key: 'benchmarks' });
 Object.defineProperty(benchmarkDAO, 'refs', getByCurrentDateObj);
 
@@ -95,4 +97,4 @@ Object.defineProperty(logDAO, 'refs', getByCurrentDateObj);
 
 const logTypeDAO = new DataType({ key: 'logTypes' });
 
-export { logDAO, logTypeDAO, benchmarkDAO, benchmarkTypeDAO };
+export { allLogDAO, logDAO, logTypeDAO, benchmarkDAO, benchmarkTypeDAO };
