@@ -1,6 +1,6 @@
 import Firebase from 'firebase';
 import Moment from 'moment';
-import state from '../state';
+import store from '../../state';
 
 const getUserUID = () => (Firebase.auth().currentUser.uid);
 
@@ -65,12 +65,14 @@ class DataType {
 
 const getByCurrentDateObj = {
   get: function () {
+    const date = store.getState().currentDate.milliseconds;
+
     const write = Firebase.database().ref(this.path);
 
-    const currentDateString = Moment(state.date)
+    const currentDateString = Moment(date)
       .format('YYYY-MM-DD');
 
-    const beginningOfWeekString = Moment(state.date)
+    const beginningOfWeekString = Moment(date)
       // ISO week starts on Monday
       .startOf('isoWeek')
       .format('YYYY-MM-DD');

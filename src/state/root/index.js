@@ -8,9 +8,13 @@ const actionsMap = {
 
     const nextState = JSON.parse(localStorage.getItem('previousState'));
     nextState.init.currentUser = previous.init.currentUser;
+    nextState.currentDate = previous.currentDate;
+    nextState.home = previous.home;
+
     // Maintain the part of the state monitoring the Firebase connection
     nextState.persistence.connectedToFirebase =
       previous.persistence.connectedToFirebase;
+
     return nextState;
   },
 };
