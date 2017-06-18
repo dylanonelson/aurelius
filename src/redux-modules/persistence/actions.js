@@ -11,3 +11,7 @@ const DELETE_LOG_AT_KEY = 'persistence/DELETE_LOG_AT_KEY';
 export const deleteLogAtKey = createAction(DELETE_LOG_AT_KEY, (id, data) => {
   return id;
 });
+
+export const FLUSH_QUEUED_ACTIONS = 'persistence/FLUSH_QUEUED_ACTIONS';
+
+export const flushQueuedActions = createAction(FLUSH_QUEUED_ACTIONS);

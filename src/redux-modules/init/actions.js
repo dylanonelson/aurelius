@@ -4,6 +4,14 @@ export const AUTHENTICATE_USER = 'init/AUTHENTICATE_USER';
 
 export const authenticateUser = createAction(AUTHENTICATE_USER);
 
+export const LOAD_FIREBASE_DATA = 'persistence/LOAD_FIREBASE_DATA';
+
+export const loadFirebaseData = createAction(LOAD_FIREBASE_DATA);
+
+export const LOAD_LOCAL_STORAGE_DATA = 'persistence/LOAD_LOCAL_STORAGE_DATA';
+
+export const loadLocalStorageData = createAction(LOAD_LOCAL_STORAGE_DATA);
+
 export const LOGIN_USER = 'init/LOGIN_USER';
 
 export const loginUser = createAction(LOGIN_USER, (user) => {

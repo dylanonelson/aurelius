@@ -1,4 +1,4 @@
-import { LOGIN_USER } from '../init/actions';
+import { LOAD_FIREBASE_DATA } from '../init/actions';
 import { data } from '../../persistence';
 import { ingestLogTypes } from './actions';
 
@@ -9,7 +9,7 @@ const initializeLogTypes = (dispatch) => {
 };
 
 export default store => next => action => {
-  if (action.type === LOGIN_USER) {
+  if (action.type === LOAD_FIREBASE_DATA) {
     initializeLogTypes(store.dispatch);
   }
 

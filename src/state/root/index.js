@@ -1,3 +1,18 @@
-export default (prev = {}, action) => {
-  return prev;
+import { handleActions } from 'redux-actions';
+
+import { loadLocalStorageData } from 'redux-modules/init/actions';
+
+const actionsMap = {
+  [loadLocalStorageData]: (previous = {}, action) => {
+    const nextState = JSON.parse(localStorage.getItem('state'));
+    nextState.init.currentUser = previous.init.currentUser;
+    // Maintain the part of the state monitoring the Firebase connection
+    nextState.persistence.connectedToFirebase =
+      previous.persistence.connectedToFirebase;
+    return nextState;
+  },
 };
+
+const initialState = {};
+
+export default handleActions(actionsMap, initialState);

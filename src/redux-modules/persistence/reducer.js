@@ -1,9 +1,10 @@
 import { handleActions } from 'redux-actions';
 
-import { ingestLogs } from '../logs/actions';
+import { incrementLogType, ingestLogs } from '../logs/actions';
 import { ingestLogTypes } from '../logTypes/actions';
+import { loadFirebaseData } from 'redux-modules/init/actions';
 
-import { addLogAtKey, deleteLogAtKey } from './actions';
+import { addLogAtKey, deleteLogAtKey, flushQueuedActions } from './actions';
 
 const reducerMap = {
   [addLogAtKey]: (previous = {}, action) => {
@@ -18,6 +19,21 @@ const reducerMap = {
     if (result.logs[key]) delete result.logs[key];
     return result;
   },
+  [flushQueuedActions]: (previous = {}, action) => {
+    return Object.assign({}, previous, {
+      connectedToFirebase: true,
+      queuedActions: [],
+    });
+  },
+  [incrementLogType]: (previous = {}, action) => {
+    if (action.meta && action.meta.saveToQueue) {
+      const nextState = Object.assign({}, previous);
+      nextState.queuedActions = [...(previous.queuedActions || []), action];
+      return nextState;
+    }
+
+    return previous;
+  },
   [ingestLogs]: (previous = {}, action) => {
     return Object.assign({}, previous, {
       logs: Object.assign({}, previous.logs, action.payload),
@@ -28,8 +44,13 @@ const reducerMap = {
       logTypes: Object.assign({}, previous.logTypes, action.payload),
     });
   },
+  [loadFirebaseData]: (previous = {}, action) => {
+    return Object.assign({}, previous, {
+      connectedToFirebase: true,
+    });
+  },
 };
 
-const initialState = {};
+const initialState = { connectedToFirebase: false };
 
 export default handleActions(reducerMap, initialState);

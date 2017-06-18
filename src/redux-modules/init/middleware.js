@@ -3,9 +3,14 @@ import firebase from 'firebase';
 import {
   AUTHENTICATE_USER,
   LOG_IN_WITH_GOOGLE,
+  LOGIN_USER,
+  loadFirebaseData,
+  loadLocalStorageData,
   loginUser,
   requestLogin,
 } from './actions';
+
+import { flushQueuedActions } from 'redux-modules/persistence/actions';
 
 const initiateLogin = (dispatch) => {
   firebase.auth().onAuthStateChanged(user => {
@@ -34,6 +39,18 @@ export default store => next => action => {
 
   if (action.type === LOG_IN_WITH_GOOGLE) {
     initiateRedirect();
+  }
+
+  if (action.type === LOGIN_USER) {
+    if (navigator.onLine) {
+      store.dispatch(loadFirebaseData());
+    } else {
+      store.dispatch(loadLocalStorageData());
+
+      window.addEventListener('online', () => {
+        store.dispatch(flushQueuedActions());
+      });
+    }
   }
 
   return next(action);

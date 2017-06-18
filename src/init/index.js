@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 import './firebaseInit';
+import './localStorageInit';
 import { authenticateUser  } from 'redux-modules/init/actions';
 import App from '../views';
 import store from '../state';
