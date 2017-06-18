@@ -12,13 +12,13 @@ const getStyles = ({ active }) => {
       lineHeight: '56px',
       fontFamily: 'Roboto',
       fontSize: 20,
-      fontWeight: 300,
+      fontWeight: 400,
     },
     count: {
       fontFamily: 'Roboto Mono, monospace',
       lineHeight: '56px',
       fontSize: 24,
-      fontWeight: 100,
+      fontWeight: 400,
     },
   };
 };
