@@ -51,12 +51,15 @@ export default store => next => action => {
     } else {
       store.dispatch(loadLocalStorageData());
 
-      window.addEventListener('online', () => {
+      const handleOnline = () => {
+        window.removeEventListener(handleOnline);
         store.dispatch(flushQueuedActions());
         persistenceWorker.schedule(() => {
           store.dispatch(loadFirebaseData());
         });
-      });
+      };
+
+      window.addEventListener('online', handleOnline);
     }
   }
 

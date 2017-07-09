@@ -19,7 +19,10 @@ const styles = {
 
 class Log extends React.Component {
   shouldComponentUpdate(nextProps) {
-    return (nextProps.count !== this.props.count);
+    return (
+      nextProps.count !== this.props.count ||
+      nextProps.dateString !== this.props.dateString
+    );
   }
 
   render() {
@@ -56,6 +59,7 @@ class Log extends React.Component {
 
 Log.propTypes = {
   count: PropTypes.number.isRequired,
+  dateString: PropTypes.string.isRequired,
   addLog: PropTypes.func.isRequired,
   removeLog: PropTypes.func.isRequired,
   logType: PropTypes.object.isRequired,
