@@ -13,10 +13,11 @@ import { flushQueuedActions } from 'redux-modules/persistence/actions';
 import { persistenceWorker } from 'redux-modules/persistence/middleware';
 
 const initiateLogin = (dispatch) => {
-  firebase.auth().onAuthStateChanged(user => {
+  const unsubscribe = firebase.auth().onAuthStateChanged(user => {
     if (user) {
       // User is signed in.
       dispatch(loginUser(user));
+      unsubscribe();
     } else {
       dispatch(requestLogin());
     }
