@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route } from 'react-router';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state, props) {
@@ -15,7 +14,7 @@ function mapStateToProps(state, props) {
 @connect(
   mapStateToProps,
 )
-class EditLogType {
+class EditLogType extends React.Component {
   render() {
     const { name } = this.props;
 
@@ -25,7 +24,7 @@ class EditLogType {
   }
 }
 
-const EditLogTypeRoute = ({ match: { logTypeId } }) => {
+const EditLogTypeRoute = ({ params: { logTypeId } }) => {
   return (
     <EditLogType logTypeId={logTypeId} />
   );
