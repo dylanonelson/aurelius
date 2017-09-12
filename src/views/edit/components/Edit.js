@@ -1,53 +1,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import autobind from 'autobind-decorator';
+import { connect } from 'react-redux';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 
 import { data } from '../../../persistence';
 import AddButton from './AddButton';
-import EditDialog from './EditDialog';
 import Header from './Header';
 import LogTypes from './LogTypes';
 
-@observer
+function mapStateToProps(state) {
+  if (state && state.logTypes) {
+    return { logTypes: state.logTypes };
+  }
+
+  return { logTypes: {} };
+}
+
+@connect(
+  mapStateToProps,
+)
 class Edit extends React.Component {
-
-  @observable selectedLogType = null;
-
-  @autobind
-  handleLogTypeSelection({ logType }) {
-    this.selectedLogType = logType;
-  }
-
-  @autobind
-  handleLogTypeCreation() {
-    this.selectedLogType = { id: null };
-  }
-
-  @autobind
-  handleDialogClose() {
-    this.selectedLogType = null;
-  }
-
-  @autobind
-  handleSave(logType) {
-    const { id } = logType;
-
-    if (id) {
-      delete logType.id;
-      data.LOG_TYPES.update(id, logType);
-    } else if (id === null) {
-      data.LOG_TYPES.write(logType);
-    } else {
-      throw new Error(`Cannot save logType with id of ${id}`);
-    }
-
-    this.handleDialogClose();
-  }
-
   render() {
-    const { logTypes } = this.props.state;
+    const { logTypes } = this.props;
 
     const callbacks = {
       onLogTypeSelection: this.handleLogTypeSelection,
@@ -56,22 +32,15 @@ class Edit extends React.Component {
     return (
       <div id="edit">
         <Header />
-        <LogTypes logTypes={logTypes} {...callbacks} />
+        <LogTypes />
         <AddButton
           onClick={this.handleLogTypeCreation}
-        />
-        <EditDialog
-          logType={this.selectedLogType}
-          onClose={this.handleDialogClose}
-          onSave={this.handleSave}
         />
       </div>
     );
   }
 }
 
-Edit.propTypes = {
-  state: PropTypes.object.isRequired,
-};
+Edit.propTypes = {};
 
 export default Edit;

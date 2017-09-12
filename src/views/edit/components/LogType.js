@@ -2,6 +2,7 @@ import Avatar from 'material-ui/avatar';
 import Create from 'material-ui/svg-icons/content/create';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router';
 import { ListItem } from 'material-ui/List';
 
 const styles = {
@@ -36,14 +37,15 @@ const styles = {
   },
 };
 
-const LogType = ({ logType, onLogTypeSelection }) => (
-  <ListItem
-    id="edit-log-type"
-    onClick={() => onLogTypeSelection({ logType })}
-    primaryText={logType.name}
-    leftAvatar={<Avatar style={styles.avatar}>{logType.mark}</Avatar>}
-    rightIcon={<Create />}
-  />
+const LogType = ({ logType }) => (
+  <Link to={`edit/${logType.id}`}>
+    <ListItem
+      id="edit-log-type"
+      primaryText={logType.name}
+      leftAvatar={<Avatar style={styles.avatar}>{logType.mark}</Avatar>}
+      rightIcon={<Create />}
+    />
+  </Link>
 );
 
 LogType.propTypes = {

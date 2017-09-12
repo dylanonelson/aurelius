@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import { List } from 'material-ui/List';
 import LogType from './LogType';
 
@@ -10,26 +11,47 @@ const styles = {
   },
 };
 
-const LogTypes = ({ logTypes, onLogTypeSelection }) => {
-  return (
-    <div id="edit-log-types">
-      <List style={styles.list}>
-        {[...logTypes].map(([id, logType]) => (
-          <LogType
-            key={id}
-            logType={Object.assign({}, logType, { id })}
-            onLogTypeSelection={onLogTypeSelection}
-          />
-         ))}
-      </List>
-    </div>
-  );
-};
+function mapStateToProps(state) {
+  const { logTypes } = state;
+  if (logTypes === 'loading') return { logTypes: {} };
+  return { logTypes };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onLogTypeSelection: () => console.log('Yo'),
+  };
+}
+
+@connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)
+class LogTypes extends React.Component {
+  render() {
+    const { logTypes } = this.props;
+
+    return (
+      <div id="edit-log-types">
+        <List style={styles.list}>
+          {logTypes && Object.keys(logTypes).map(id => {
+            const logType = logTypes[id];
+
+            return (
+              <LogType
+                key={id}
+                logType={Object.assign({}, logType, { id })}
+              />
+            );
+           })}
+        </List>
+      </div>
+    );
+  }
+}
 
 LogTypes.propTypes = {
-  // MobX observable array
   logTypes: PropTypes.object.isRequired,
-  onLogTypeSelection: PropTypes.func.isRequired,
 };
 
 export default LogTypes;

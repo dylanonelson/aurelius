@@ -10,6 +10,7 @@ import Edit from '../edit';
 import Home from '../home';
 import LoadingScreen from '../loadingScreen';
 import store from '../../state';
+import { EditLogType } from './EditLogTypeRoute';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -42,6 +43,7 @@ const routes = {
   indexRoute: { component: Home },
   childRoutes: [
     { path: 'edit', component: Edit },
+    { path: 'edit/:logTypeId', component: EditLogType },
   ],
 };
 
