@@ -9,6 +9,7 @@ import {
   loginUser,
   requestLogin,
 } from './actions';
+
 import { flushQueuedActions } from 'redux-modules/persistence/actions';
 import { persistenceWorker } from 'redux-modules/persistence/middleware';
 

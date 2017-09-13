@@ -4,7 +4,9 @@ import Worker from 'utilities/worker';
 import { FLUSH_QUEUED_ACTIONS, addLogAtKey, deleteLogAtKey } from './actions';
 import { INCREMENT_LOG_TYPE, ingestLogs } from '../logs/actions';
 import { SET_SELECTED_DATE } from 'redux-modules/home/actions';
-import { data } from '../../persistence';
+import FirebaseDAOThunk from '../../persistence';
+
+const data = FirebaseDAOThunk();
 
 export const persistenceWorker = new Worker(500);
 

@@ -1,2 +1,2 @@
-import data from './DataTypes';
-export { data };
+import FirebaseDAOThunk from './daos';
+export default FirebaseDAOThunk;

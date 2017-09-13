@@ -1,14 +1,18 @@
 import Firebase from 'firebase';
 import Moment from 'moment';
-import store from '../../redux-store';
+import store from '../redux-store';
+import { createEnum, defineConstant } from 'enumfactory';
 
 const getUserUID = () => (Firebase.auth().currentUser.uid);
 
 class DataType {
   // The key paramater matches both the path segment in the Firebase
   // db and the property in the local state.
-  constructor({ key }) {
+  constructor({ key, refs }) {
     this.key = key;
+    if (refs) {
+      Object.defineProperty(this, 'refs', { get: refs });
+    }
   }
 
   get path() {
@@ -63,40 +67,34 @@ class DataType {
   }
 }
 
-const getByCurrentDateObj = {
-  get: function () {
-    const date = Number(
-      store.getState().currentDate.milliseconds
-    );
+const getByCurrentDateObj = function () {
+  const date = Number(
+    store.getState().currentDate.milliseconds
+  );
 
-    const write = Firebase.database().ref(this.path);
+  const write = Firebase.database().ref(this.path);
 
-    const currentDateString = Moment(date)
-      .format('YYYY-MM-DD');
+  const currentDateString = Moment(date)
+    .format('YYYY-MM-DD');
 
-    const beginningOfWeekString = Moment(date)
-      // ISO week starts on Monday
-      .startOf('isoWeek')
-      .format('YYYY-MM-DD');
+  const beginningOfWeekString = Moment(date)
+    // ISO week starts on Monday
+    .startOf('isoWeek')
+    .format('YYYY-MM-DD');
 
-    const read = write.orderByChild('date')
-      .startAt(beginningOfWeekString)
-      .endAt(currentDateString);
+  const read = write.orderByChild('date')
+    .startAt(beginningOfWeekString)
+    .endAt(currentDateString);
 
-    return { read, write };
-  },
+  return { read, write };
 };
 
-const allLogDAO = new DataType({ key: 'logs' });
-
-const benchmarkDAO = new DataType({ key: 'benchmarks' });
-Object.defineProperty(benchmarkDAO, 'refs', getByCurrentDateObj);
-
-const benchmarkTypeDAO = new DataType({ key: 'benchmarkTypes' });
-
-const logDAO = new DataType({ key: 'logs' });
-Object.defineProperty(logDAO, 'refs', getByCurrentDateObj);
-
-const logTypeDAO = new DataType({ key: 'logTypes' });
-
-export { allLogDAO, logDAO, logTypeDAO, benchmarkDAO, benchmarkTypeDAO };
+export default function () {
+  return createEnum(
+    defineConstant('ALL_LOGS', { key: 'logs' }),
+    defineConstant('BENCHMARK_TYPES', { key: 'benchmarkTypes' }),
+    defineConstant('CURRENT_BENCHMARKS', { key: 'benchmarks', refs: getByCurrentDateObj }),
+    defineConstant('CURRENT_LOGS', { key: 'logs', refs: getByCurrentDateObj }),
+    defineConstant('LOG_TYPES', { key: 'logTypes' }),
+  )(DataType);
+}

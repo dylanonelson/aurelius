@@ -8,7 +8,6 @@ import { deepPurple700 } from 'material-ui/styles/colors';
 import { Router, hashHistory } from 'react-router';
 
 import './app.css';
-import { bindData, data, state } from './persistence';
 import { Home, Edit } from './views';
 
 const muiTheme = getMuiTheme({
@@ -39,7 +38,6 @@ const routes = {
 
 const render = () => {
   injectTapEventPlugin();
-  bindData(data, state);
 
   ReactDOM.render(
     <Router history={hashHistory} routes={routes} />,

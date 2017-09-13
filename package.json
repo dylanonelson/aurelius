@@ -24,7 +24,7 @@
     "babel-preset-stage-1": "^6.16.0",
     "css-loader": "^0.26.0",
     "debounce": "^1.0.2",
-    "enumfactory": "^0.1.2",
+    "enumfactory": "^3.1.0",
     "eslint": "^3.10.2",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-react": "^6.7.1",
