@@ -6,7 +6,7 @@ import './firebaseInit';
 import './localStorageInit';
 import { authenticateUser  } from 'redux-modules/init/actions';
 import App from '../views';
-import store from '../state';
+import store from '../redux-store';
 
 const renderApp = () => {
   injectTapEventPlugin();

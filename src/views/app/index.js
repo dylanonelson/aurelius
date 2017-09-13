@@ -9,7 +9,7 @@ import React from 'react';
 import Edit from '../edit';
 import Home from '../home';
 import LoadingScreen from '../loadingScreen';
-import store from '../../state';
+import store from '../../redux-store';
 import EditLogType from './EditLogTypeRoute';
 
 const muiTheme = getMuiTheme({

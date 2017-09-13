@@ -1,6 +1,6 @@
 import Firebase from 'firebase';
 import Moment from 'moment';
-import store from '../../state';
+import store from '../../redux-store';
 
 const getUserUID = () => (Firebase.auth().currentUser.uid);
 

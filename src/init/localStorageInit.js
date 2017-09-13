@@ -1,5 +1,5 @@
 import Worker from 'utilities/worker';
-import store from '../state';
+import store from '../redux-store';
 
 const storageWorker = new Worker(500);
 const persistStore = () =>

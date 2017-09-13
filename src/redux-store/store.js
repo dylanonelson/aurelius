@@ -5,7 +5,7 @@ import currentDateMiddleware from '../redux-modules/currentDate/middleware';
 import initMiddleware from '../redux-modules/init/middleware';
 import logsMiddleware from '../redux-modules/logs/middleware';
 import logTypesMiddleware from '../redux-modules/logTypes/middleware';
-import persistenceMiddleware from 'redux-modules/persistence/middleware';
+import persistenceMiddleware from '../redux-modules/persistence/middleware';
 
 const middleware = applyMiddleware(
   currentDateMiddleware,
