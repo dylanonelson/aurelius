@@ -1,8 +1,7 @@
 .*.s[a-z]?
 .s[a-z]?
 node_modules/
-dist/*bundle*
-dist/index.html
-dist/service-worker.js
+dist/
+!dist/images
 builds/
 .DS_Store

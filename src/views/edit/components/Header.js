@@ -1,8 +1,9 @@
 import AppBar from 'material-ui/AppBar';
 import Back from 'material-ui/svg-icons/navigation/arrow-back';
 import IconButton from 'material-ui/IconButton';
-import { Link } from 'react-router';
+import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router';
 
 const styles = {
   appbar: {
@@ -10,7 +11,7 @@ const styles = {
   },
 };
 
-const Header = () => {
+const Header = ({ title }) => {
 
   const backButton = (
     <Link to="/">
@@ -30,6 +31,10 @@ const Header = () => {
       />
     </div>
   );
+};
+
+Header.propTypes = {
+  title: PropTypes.string,
 };
 
 export default Header;

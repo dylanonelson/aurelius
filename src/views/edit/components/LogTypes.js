@@ -17,16 +17,6 @@ function mapStateToProps(state) {
   return { logTypes };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onLogTypeSelection: () => console.log('Yo'),
-  };
-}
-
-@connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)
 class LogTypes extends React.Component {
   render() {
     const { logTypes } = this.props;
@@ -54,4 +44,6 @@ LogTypes.propTypes = {
   logTypes: PropTypes.object.isRequired,
 };
 
-export default LogTypes;
+export default connect(
+  mapStateToProps,
+)(LogTypes);

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -24,10 +25,18 @@ class EditLogType extends React.Component {
   }
 }
 
+EditLogType.propTypes = {
+  name: PropTypes.string,
+};
+
 const EditLogTypeRoute = ({ params: { logTypeId } }) => {
   return (
     <EditLogType logTypeId={logTypeId} />
   );
+};
+
+EditLogTypeRoute.propTypes = {
+  params: PropTypes.object,
 };
 
 export default EditLogTypeRoute;

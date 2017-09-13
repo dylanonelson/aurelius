@@ -38,7 +38,12 @@ const styles = {
 };
 
 const LogType = ({ logType }) => (
-  <Link to={`edit/${logType.id}`}>
+  <Link
+    style={{
+      textDecoration: 'none',
+    }}
+    to={`edit/${logType.id}`}
+  >
     <ListItem
       id="edit-log-type"
       primaryText={logType.name}
