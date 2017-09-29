@@ -46,11 +46,7 @@ var config = {
       staticFileGlobs: ['dist/**/*.{js,html,css,png,jpg,gif}'],
       stripPrefix: 'dist',
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      }
-    }),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
   ],
   output: {
     path: path.join(__dirname, 'dist'),
