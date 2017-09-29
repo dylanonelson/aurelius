@@ -5,6 +5,7 @@ import React from 'react';
 import EditButton from './EditButton';
 import HomeDatePicker from './HomeDatePicker';
 import Logs from './Logs';
+import WeeklySummary from './WeeklySummary.jsx';
 
 const styles = {
   appbar: {
@@ -19,13 +20,15 @@ const styles = {
 
 class Home extends React.Component {
   render() {
-    const { displayDate, loading, logTypes } = this.props;
+    const { displayDate, logTypes } = this.props;
 
     return (
       <div id="home">
         {this.getHeader(displayDate)}
         <Logs
-          loading={loading}
+          logTypes={logTypes}
+        />
+        <WeeklySummary
           logTypes={logTypes}
         />
         <EditButton />

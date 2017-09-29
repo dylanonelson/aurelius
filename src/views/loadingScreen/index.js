@@ -55,7 +55,11 @@ class LoadingScreen extends React.Component {
             style={styles.progress}
           />
         </div>
-        {currentUser === null ? <LandingPage /> : children}
+        {
+          currentUser === null || this.props.loading
+            ? <LandingPage />
+            : children
+        }
       </main>
     );
   }
