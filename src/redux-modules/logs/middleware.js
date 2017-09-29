@@ -1,8 +1,6 @@
 import { LOAD_FIREBASE_DATA } from '../init/actions';
-import FirebaseDAOThunk from '../../persistence';
+import data from '../../persistence';
 import { ingestLogs } from './actions';
-
-const data = FirebaseDAOThunk();
 
 const initializeLogs = (dispatch) => {
   data.CURRENT_LOGS.load(logs => {

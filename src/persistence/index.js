@@ -1,2 +1,2 @@
-import FirebaseDAOThunk from './daos';
-export default FirebaseDAOThunk;
+import daos from './daos';
+export default daos;
