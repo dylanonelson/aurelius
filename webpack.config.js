@@ -1,8 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
-module.exports = {
+var config = {
   devtool: 'source-map',
   entry: {
     index: './src/index.js',
@@ -62,3 +63,9 @@ module.exports = {
     ],
   }
 }
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new UglifyJSPlugin());
+}
+
+module.exports = config;
