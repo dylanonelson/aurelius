@@ -49,13 +49,13 @@ const LogType = ({ logType }) => (
       primaryText={logType.name}
       leftAvatar={<Avatar style={styles.avatar}>{logType.mark}</Avatar>}
       rightIcon={<Create />}
+      style={{ borderBottom: '1px solid #ccc' }}
     />
   </Link>
 );
 
 LogType.propTypes = {
   logType: PropTypes.object.isRequired,
-  onLogTypeSelection: PropTypes.func.isRequired,
 };
 
 export default LogType;

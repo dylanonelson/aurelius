@@ -10,7 +10,7 @@ import Edit from '../edit';
 import Home from '../home';
 import LoadingScreen from '../loadingScreen';
 import store from '../../redux-store';
-import EditLogType from './EditLogTypeRoute';
+import EditLogType from '../edit/EditLogTypeRoute';
 
 const muiTheme = getMuiTheme({
   palette: {

@@ -7,7 +7,7 @@ import LogTypes from './LogTypes';
 const Edit = () => {
   return (
     <div id="edit">
-      <Header />
+      <Header title="Edit Log Types" />
       <LogTypes />
       <AddButton />
     </div>

@@ -26,7 +26,7 @@ const Header = ({ title }) => {
       <AppBar
         iconElementLeft={backButton}
         style={styles.appbar}
-        title="Edit Log Types"
+        title={title}
         zDepth={3}
       />
     </div>
