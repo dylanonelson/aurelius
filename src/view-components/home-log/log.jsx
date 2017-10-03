@@ -64,4 +64,4 @@ Log.propTypes = {
   logType: PropTypes.object.isRequired,
 };
 
-
+export default Log;

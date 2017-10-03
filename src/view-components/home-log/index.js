@@ -1,3 +1,3 @@
-import Log from './log.jsx';
+import Log from './Log.jsx';
 
 export default Log;

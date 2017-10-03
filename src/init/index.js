@@ -2,6 +2,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
+import './index.css';
 import './firebaseInit';
 import './localStorageInit';
 import { authenticateUser  } from 'redux-modules/init/actions';
