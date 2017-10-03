@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { Home } from './components';
+import Home from './Home.jsx';
 
 function mapStateToProps(state) {
   const { selectedDate } = state.home;

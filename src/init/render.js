@@ -7,8 +7,9 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { deepPurple700 } from 'material-ui/styles/colors';
 import { Router, hashHistory } from 'react-router';
 
+import Home from 'connected-components/home';
+import { Edit } from './views';
 import './app.css';
-import { Home, Edit } from './views';
 
 const muiTheme = getMuiTheme({
   palette: {

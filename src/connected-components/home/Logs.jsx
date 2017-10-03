@@ -3,7 +3,7 @@ import React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 import { connect } from 'react-redux';
 
-import Log from './Log';
+import Log from 'connected-components/home-log';
 
 const styles = {
   list: {

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Edit from '../edit';
-import Home from '../home';
+import Home from 'connected-components/home';
 import LoadingScreen from '../loadingScreen';
 import store from '../../redux-store';
 import EditLogType from './EditLogTypeRoute';

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import './Marks.css';
+import './marks.css';
 
 const getStyles = (largeStyle = false) => ({
   emptyList: {

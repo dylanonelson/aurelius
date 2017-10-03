@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 var config = {
   devtool: 'source-map',
@@ -46,7 +46,9 @@ var config = {
       staticFileGlobs: ['dist/**/*.{js,html,css,png,jpg,gif}'],
       stripPrefix: 'dist',
     }),
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+    }),
   ],
   output: {
     path: path.join(__dirname, 'dist'),

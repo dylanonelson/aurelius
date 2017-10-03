@@ -2,9 +2,9 @@ import AppBar from 'material-ui/AppBar';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import EditButton from './EditButton';
-import HomeDatePicker from './HomeDatePicker';
-import Logs from './Logs';
+import EditButton from './EditButton.jsx';
+import HomeDatePicker from './HomeDatePicker.jsx';
+import Logs from './Logs.jsx';
 import WeeklySummary from './WeeklySummary.jsx';
 
 const styles = {

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Marks from './Marks';
+import Marks from './Marks.jsx';
 
 const styles = {
   container: {
