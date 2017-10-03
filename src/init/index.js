@@ -5,7 +5,7 @@ import React from 'react';
 import './firebaseInit';
 import './index.css';
 import './localStorageInit';
-import App from './root-component';
+import Root from './root-component';
 import store from '../redux-store';
 import { authenticateUser  } from 'redux-modules/init/actions';
 
@@ -13,7 +13,7 @@ const renderApp = () => {
   injectTapEventPlugin();
 
   ReactDOM.render(
-    React.createElement(App),
+    React.createElement(Root),
     document.getElementById('root')
   );
 };
