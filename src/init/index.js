@@ -5,7 +5,7 @@ import React from 'react';
 import './firebaseInit';
 import './localStorageInit';
 import { authenticateUser  } from 'redux-modules/init/actions';
-import App from '../views';
+import App from './root-component';
 import store from '../redux-store';
 
 const renderApp = () => {

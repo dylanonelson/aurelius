@@ -1,2 +1,3 @@
 import Edit from './Edit';
-export { Edit };
+
+export default Edit;

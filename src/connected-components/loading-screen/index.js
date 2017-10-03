@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { deepPurple700 } from 'material-ui/styles/colors';
 
 import './styles.css';
-import LandingPage from '../landingPage';
+import LandingPage from 'connected-components/landing-page';
 
 const getStyles = (loading, isVisible) => ({
   loadingContainer: {

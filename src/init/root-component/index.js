@@ -6,11 +6,10 @@ import { Router, hashHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Edit from '../edit';
+import Edit from 'connected-components/edit';
 import Home from 'connected-components/home';
-import LoadingScreen from '../loadingScreen';
+import LoadingScreen from 'connected-components/loading-screen';
 import store from '../../redux-store';
-import EditLogType from './EditLogTypeRoute';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -42,7 +41,6 @@ const routes = {
   component: App,
   indexRoute: { component: Home },
   childRoutes: [
-    { path: 'edit/:logTypeId', component: EditLogType },
     { path: 'edit', component: Edit },
   ],
 };

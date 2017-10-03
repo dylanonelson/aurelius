@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import React from 'react';
-
 import RaisedButton from 'material-ui/RaisedButton';
-import { logInWithGoogle } from 'redux-modules/init/actions';
+import React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
+import { connect } from 'react-redux';
+
+import { logInWithGoogle } from 'redux-modules/init/actions';
 
 const getStyles = ({ palette }) => ({
   buttonRow: {
