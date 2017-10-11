@@ -55,7 +55,6 @@ const LogType = ({ logType }) => (
 
 LogType.propTypes = {
   logType: PropTypes.object.isRequired,
-  onLogTypeSelection: PropTypes.func.isRequired,
 };
 
 export default LogType;

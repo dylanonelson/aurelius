@@ -14,7 +14,7 @@ const styles = {
   },
   tabs: {
     position: 'relative',
-    top: 64,
+    top: 72,
   },
 };
 
@@ -45,7 +45,7 @@ class Home extends React.Component {
           iconElementRight={<HomeDatePicker />}
           style={styles.appbar}
           title={displayDate}
-          zDepth={0}
+          zDepth={2}
         />
       </div>
     );

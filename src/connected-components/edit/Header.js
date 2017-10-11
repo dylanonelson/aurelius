@@ -27,7 +27,7 @@ const Header = ({ title }) => {
         iconElementLeft={backButton}
         style={styles.appbar}
         title="Edit Log Types"
-        zDepth={3}
+        zDepth={2}
       />
     </div>
   );
