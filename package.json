@@ -5,14 +5,16 @@
     "build": "webpack --colors --progress",
     "build:prd": "NODE_ENV=production webpack --colors --progress",
     "deploy": "npm run build:prd && firebase deploy",
+    "dev": "npm run watch & npm run serve",
     "serve": "ws -d dist -p 1104",
-    "watch": "webpack --colors --progress --watch",
-    "dev": "npm run watch & npm run serve"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "watch": "webpack --colors --progress --watch"
   },
   "author": "Dylan Nelson",
   "license": "ISC",
   "name": "aurelius",
-  "devDependencies": {
+  "dependencies": {
     "async": "^2.4.1",
     "autobind-decorator": "^1.3.4",
     "babel-core": "^6.18.2",
@@ -46,5 +48,15 @@
     "sw-precache-webpack-plugin": "^0.6.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^2.6.1"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      ".s\\w\\w$"
+    ]
   }
 }
