@@ -1,6 +1,7 @@
 import AppBar from 'material-ui/AppBar';
 import PropTypes from 'prop-types';
 import React from 'react';
+import moment from 'moment';
 import { Tab, Tabs } from 'material-ui/Tabs';
 
 import EditButton from './EditButton.jsx';
@@ -67,7 +68,12 @@ class Home extends React.Component {
   }
 
   getHeader() {
-    const { displayDate } = this.props;
+    const { beginningOfCurrentISOWeek, displayDate } = this.props;
+    const { route } = this.state;
+
+    const title = route === '/this-week'
+      ? `Since ${moment(beginningOfCurrentISOWeek).format('MMMM D')}`
+      : displayDate;
 
     return (
       <div id="home-header">
@@ -75,7 +81,7 @@ class Home extends React.Component {
           iconElementRight={<HomeDatePicker />}
           style={styles.appbar}
           showMenuIconButton={false}
-          title={displayDate}
+          title={title}
           zDepth={0}
         />
       </div>
@@ -101,7 +107,9 @@ class Home extends React.Component {
     );
   }
 }
+
 Home.propTypes = {
+  beginningOfCurrentISOWeek: PropTypes.string.isRequired,
   displayDate: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   logTypes: PropTypes.object.isRequired,
