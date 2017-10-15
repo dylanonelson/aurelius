@@ -3,7 +3,11 @@ import moment from 'moment';
 import reducer from '../src/redux-modules/logs/reducer';
 import * as selectors from '../src/redux-modules/logs/selectors';
 
-const { getLogsSelectorByDateRange } = selectors;
+const {
+  aggregateDailyCounts,
+  getLogsSelectorByDateRange,
+  getStatisticsFromDailyCounts
+} = selectors;
 
 const getSampleLogCounts = () => ({
   1: 1,
@@ -31,11 +35,13 @@ describe('logs redux module selectors', () => {
     expect(typeof result).toBe('function');
   });
 
-  test('getLogsSelectorByDateRange selectors select dates within the rage provided', () => {
+  test('getLogsSelectorByDateRange selectors includes dates within the rage provided, even if there are no logs on every date', () => {
     const state = getSampleLogs();
     const selector = getLogsSelectorByDateRange(['2017-10-10', '2017-10-13']);
     const result = selector(state);
-    expect(result).toEqual(getSampleLogs().logs);
+    const expected = getSampleLogs();
+    expected.logs['2017-10-12'] = {};
+    expect(result).toEqual(expected.logs);
   });
 
   test('getLogsSelectorByDateRange selectors select only dates within the rage provided', () => {
@@ -44,6 +50,7 @@ describe('logs redux module selectors', () => {
     const result = selector(state);
     const expected = getSampleLogs().logs;
     delete expected['2017-10-10'];
+    expected['2017-10-12'] = {};
     expect(result).toEqual(expected);
   });
 
@@ -56,5 +63,58 @@ describe('logs redux module selectors', () => {
 
     const nonexistent = ['2017-10-31', '2017-10-33'];
     expect(() => getLogsSelectorByDateRange(nonextent)).toThrow();
+  });
+
+  test('aggregateDailyCounts aggregates the counts into an array', () => {
+    const logTypes = {
+      a: {},
+      b: {},
+      c: {},
+    };
+
+    const logs = {
+      '2017-10-10': {
+        a: 0,
+        b: 2,
+        c: 0,
+      },
+      '2017-10-11': {
+        a: 1,
+        b: 1,
+        c: 0,
+      }
+    };
+
+    const expected = {
+      a: [0, 1],
+      b: [2, 1],
+      c: [0, 0],
+    };
+
+    expect(aggregateDailyCounts(logs, logTypes)).toEqual(expected);
+  });
+
+  test('getStatisticsFromDailyCounts calculates the statistics from the daily counts', () => {
+    const counts = {
+      a: [0, 1],
+      b: [2, 1],
+    };
+
+    const expected = {
+      a: {
+        avg: 0.5,
+        max: 1,
+        nonzeroes: 1,
+        sum: 1,
+      },
+      b: {
+        avg: 1.5,
+        max: 2,
+        nonzeroes: 2,
+        sum: 3,
+      },
+    };
+
+    expect(getStatisticsFromDailyCounts(counts)).toEqual(expected);
   });
 });
