@@ -1,14 +1,33 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 
-const WeeklySummary = ({ totals }) => {
+import WeeklyLogSummary from 'view-components/weekly-log-summary';
+import { selectors as logsSelectors } from 'redux-modules/logs';
+import { selectors as logTypesSelectors } from 'redux-modules/logTypes';
+
+const styles = {
+  container: {
+    position: 'absolute',
+    top: 64 + 48,
+  },
+};
+
+const WeeklySummary = ({ logTypes, stats }) => {
   return (
-    <div>
-      <h2>This week</h2>
+    <div
+      style={styles.container}
+    >
       {
-        Object.keys(totals).map((key) => {
-          return (<p key={key}>{key} {totals[key] || 0}</p>);
+        Object.keys(stats).map((key) => {
+          return (
+            <WeeklyLogSummary
+              key={key}
+              logType={logTypes[key]}
+              {...stats[key]}
+            />
+          );
         })
       }
     </div>
@@ -16,38 +35,39 @@ const WeeklySummary = ({ totals }) => {
 };
 
 WeeklySummary.propTypes = {
-  totals: PropTypes.objectOf(PropTypes.number),
-};
-
-function mapStateToProps(state, props) {
-  const { logTypes } = props;
-
-  const totals = Object.keys(logTypes).reduce((acc, key) => {
-    const logType = logTypes[key];
-    const logsByDay = state.logs;
-    Object.keys(logsByDay).forEach((day) => {
-      const daysLogs = logsByDay[day];
-      const { id, name } = logType;
-      const count = daysLogs[id] || 0;
-      acc[name] = acc[name] === undefined ? count : acc[name] + count;
-    });
-    return acc;
-  }, {});
-
-  return { totals };
-}
-
-const ConnectedWeeklySummary = connect(
-  mapStateToProps
-)(WeeklySummary);
-
-ConnectedWeeklySummary.propTypes = {
   logTypes: PropTypes.objectOf(PropTypes.shape({
     id: PropTypes.string,
     mark: PropTypes.string,
     name: PropTypes.string,
     ts: PropTypes.number,
   })).isRequired,
+  stats: PropTypes.objectOf(PropTypes.shape({
+    avg: PropTypes.number,
+    max: PropTypes.number,
+    nonzeroes: PropTypes.number,
+    sum: PropTypes.number,
+  })),
 };
+
+function mapStateToProps(state, props) {
+  const logTypes = logTypesSelectors.logTypesSelector(state);
+  const beginningOfWeekString = moment()
+    .startOf('isoWeek')
+    .format('YYYY-MM-DD');
+  const today = state.currentDate.yearmoday;
+  const logsSelector = logsSelectors.getLogsSelectorByDateRange([beginningOfWeekString, today]);
+  const logs = logsSelector(state);
+  const aggregateCounts = logsSelectors.aggregateDailyCounts(logs, logTypes);
+  const stats = logsSelectors.getStatisticsFromDailyCounts(aggregateCounts);
+
+  return {
+    logTypes,
+    stats,
+  };
+}
+
+const ConnectedWeeklySummary = connect(
+  mapStateToProps
+)(WeeklySummary);
 
 export default ConnectedWeeklySummary;

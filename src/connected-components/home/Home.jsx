@@ -49,14 +49,14 @@ class Home extends React.Component {
           <WeeklySummary
             logTypes={this.props.logTypes}
           />
-        )
+        );
       }
       default: {
         return (
           <Logs
             logTypes={this.props.logTypes}
           />
-        )
+        );
       }
     }
   }
@@ -98,7 +98,7 @@ class Home extends React.Component {
           onActive={this.handleActiveTab}
         />
       </Tabs>
-    )
+    );
   }
 }
 Home.propTypes = {

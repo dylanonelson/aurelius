@@ -30,7 +30,7 @@ var config = {
     }, {
       enforce: 'pre',
       include: /src/,
-      test: /\.js?$/,
+      test: /\.jsx?$/,
       use: [{
         loader: 'eslint-loader',
         options: {
