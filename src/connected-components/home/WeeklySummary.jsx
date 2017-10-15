@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 
 import WeeklyLogSummary from 'view-components/weekly-log-summary';
 import { selectors as logsSelectors } from 'redux-modules/logs';
 import { selectors as logTypesSelectors } from 'redux-modules/logTypes';
+import { selectors as currentDateSelectors } from 'redux-modules/currentDate';
 
 const styles = {
   container: {
@@ -51,11 +51,9 @@ WeeklySummary.propTypes = {
 
 function mapStateToProps(state, props) {
   const logTypes = logTypesSelectors.logTypesSelector(state);
-  const beginningOfWeekString = moment()
-    .startOf('isoWeek')
-    .format('YYYY-MM-DD');
-  const today = state.currentDate.yearmoday;
-  const logsSelector = logsSelectors.getLogsSelectorByDateRange([beginningOfWeekString, today]);
+  const beginningOfWeek = currentDateSelectors.beginningOfCurrentISOWeekSelector(state);
+  const today = currentDateSelectors.currentISODateSelector(state);
+  const logsSelector = logsSelectors.getLogsSelectorByDateRange([beginningOfWeek, today]);
   const logs = logsSelector(state);
   const aggregateCounts = logsSelectors.aggregateDailyCounts(logs, logTypes);
   const stats = logsSelectors.getStatisticsFromDailyCounts(aggregateCounts);
