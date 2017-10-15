@@ -7,8 +7,6 @@ import Log from 'connected-components/home-log';
 
 const styles = {
   list: {
-    // Add bottom margin for FAB
-    marginBottom: 100,
   },
   spinner: {
     position: 'fixed',

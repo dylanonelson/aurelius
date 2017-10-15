@@ -5,14 +5,69 @@ import Paper from 'material-ui/Paper';
 
 const styles = {
   line: {
-    height: 175,
+    height: 185,
     margin: '0 15px 15px 15px',
+    padding: '10px 20px',
     position: 'relative',
+  },
+  logMarks: {
+    fontSize: 16,
+    letterSpacing: 4,
+    marginBottom: 30,
+    marginTop: 0,
+    textAlign: 'center',
+  },
+  logName: {
+    fontFamily: 'Roboto',
+    fontSize: 22,
+    fontWeight: 400,
+    marginTop: 15,
+    textAlign: 'center',
+  },
+  logStats: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  logStatContainer: {
+    width: '25%',
+  },
+  logStatName: {
+    fontSize: 14,
+    fontWeight: 300,
+    marginBottom: 5,
+    textAlign: 'center',
+  },
+  logStatNum: {
+    fontSize: 32,
+    fontWeight: 100,
+    textAlign: 'center',
+    lineHeight: 1,
+    margin: 0,
   },
 };
 
+function roundToOneDecimal(num) {
+  return (Math.floor(num * 10) / 10);
+}
+
+const LogStat = ({ name, num }) => {
+  return (
+    <div
+      style={styles.logStatContainer}
+    >
+      <h3 style={styles.logStatName}>{name}</h3>
+      <p style={styles.logStatNum}>{num}</p>
+    </div>
+  );
+};
+
+LogStat.propTypes = {
+  name: PropTypes.string.isRequired,
+  num: PropTypes.number.isRequired,
+};
+
 const WeeklyLogSummary = (props) => {
-  const { avg, logType: { name }, max, nonzeroes, sum } = props;
+  const { avg, logType: { mark, name }, max, nonzeroes, sum } = props;
 
   return (
     <Paper
@@ -20,20 +75,29 @@ const WeeklyLogSummary = (props) => {
       style={styles.line}
       zDepth={1}
     >
-      <h2>{name}</h2>
-      <ul>
-        <p>
-          Avg: {avg}
-        </p>
-        <p>
-          Max: {max}
-        </p>
-        <p>
-          Non-zeroes: {nonzeroes}
-        </p>
-        <p>
-          Total: {sum}
-        </p>
+      <h2
+        style={styles.logName}
+      >
+        {name}
+      </h2>
+      <p style={styles.logMarks}>{mark.repeat(3)}</p>
+      <ul style={styles.logStats}>
+        <LogStat
+          name="avg"
+          num={roundToOneDecimal(avg)}
+        />
+        <LogStat
+          name="max"
+          num={max}
+        />
+        <LogStat
+          name="non-zeroes"
+          num={nonzeroes}
+        />
+        <LogStat
+          name="sum"
+          num={sum}
+        />
       </ul>
     </Paper>
   );

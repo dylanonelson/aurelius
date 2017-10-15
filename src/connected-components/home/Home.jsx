@@ -16,7 +16,11 @@ const styles = {
     top: 0,
   },
   bodyFrame: {
+    boxSizing: 'border-box',
+    height: 'calc(100% - 64px - 48px)',
     top: 64 + 48,
+    overflow: 'scroll',
+    paddingBottom: 100,
     paddingTop: 15,
     position: 'fixed',
     width: '100%',
