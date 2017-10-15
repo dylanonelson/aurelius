@@ -49,8 +49,8 @@ var config = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
-    // Fix moment locale warning
-    new webpack.IgnorePlugin(/\.\/locale$/),
+    // Don't bundle moment locales beyond en
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
   ],
   output: {
     path: path.join(__dirname, 'dist'),
