@@ -11,12 +11,17 @@ import WeeklySummary from './WeeklySummary.jsx';
 
 const styles = {
   appbar: {
+    flexWrap: 'wrap',
     position: 'fixed',
     top: 0,
   },
+  bodyFrame: {
+    top: 64 + 48,
+    paddingTop: 15,
+    position: 'fixed',
+    width: '100%',
+  },
   tabs: {
-    position: 'relative',
-    top: 64,
     width: '100%',
   },
 };
@@ -36,8 +41,9 @@ class Home extends React.Component {
     return (
       <div id="home">
         {this.getHeader(displayDate)}
-        {this.getTabs()}
-        {this.getBody()}
+        <div id="body-frame" style={styles.bodyFrame}>
+          {this.getBody()}
+        </div>
         <EditButton />
       </div>
     );
@@ -78,11 +84,12 @@ class Home extends React.Component {
     return (
       <div id="home-header">
         <AppBar
+          children={this.getTabs()}
           iconElementRight={<HomeDatePicker />}
-          style={styles.appbar}
           showMenuIconButton={false}
+          style={styles.appbar}
           title={title}
-          zDepth={0}
+          zDepth={2}
         />
       </div>
     );

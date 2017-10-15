@@ -9,10 +9,6 @@ const styles = {
   list: {
     // Add bottom margin for FAB
     marginBottom: 100,
-    // Spacing beneath tabs
-    position: 'relative',
-    // Height of app bar + tabs
-    top: 64,
   },
   spinner: {
     position: 'fixed',

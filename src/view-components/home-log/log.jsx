@@ -6,8 +6,6 @@ import LogControls from './LogControls.jsx';
 import LogDetails from './LogDetails.jsx';
 import LogSummary from './LogSummary.jsx';
 
-import './log.css';
-
 const styles = {
   line: {
     height: 175,

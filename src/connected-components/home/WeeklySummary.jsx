@@ -6,18 +6,9 @@ import WeeklyLogSummary from 'view-components/weekly-log-summary';
 import { selectors as logsSelectors } from 'redux-modules/logs';
 import { selectors as logTypesSelectors } from 'redux-modules/logTypes';
 
-const styles = {
-  container: {
-    position: 'absolute',
-    top: 64 + 48,
-  },
-};
-
 const WeeklySummary = ({ logTypes, stats }) => {
   return (
-    <div
-      style={styles.container}
-    >
+    <div id="weekly-summary">
       {
         Object.keys(stats).map((key) => {
           return (
