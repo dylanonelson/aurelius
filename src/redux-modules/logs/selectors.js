@@ -1,17 +1,18 @@
 import moment from 'moment';
 import { createSelector } from 'reselect';
 
-const rootSelector = state => state.logs;
+import * as logTypesSelectors from '../logTypes/selectors';
+import * as currentDateSelectors from '../currentDate/selectors';
 
-const dateRangeSelectorMap = {};
+const rootSelector = state => state.logs;
 
 const ISODate = new RegExp('^\\d{4}-\\d{2}-\\d{2}$');
 
 const throwRangeError = () => {
-  throw new Error('getLogsSelectorByDateRange was called with an invalid range');
+  throw new Error('logsByDateRangeSelector was called with an invalid range');
 };
 
-export const getLogsSelectorByDateRange = ([from, to]) => {
+export const logsByDateRangeSelector = (logs, [from, to]) => {
   if (from > to) throwRangeError();
 
   if (moment(from, 'YYYY-MM-DD').isValid() === false || moment(to, 'YYYY-MM-DD').isValid() === false) {
@@ -22,29 +23,17 @@ export const getLogsSelectorByDateRange = ([from, to]) => {
     throwRangeError();
   }
 
-  const key = `${from}_${to}`;
-  if (dateRangeSelectorMap[key] === undefined) {
-    const retrieveByDateRange = (state, from, to) => {
-      const m = moment(from, 'YYYY-MM-DD');
-      const acc = {};
-      let date = m.format('YYYY-MM-DD');
+  const m = moment(from, 'YYYY-MM-DD');
+  const acc = {};
+  let date = m.format('YYYY-MM-DD');
 
-      while (date <= to) {
-        acc[date] = state[date] || {};
-        m.add(1, 'day');
-        date = m.format('YYYY-MM-DD');
-      }
-
-      return acc;
-    };
-
-    dateRangeSelectorMap[key] = createSelector(
-      rootSelector,
-      logs => retrieveByDateRange(logs, from, to),
-    );
+  while (date <= to) {
+    acc[date] = logs[date] || {};
+    m.add(1, 'day');
+    date = m.format('YYYY-MM-DD');
   }
 
-  return dateRangeSelectorMap[key];
+  return acc;
 };
 
 /**
@@ -84,3 +73,24 @@ export const getStatisticsFromDailyCounts = (dailyCounts) => {
     return acc;
   }, {});
 };
+
+const thisWeeksLogsSelector = createSelector(
+  [
+    rootSelector,
+    currentDateSelectors.thisWeekISORangeSelector,
+  ],
+  logsByDateRangeSelector,
+);
+
+const thisWeeksLogsCountsSelector = createSelector(
+  [
+    thisWeeksLogsSelector,
+    logTypesSelectors.logTypesSelector,
+  ],
+  aggregateDailyCounts,
+);
+
+export const thisWeeksLogsStatisticsSelector = createSelector(
+  thisWeeksLogsCountsSelector,
+  getStatisticsFromDailyCounts,
+);

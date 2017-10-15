@@ -12,3 +12,11 @@ export const beginningOfCurrentISOWeekSelector = createSelector(
   currentISODateSelector,
   currentDate => moment(currentDate, 'YYYY-MM-DD').startOf('isoWeek').format('YYYY-MM-DD'),
 );
+
+export const thisWeekISORangeSelector = createSelector(
+  [
+    beginningOfCurrentISOWeekSelector,
+    currentISODateSelector,
+  ],
+  (from, to) => [from, to],
+);

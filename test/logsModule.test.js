@@ -5,7 +5,7 @@ import * as selectors from '../src/redux-modules/logs/selectors';
 
 const {
   aggregateDailyCounts,
-  getLogsSelectorByDateRange,
+  logsByDateRangeSelector,
   getStatisticsFromDailyCounts
 } = selectors;
 
@@ -30,39 +30,32 @@ describe('logs redux module reducer', () => {
 });
 
 describe('logs redux module selectors', () => {
-  test('getLogsSelectorByDateRange returns a function', () => {
-    const result = getLogsSelectorByDateRange(['2017-10-10', '2018-10-10']);
-    expect(typeof result).toBe('function');
-  });
-
-  test('getLogsSelectorByDateRange selectors includes dates within the rage provided, even if there are no logs on every date', () => {
+  test('logsByDateRangeSelector selectors includes dates within the rage provided, even if there are no logs on every date', () => {
     const state = getSampleLogs();
-    const selector = getLogsSelectorByDateRange(['2017-10-10', '2017-10-13']);
-    const result = selector(state);
+    const result = logsByDateRangeSelector(state.logs, ['2017-10-10', '2017-10-13']);
     const expected = getSampleLogs();
     expected.logs['2017-10-12'] = {};
     expect(result).toEqual(expected.logs);
   });
 
-  test('getLogsSelectorByDateRange selectors select only dates within the rage provided', () => {
+  test('logsByDateRangeSelector selectors select only dates within the rage provided', () => {
     const state = getSampleLogs();
-    const selector = getLogsSelectorByDateRange(['2017-10-11', '2017-10-13']);
-    const result = selector(state);
+    const result = logsByDateRangeSelector(state.logs, ['2017-10-11', '2017-10-13']);
     const expected = getSampleLogs().logs;
     delete expected['2017-10-10'];
     expected['2017-10-12'] = {};
     expect(result).toEqual(expected);
   });
 
-  test('getLogsSelectorByDateRange throws an error if the date range is invalid', () => {
+  test('logsByDateRangeSelector throws an error if the date range is invalid', () => {
     const backwardsDates = ['2017-10-10', '2017-10-08'];
-    expect(() => getLogsSelectorByDateRange(backwardsDates)).toThrow();
+    expect(() => logsByDateRangeSelector(backwardsDates)).toThrow();
 
     const wrongFormat = ['12/01/2011', '12/02/2011'];
-    expect(() => getLogsSelectorByDateRange(wrongFormat)).toThrow();
+    expect(() => logsByDateRangeSelector(wrongFormat)).toThrow();
 
     const nonexistent = ['2017-10-31', '2017-10-33'];
-    expect(() => getLogsSelectorByDateRange(nonextent)).toThrow();
+    expect(() => logsByDateRangeSelector(nonextent)).toThrow();
   });
 
   test('aggregateDailyCounts aggregates the counts into an array', () => {
