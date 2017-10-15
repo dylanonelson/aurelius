@@ -1,6 +1,7 @@
 import AppBar from 'material-ui/AppBar';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Tab, Tabs } from 'material-ui/Tabs';
 
 import EditButton from './EditButton.jsx';
 import HomeDatePicker from './HomeDatePicker.jsx';
@@ -14,26 +15,55 @@ const styles = {
   },
   tabs: {
     position: 'relative',
-    top: 72,
+    top: 64,
+    width: '100%',
   },
 };
 
 class Home extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      route: '/today',
+    };
+    this.handleActiveTab = this.handleActiveTab.bind(this);
+  }
+
   render() {
-    const { displayDate, logTypes } = this.props;
+    const { displayDate } = this.props;
 
     return (
       <div id="home">
         {this.getHeader(displayDate)}
-        <Logs
-          logTypes={logTypes}
-        />
-        <WeeklySummary
-          logTypes={logTypes}
-        />
+        {this.getTabs()}
+        {this.getBody()}
         <EditButton />
       </div>
     );
+  }
+
+  getBody() {
+    switch (this.state.route) {
+      case '/this-week': {
+        return (
+          <WeeklySummary
+            logTypes={this.props.logTypes}
+          />
+        )
+      }
+      default: {
+        return (
+          <Logs
+            logTypes={this.props.logTypes}
+          />
+        )
+      }
+    }
+  }
+
+  handleActiveTab({ props }) {
+    const route = props['data-route'];
+    this.setState({ route });
   }
 
   getHeader() {
@@ -44,11 +74,31 @@ class Home extends React.Component {
         <AppBar
           iconElementRight={<HomeDatePicker />}
           style={styles.appbar}
+          showMenuIconButton={false}
           title={displayDate}
-          zDepth={2}
+          zDepth={0}
         />
       </div>
     );
+  }
+
+  getTabs() {
+    return (
+      <Tabs
+        style={styles.tabs}
+      >
+        <Tab
+          data-route="/today"
+          label="Today"
+          onActive={this.handleActiveTab}
+        />
+        <Tab
+          data-route="/this-week"
+          label="This week"
+          onActive={this.handleActiveTab}
+        />
+      </Tabs>
+    )
   }
 }
 Home.propTypes = {
