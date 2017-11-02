@@ -89,10 +89,14 @@ const getByCurrentDateObj = function () {
   return { read, write };
 };
 
-export default createEnum(
+const data = createEnum(
   defineConstant('ALL_LOGS', { key: 'logs' }),
   defineConstant('BENCHMARK_TYPES', { key: 'benchmarkTypes' }),
   defineConstant('CURRENT_BENCHMARKS', { key: 'benchmarks', refs: getByCurrentDateObj }),
   defineConstant('CURRENT_LOGS', { key: 'logs', refs: getByCurrentDateObj }),
   defineConstant('LOG_TYPES', { key: 'logTypes' }),
 )(DataType);
+
+export default data;
+
+window.data = data;

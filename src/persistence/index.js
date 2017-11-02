@@ -1,2 +1,1 @@
-import daos from './daos';
-export default daos;
+export { default } from './daos';
