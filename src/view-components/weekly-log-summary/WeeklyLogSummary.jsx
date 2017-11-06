@@ -80,7 +80,7 @@ const WeeklyLogSummary = (props) => {
       >
         {name}
       </h2>
-      <p style={styles.logMarks}>{mark.repeat(3)}</p>
+      <p style={styles.logMarks}>{mark.repeat(nonzeroes)}</p>
       <ul style={styles.logStats}>
         <LogStat
           name="avg"
