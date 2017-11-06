@@ -12,8 +12,8 @@ import WeeklySummary from './WeeklySummary.jsx';
 const styles = {
   appbar: {
     flexWrap: 'wrap',
-    position: 'fixed',
-    top: 0,
+    position: 'sticky',
+    top: -64,
   },
   bodyFrame: {
     boxSizing: 'border-box',
@@ -22,7 +22,6 @@ const styles = {
     overflow: 'scroll',
     paddingBottom: 100,
     paddingTop: 15,
-    position: 'fixed',
     width: '100%',
   },
   tabs: {
@@ -86,16 +85,14 @@ class Home extends React.Component {
       : displayDate;
 
     return (
-      <div id="home-header">
-        <AppBar
-          children={this.getTabs()}
-          iconElementRight={<HomeDatePicker />}
-          showMenuIconButton={false}
-          style={styles.appbar}
-          title={title}
-          zDepth={2}
-        />
-      </div>
+      <AppBar
+        children={this.getTabs()}
+        iconElementRight={<HomeDatePicker />}
+        showMenuIconButton={false}
+        style={styles.appbar}
+        title={title}
+        zDepth={2}
+      />
     );
   }
 
